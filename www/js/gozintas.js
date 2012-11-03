@@ -193,5 +193,44 @@ var Gozintas = {
         }
 
         
+	},
+	handleKeyups: function(page){
+		if(page == 3){
+			var three_classes = [{id: "#group_nickname", input:"text", attribute:"nickname"},{id:"#people_in_group", input:"integer", attribute:"peopleInParty"},{id:"#drinks_deserts_etc",input:"money", attribute:"foodTotal"},{id:"#wine_amount",input:"money", attribute:"wineTotal"},{id:"#carry_out_amount",input:"money", attribute:"carryOutTotal"},{id:"#fair_reduction",input:"money", attribute:"reductionTotal"}]
+			$.each(three_classes, function(index, value) { 
+				$("#three "+value["id"]).live("keyup",function(){
+	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
+	            	parentClass = "#"+group+" ";
+		            groupNum = parseFloat(group.split("-")[1])
+		            if(value["input"] == "text"){
+		            	input = $(parentClass+value["id"]).val();
+		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = '"+input+"'"
+		            }
+		            else if(value["input"] == "integer"){
+		            	input = parseFloat($(parentClass+value["id"]).val()).toFixed();
+		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
+		            }else if(value["input"] == "money"){
+		            	input = parseFloat($(parentClass+value["id"]).val()).toFixed(2);
+						store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
+		            }
+
+		            eval(store)
+		            if(value["id"] == "#group_nickname"){
+		            	elToRemove = $("#three "+parentClass+"h3 span.ui-btn-text");
+			            final_elToRemove = $("#five "+parentClass+"h3 span.ui-btn-text");
+			            if(final_elToRemove.length == 0){
+			                final_elToRemove = $("#five "+parentClass+"h3");
+			            }
+			            children = elToRemove.children().detach();
+			            finalChildren = final_elToRemove.children().detach();
+			            elToRemove.html(input);
+			            final_elToRemove.html(input);
+			            elToRemove.append(children);
+			            final_elToRemove.append(finalChildren);
+		            }
+
+	        	});
+			});
+		}
 	}
 }
