@@ -95,7 +95,7 @@
         <div data-role="page" id="five" data-add-back-btn="true" data-routing="page5.html">
             <script>
                 $("#five").live(
-                    "pageshow",
+                    "pagebeforeshow",
                     function () {
                         $(".page5.total input").val($("#total_amount_input").val())
                         $(".page5.tax input").val($("#total_tax_amount_input").val())
@@ -117,8 +117,9 @@
         <div data-role="page" id="fiveb" data-add-back-btn="true" data-routing="page5b.html">
             <script>
                 $("#fiveb").live(
-                    "pageshow",
+                    "pagebeforeshow",
                     function () {
+                        $("#fiveb #total_amount").val($("#people_in_party").val())
                         $(".page5.total input").val($("#total_amount_input").val())
                         $(".page5.tax input").val($("#total_tax_amount_input").val())
                         if(!gozintas.billModifier.wine){
