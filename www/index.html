@@ -51,6 +51,17 @@
                         gozintas.showSplitTipButtons();
                     }
                 );
+                $("#two").live(
+                    "pageshow",
+                    function() {
+                    $("#two #total_amount_input").focusout(function() {
+                        gozintas.storeFoodAmount($(this).val());
+                    });
+                    $("#two #total_tax_amount_input").focusout(function(){
+                        gozintas.storeTaxAmount($(this).val());
+                    })
+                });
+
             </script>        
         </div>
 
@@ -119,8 +130,8 @@
                 $("#fiveb").live(
                     "pagebeforeshow",
                     function () {
-                        $("#fiveb #total_amount").val($("#people_in_party").val())
-                        $(".page5.total input").val($("#total_amount_input").val())
+                        $("#fiveb #total_individuals").val($("#people_in_party").val())
+                        $("#fiveb #pre_tax_amount").val($("#total_amount_input").val())
                         $(".page5.tax input").val($("#total_tax_amount_input").val())
                         if(!gozintas.billModifier.wine){
                             $(".page5.wine_tip").hide();
