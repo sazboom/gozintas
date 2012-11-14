@@ -90,6 +90,13 @@
         </div>
 
         <div data-role="page" id="three-b" data-add-back-btn="true" data-routing="page3b.html">
+            <script>
+                $("#three-b").live('pageshow',function(){
+                    $("#three-b #people_in_party").focusout(function() {
+                        gozintas.storePeopleInParty($(this).val());
+                    });
+                });
+            </script>
         </div>
 
         <div data-role="page" id="four" data-add-back-btn="true" data-routing="page4.html">

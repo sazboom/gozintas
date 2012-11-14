@@ -9,6 +9,7 @@ var gozintas = {
 	foodAmount : '',
 	taxAmount : '',
 	totalAmount : '',
+	peopleInParty : '',
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
 	},
@@ -35,6 +36,9 @@ var gozintas = {
 	},
 	storeTotalAmount: function(value){
 		this.totalAmount = value
+	},
+	storePeopleInParty: function(value){
+		this.peopleInParty = value
 	},
 	isSplitingByIndividual : function(){
 		return this.splitBy == 'individual'
