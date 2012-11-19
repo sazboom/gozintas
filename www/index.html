@@ -160,9 +160,9 @@
                         $("#fiveb input#food_total").val(gozintas.foodAmount);
                         $("#fiveb input#tax_total").val(gozintas.taxAmount);
                         gozintas.showPageFiveButtons();
-                        $("#fiveb input#tip_total").val(gozintas.calculateTip());
+                        $("#fiveb input#tip_total").val(gozintas.calculateTip()+" ("+gozintas.tipAmount*100+"%)");
                         $("#fiveb input#total").val(gozintas.calculateTotal());
-                        $("#fiveb input#tip_individual").val(gozintas.calculateTipIndividual());
+                        $("#fiveb input#tip_individual").val(gozintas.calculateTipIndividual() +" ("+gozintas.tipAmount*100+"%)");
                         $("#fiveb input#total_individual").val(gozintas.calculateTotalIndividual());
                     }
                 );

@@ -22,10 +22,10 @@ var gozintas = {
 		return parseFloat(this.calculateTip()/(+this.peopleInParty)).toFixed(2)
 	},
 	calculateTotal: function(){
-		return parseFloat(+this.foodAmount + +this.taxAmount + this.calculateTip()).toFixed(2)
+		return parseFloat(+this.foodAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
-		return parseFloat(this.calculateTotal()/(+this.peopleInParty)).toFixed(2)
+		return parseFloat(+this.calculateTotal()/(+this.peopleInParty)).toFixed(2)
 	},
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
