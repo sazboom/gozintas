@@ -1,9 +1,11 @@
-var gozintas = {
+var Gozintas = {
 	billModifier : {
 		wine : false,
 		reductions : false,
 		extras : false
 	},
+	totalBill : 0,
+	totalTax : 0,
 	billPath : '',
 	splitBy : '',
 	splitBillPath : function() {
@@ -42,7 +44,7 @@ var gozintas = {
 	    $(hideButton).hide();
 	},
 	showPageFourButton: function(){
-        if(gozintas.isSplitingByIndividual()){
+        if(this.isSplitingByIndividual()){
             $("#next_button_page4").attr("href", "#fiveb");
         }else{
             $("#next_button_page4").attr("href", "#five")

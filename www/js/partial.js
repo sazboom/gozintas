@@ -15,24 +15,25 @@ function moreStuff(router, onReady){
    		return 0;
     }else{
 	  $(router).each(function(){
-		 	var link = $(this).data("routing");
-		 	var that = this
-			$.ajax({
-				url: "partials/_"+link, 
-				dataType:'html',
-				success: function(data){
-					$(that).append(data);
-					var newRouter = "#"+$(that).attr('id')+" *[data-routing]"
-					loadPartials(newRouter,onReady);
-					if(trigger_create){
-						$(that).trigger('create');
-						$(that).parent().trigger('create');
-						$(that).parent().parent().trigger('create');
-					}else{
-						$(that).trigger('pagebeforeload');
-					}
+		var link = $(this).data("routing");
+		var that = this
+		$.ajax({
+			url: "partials/_"+link, 
+			dataType:'html',
+			success: function(data){
+				$(that).append(data);
+				var newRouter = "#"+$(that).attr('id')+" *[data-routing]"
+				loadPartials(newRouter,onReady);
+				if(trigger_create){
+					$(that).trigger('create');
+					$(that).parent().trigger('create');
+					$(that).parent().parent().trigger('create');
+				}else{
+					$(that).trigger('pagebeforeload');
 				}
-			});
+				loadPageJS(that)
+			}
+		});
 	  });
 	}
 }
@@ -46,5 +47,11 @@ function loadPartials(router, onReady){
 	});
 }
 
+function loadPageJS(selector){
+	page = $(selector).data('pagejs')
+	if(page){
+		Page.js[page]()
+	}
+}
 
 
