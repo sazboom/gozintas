@@ -9,6 +9,8 @@ var gozintas = {
 	foodAmount : '',
 	taxAmount : '',
 	totalAmount : '',
+	wineAmount : '',
+	carryOutAmount: '',
 	peopleInParty : '',
 	tipAmount : '0.15',
 	validatePrice: function(price){

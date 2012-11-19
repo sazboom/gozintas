@@ -13,25 +13,16 @@
 </div>
 <div class = "question_input">
     The group ordered the following extras:<br>
-    <div class="div_select_gaz">
-        <select class="select_gaz drink_desert_tip_rate" id="drink_desert_tip_rate" name="drink_desert_tip_rate" data-inline="true" data-routing="tip-rate.html">
-        </select> 
-    </div>
-    <label for="drink_desert_tip_rate" class="label_gaz drink_desert_tip_rate">Food tip rate</label>
+    <input class = "input_text" id="drinks_deserts_etc" type="number" step = "0.01" name="drinks_deserts_etc" placeholder="0.00" min="0.00" style="width:10%; display:inline;">
+    <label for="drink_deserts_etc" class="label_gaz drink_desert_tip_rate">Drinks/Deserts/Etc (food tip rate)</label>
 </div>
 <div class = "question_input">
-    <div class="div_select_gaz">
-        <select class="select_gaz wine_rate" id="wine_rate" name="wine_rate" data-inline="true" data-routing="tip-rate.html">
-        </select> 
-    </div>
-    <label for="wine_rate" class="label_gaz wine_rate">Wine tip rate</label>
+    <input class = "input_text" id="wine_amount" type="number" step = "0.01" name="wine_amount" placeholder="0.00" min="0.00" style="width:10%; display:inline;">
+    <label for="wine_amount" class="label_gaz wine_rate">Wine  (alternative tip rate)</label>
 </div>
 <div class = "question_input">
-    <div class="div_select_gaz">
-        <select class="select_gaz takeout_rate" id="takeout_rate" name="takeout_rate" data-inline="true" data-routing="tip-rate.html">
-        </select> 
-    </div>
-    <label for="takeout_rate" class="label_gaz takeout_rate">Carry-out tip rate</label>
+    <input class = "input_text" id="carry_out_amount" type="number" step = "0.01" name="carry_out_amount" placeholder="0.00" min="0.00" style="width:10%; display:inline;">
+    <label for="carry_out_amount" class="label_gaz takeout_rate">Carry-out</label>
 </div>
 <br>
 <div class = "wording">

@@ -78,21 +78,19 @@
         <div data-role="page" id="three" data-add-back-btn="true" data-routing="page3.html">
             <script>
                 $(".group_nickname").live('keyup',function(){
-                    parentClass = "."+$(this).parent().parent().parent().attr("class").split(" ")[0]+" ";
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0]
+                    parentClass = "."+group+" ";
+                    groupNum = group.split("-")[1]
                     textinput = $(parentClass+'.group_nickname').val();
-                    console.log(parentClass+"hello");
                     elToRemove = $("#three "+parentClass+"h3 span.ui-btn-text");
                     final_elToRemove = $("#five "+parentClass+"h3 span.ui-btn-text");
                     if(final_elToRemove.length == 0){
                         final_elToRemove = $("#five "+parentClass+"h3");
                     }
-                    console.log(elToRemove);
-                    console.log(final_elToRemove);
                     children = elToRemove.children().detach();
                     finalChildren = final_elToRemove.children().detach();
                     elToRemove.html(textinput);
                     final_elToRemove.html(textinput);
-                    console.log("I appended the value");
                     elToRemove.append(children);
                     final_elToRemove.append(finalChildren);
                 });
