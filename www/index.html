@@ -55,10 +55,22 @@
                     "pageshow",
                     function() {
                     $("#two #total_amount_input").focusout(function() {
-                        gozintas.storeFoodAmount($(this).val());
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeFoodAmount(parseFloat($(this).val()).toFixed(2));
+                            $(this).val("5.00")
+                        }else{
+                            $(this).val("");
+                        }
                     });
                     $("#two #total_tax_amount_input").focusout(function(){
-                        gozintas.storeTaxAmount($(this).val());
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeTaxAmount(parseFloat($(this).val()).toFixed(2));
+                            $(this).val("5.00")
+                        }else{
+                            $(this).val("");
+                        }
                     })
                 });
 
@@ -107,6 +119,14 @@
                         gozintas.showPageFourButton();
                     }
                 );
+
+                $("#four").live(
+                    "pageshow",
+                    function() {
+                    $("#four #tip_rate").focusout(function() {
+                        gozintas.storeTipAmount($(this).val());
+                    });
+                });
             </script> 
         </div>
 
@@ -137,19 +157,15 @@
                 $("#fiveb").live(
                     "pagebeforeshow",
                     function () {
-                        $("#fiveb #total_individuals").val($("#people_in_party").val())
-                        $("#fiveb #pre_tax_amount").val($("#total_amount_input").val())
-                        $(".page5.tax input").val($("#total_tax_amount_input").val())
-                        if(!gozintas.billModifier.wine){
-                            $(".page5.wine_tip").hide();
-                            $(".page5.wine").hide();
-                        }
-                        if(!gozintas.billModifier.reductions){
-                            $(".page5.reductions").hide();
-                        }
-                        if(!gozintas.billModifier.extras){
-                            $(".page5.extras").hide();
-                        }
+
+                        $("#fiveb input#individuals_in_party").val(gozintas.peopleInParty);
+                        $("#fiveb input#food_total").val(gozintas.foodAmount);
+                        $("#fiveb input#tax_total").val(gozintas.taxAmount);
+                        gozintas.showPageFiveButtons();
+                        $("#fiveb input#tip_total").val(gozintas.calculateTip());
+                        $("#fiveb input#total").val(gozintas.calculateTotal());
+                        $("#fiveb input#tip_individual").val(gozintas.calculateTipIndividual());
+                        $("#fiveb input#total_individual").val(gozintas.calculateTotalIndividual());
                     }
                 );
             </script>
