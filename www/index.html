@@ -52,27 +52,46 @@
                         Gozintas.showSplitTipButtons();
                     }
                 );
+                $("#two").live(
+                    "pageshow",
+                    function() {
+                    $("#two #total_amount_input").focusout(function() {
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeFoodAmount(parseFloat($(this).val()).toFixed(2));
+                        }else{
+                            $(this).val("");
+                        }
+                    });
+                    $("#two #total_tax_amount_input").focusout(function(){
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeTaxAmount(parseFloat($(this).val()).toFixed(2));
+                        }else{
+                            $(this).val("");
+                        }
+                    })
+                });
+
             </script>        
         </div>
 
         <div data-role="page" id="three" data-add-back-btn="true" data-routing="page3.html">
             <script>
                 $(".group_nickname").live('keyup',function(){
-                    parentClass = "."+$(this).parent().parent().parent().attr("class").split(" ")[0]+" ";
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0]
+                    parentClass = "."+group+" ";
+                    groupNum = group.split("-")[1]
                     textinput = $(parentClass+'.group_nickname').val();
-                    console.log(parentClass+"hello");
                     elToRemove = $("#three "+parentClass+"h3 span.ui-btn-text");
                     final_elToRemove = $("#five "+parentClass+"h3 span.ui-btn-text");
                     if(final_elToRemove.length == 0){
                         final_elToRemove = $("#five "+parentClass+"h3");
                     }
-                    console.log(elToRemove);
-                    console.log(final_elToRemove);
                     children = elToRemove.children().detach();
                     finalChildren = final_elToRemove.children().detach();
                     elToRemove.html(textinput);
                     final_elToRemove.html(textinput);
-                    console.log("I appended the value");
                     elToRemove.append(children);
                     final_elToRemove.append(finalChildren);
                 });
@@ -80,6 +99,13 @@
         </div>
 
         <div data-role="page" id="three-b" data-add-back-btn="true" data-routing="page3b.html">
+            <script>
+                $("#three-b").live('pageshow',function(){
+                    $("#three-b #people_in_party").focusout(function() {
+                        gozintas.storePeopleInParty($(this).val());
+                    });
+                });
+            </script>
         </div>
 
         <div data-role="page" id="four" data-add-back-btn="true" data-routing="page4.html">
@@ -90,6 +116,14 @@
                         Gozintas.showPageFourButton();
                     }
                 );
+
+                $("#four").live(
+                    "pageshow",
+                    function() {
+                    $("#four #tip_rate").focusout(function() {
+                        gozintas.storeTipAmount($(this).val());
+                    });
+                });
             </script> 
         </div>
 
@@ -120,19 +154,15 @@
                 $("#fiveb").live(
                     "pagebeforeshow",
                     function () {
-                        $("#fiveb #total_amount").val($("#people_in_party").val())
-                        $(".page5.total input").val($("#total_amount_input").val())
-                        $(".page5.tax input").val($("#total_tax_amount_input").val())
-                        if(!Gozintas.billModifier.wine){
-                            $(".page5.wine_tip").hide();
-                            $(".page5.wine").hide();
-                        }
-                        if(!Gozintas.billModifier.reductions){
-                            $(".page5.reductions").hide();
-                        }
-                        if(!Gozintas.billModifier.extras){
-                            $(".page5.extras").hide();
-                        }
+
+                        $("#fiveb input#individuals_in_party").val(gozintas.peopleInParty);
+                        $("#fiveb input#food_total").val(gozintas.foodAmount);
+                        $("#fiveb input#tax_total").val(gozintas.taxAmount);
+                        gozintas.showPageFiveButtons();
+                        $("#fiveb input#tip_total").val(gozintas.calculateTip()+" ("+gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total").val(gozintas.calculateTotal());
+                        $("#fiveb input#tip_individual").val(gozintas.calculateTipIndividual() +" ("+gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total_individual").val(gozintas.calculateTotalIndividual());
                     }
                 );
             </script>
