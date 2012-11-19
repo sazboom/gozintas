@@ -58,7 +58,6 @@
                         var isValid = gozintas.validatePrice($(this).val());
                         if(isValid == true){
                             gozintas.storeFoodAmount(parseFloat($(this).val()).toFixed(2));
-                            $(this).val("5.00")
                         }else{
                             $(this).val("");
                         }
@@ -67,7 +66,6 @@
                         var isValid = gozintas.validatePrice($(this).val());
                         if(isValid == true){
                             gozintas.storeTaxAmount(parseFloat($(this).val()).toFixed(2));
-                            $(this).val("5.00")
                         }else{
                             $(this).val("");
                         }

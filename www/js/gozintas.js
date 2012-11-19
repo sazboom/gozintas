@@ -16,16 +16,16 @@ var gozintas = {
 		return re.test(price);
 	},
 	calculateTip: function(){
-		return +this.tipAmount * (+this.foodAmount + +this.taxAmount)
+		return parseFloat(+this.tipAmount * (+this.foodAmount + +this.taxAmount)).toFixed(2)
 	},
 	calculateTipIndividual: function(){
-		return this.calculateTip()/(+this.peopleInParty)
+		return parseFloat(this.calculateTip()/(+this.peopleInParty)).toFixed(2)
 	},
 	calculateTotal: function(){
-		return (+this.foodAmount + +this.taxAmount + this.calculateTip())
+		return parseFloat(+this.foodAmount + +this.taxAmount + this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
-		return this.calculateTotal()/(+this.peopleInParty)
+		return parseFloat(this.calculateTotal()/(+this.peopleInParty)).toFixed(2)
 	},
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
