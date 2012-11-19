@@ -33,7 +33,7 @@
         <script type="text/javascript" src="js/jquery.mobile-1.2.0.js"></script>
         <script type="text/javascript" src="cordova-2.2.0.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/Gozintas.js"></script>
+        <script type="text/javascript" src="js/gozintas.js"></script>
         <script type="text/javascript" src="js/page.js"></script>
         <script type="text/javascript" src="js/partial.js"></script>
         <script type="text/javascript">
@@ -52,6 +52,26 @@
                         Gozintas.showSplitTipButtons();
                     }
                 );
+                $("#two").live(
+                    "pageshow",
+                    function() {
+                    $("#two #total_amount_input").focusout(function() {
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeFoodAmount(parseFloat($(this).val()).toFixed(2));
+                        }else{
+                            $(this).val("");
+                        }
+                    });
+                    $("#two #total_tax_amount_input").focusout(function(){
+                        var isValid = gozintas.validatePrice($(this).val());
+                        if(isValid == true){
+                            gozintas.storeTaxAmount(parseFloat($(this).val()).toFixed(2));
+                        }else{
+                            $(this).val("");
+                        }
+                    })
+                });
 
             </script>        
         </div>
@@ -82,7 +102,7 @@
             <script>
                 $("#three-b").live('pageshow',function(){
                     $("#three-b #people_in_party").focusout(function() {
-                        Gozintas.peopleInParty = $(this).val();
+                        gozintas.storePeopleInParty($(this).val());
                     });
                 });
             </script>
@@ -101,7 +121,7 @@
                     "pageshow",
                     function() {
                     $("#four #tip_rate").focusout(function() {
-                        Gozintas.tipAmount = $(this).val();
+                        gozintas.storeTipAmount($(this).val());
                     });
                 });
             </script> 
@@ -134,15 +154,31 @@
                 $("#fiveb").live(
                     "pagebeforeshow",
                     function () {
+<<<<<<< HEAD
+                        $("#fiveb #total_amount").val($("#people_in_party").val())
+                        $(".page5.total input").val($("#total_amount_input").val())
+                        $(".page5.tax input").val($("#total_tax_amount_input").val())
+                        if(!Gozintas.billModifier.wine){
+                            $(".page5.wine_tip").hide();
+                            $(".page5.wine").hide();
+                        }
+                        if(!Gozintas.billModifier.reductions){
+                            $(".page5.reductions").hide();
+                        }
+                        if(!Gozintas.billModifier.extras){
+                            $(".page5.extras").hide();
+                        }
+=======
 
-                        $("#fiveb input#individuals_in_party").val(Gozintas.peopleInParty);
-                        $("#fiveb input#food_total").val(Gozintas.foodAmount);
-                        $("#fiveb input#tax_total").val(Gozintas.taxAmount);
-                        Gozintas.showPageFiveButtons();
-                        $("#fiveb input#tip_total").val(Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
-                        $("#fiveb input#total").val(Gozintas.calculateTotal());
-                        $("#fiveb input#tip_individual").val(Gozintas.calculateTipIndividual() +" ("+Gozintas.tipAmount*100+"%)");
-                        $("#fiveb input#total_individual").val(Gozintas.calculateTotalIndividual());
+                        $("#fiveb input#individuals_in_party").val(gozintas.peopleInParty);
+                        $("#fiveb input#food_total").val(gozintas.foodAmount);
+                        $("#fiveb input#tax_total").val(gozintas.taxAmount);
+                        gozintas.showPageFiveButtons();
+                        $("#fiveb input#tip_total").val(gozintas.calculateTip()+" ("+gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total").val(gozintas.calculateTotal());
+                        $("#fiveb input#tip_individual").val(gozintas.calculateTipIndividual() +" ("+gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total_individual").val(gozintas.calculateTotalIndividual());
+>>>>>>> gozintas-class
                     }
                 );
             </script>

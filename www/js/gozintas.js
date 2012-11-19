@@ -8,12 +8,12 @@ var Gozintas = {
 	totalTax : 0,
 	billPath : '',
 	splitBy : '',
-	foodAmount : '',
-	taxAmount : '',
-	totalAmount : '',
-	wineAmount : '',
-	carryOutAmount: '',
-	peopleInParty : '',
+	foodAmount : 0,
+	taxAmount : 0,
+	totalAmount : 0,
+	wineAmount : 0,
+	carryOutAmount: 0,
+	peopleInParty : 0,
 	tipAmount : '0.15',
 	validatePrice: function(price){
 		var re = /^[0-9]+(\.[0-9]{2})?$/;
@@ -49,21 +49,6 @@ var Gozintas = {
 	splitByGroup : function() {
 		this.splitBy = 'group'
 	},
-	storeFoodAmount: function(value){
-		this.foodAmount = value
-	},
-	storeTaxAmount: function(value){
-		this.taxAmount = value
-	},
-	storeTotalAmount: function(value){
-		this.totalAmount = value
-	},
-	storePeopleInParty: function(value){
-		this.peopleInParty = value
-	},
-	storeTipAmount: function(value){
-		this.tipAmount = value;
-	},
 	isSplitingByIndividual : function(){
 		return this.splitBy == 'individual'
 	},
@@ -89,14 +74,14 @@ var Gozintas = {
         }
 	},
 	showPageFiveButtons: function(){
-        if(!gozintas.billModifier.wine){
+        if(!Gozintas.billModifier.wine){
             $(".page5.wine_tip").hide();
             $(".page5.wine").hide();
         }
-        if(!gozintas.billModifier.reductions){
+        if(!Gozintas.billModifier.reductions){
             $(".page5.reductions").hide();
         }
-        if(!gozintas.billModifier.extras){
+        if(!Gozintas.billModifier.extras){
             $(".page5.extras").hide();
         }
 	}
