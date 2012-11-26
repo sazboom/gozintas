@@ -61,8 +61,9 @@
                 $(".group_nickname").live('keyup',function(){
                     group = $(this).parent().parent().parent().attr("class").split(" ")[0]
                     parentClass = "."+group+" ";
-                    groupNum = group.split("-")[1]
-                    textinput = $(parentClass+'.group_nickname').val();
+                    groupNum = parseFloat(group.split("-")[1])
+                    textInput = $(parentClass+'.group_nickname').val();
+                    groups[groupNum-1].nickname = textInput
                     elToRemove = $("#three "+parentClass+"h3 span.ui-btn-text");
                     final_elToRemove = $("#five "+parentClass+"h3 span.ui-btn-text");
                     if(final_elToRemove.length == 0){
@@ -70,11 +71,53 @@
                     }
                     children = elToRemove.children().detach();
                     finalChildren = final_elToRemove.children().detach();
-                    elToRemove.html(textinput);
-                    final_elToRemove.html(textinput);
+                    elToRemove.html(textInput);
+                    final_elToRemove.html(textInput);
                     elToRemove.append(children);
                     final_elToRemove.append(finalChildren);
                 });
+
+                    $("#three #people_in_group").live('keyup',function(){
+                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                        parentClass = "."+group+" ";
+                        groupNum = parseFloat(group.split("-")[1])
+                        peopleInParty = parseFloat($(parentClass+'#people_in_group').val());
+                        console.log(peopleInParty)
+                        console.log(groupNum)
+                        groups[groupNum-1].peopleInParty = peopleInParty;
+                    })
+
+                    $("#three #drinks_deserts_etc").live('keyup',function(){
+                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                        parentClass = "."+group+" ";
+                        groupNum = parseFloat(group.split("-")[1])
+                        foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val());
+                        console.log(foodTotal)
+                        console.log(groupNum)
+                        groups[groupNum-1].foodTotal = foodTotal;
+                    })
+
+                    $("#three #wine_amount").live('keyup',function(){
+                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                        parentClass = "."+group+" ";
+                        groupNum = parseFloat(group.split("-")[1])
+                        wineTotal = parseFloat($(parentClass+'#wine_amount').val());
+                        console.log(wineTotal)
+                        console.log(groupNum)
+                        groups[groupNum-1].wineTotal = wineTotal;
+                    })
+
+
+                    $("#three #carry_out_amount").live('keyup',function(){
+                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                        parentClass = "."+group+" ";
+                        groupNum = parseFloat(group.split("-")[1])
+                        carryOut = parseFloat($(parentClass+'#carry_out_amount').val());
+                        console.log(carryOut)
+                        console.log(groupNum)
+                        groups[groupNum-1].carryOutTotal = carryOut;
+                    })
+
             </script>
         </div>
 
@@ -90,6 +133,12 @@
 
         <div data-role="page" id="four" data-add-back-btn="true" data-routing="page4.html">
             <script> 
+                $("#four").live(
+                    "pagebeforeshow",
+                    function(){
+                        Gozintas.showPageFourPercentages();
+                    }
+                );
                 $("#four").live(
                     "pageshow",
                     function () {
@@ -136,13 +185,13 @@
                     function () {
 
                         $("#fiveb input#individuals_in_party").val(Gozintas.peopleInParty);
-                        $("#fiveb input#food_total").val(Gozintas.foodAmount);
-                        $("#fiveb input#tax_total").val(Gozintas.taxAmount);
+                        $("#fiveb input#food_total").val("$"+Gozintas.foodAmount);
+                        $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveButtons();
-                        $("#fiveb input#tip_total").val(Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
-                        $("#fiveb input#total").val(Gozintas.calculateTotal());
-                        $("#fiveb input#tip_individual").val(Gozintas.calculateTipIndividual() +" ("+Gozintas.tipAmount*100+"%)");
-                        $("#fiveb input#total_individual").val(Gozintas.calculateTotalIndividual());
+                        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total").val("$"+Gozintas.calculateTotal());
+                        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual() +" ("+Gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
                     }
                 );
             </script>

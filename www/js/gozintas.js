@@ -1,3 +1,17 @@
+function Group () {
+    this.wine = false;
+    this.reductions = false
+    this.extras = false
+    this.nickname = ''
+    this.peopleInParty = 0
+    this.FoodTotal = 0
+    this.wineTotal = 0
+    this.carryOutTotal = 0
+    this.reduduction = 0
+}
+
+var groups = [new Group()]
+
 var Gozintas = {
 	billModifier : {
 		wine : false,
@@ -14,7 +28,7 @@ var Gozintas = {
 	wineAmount : 0,
 	carryOutAmount: 0,
 	peopleInParty : 0,
-	tipAmount : '0.15',
+	tipAmount : 0.15,
 	validatePrice: function(price){
 		var re = /^[0-9]+(\.[0-9]{2})?$/;
 		return re.test(price);
@@ -72,6 +86,15 @@ var Gozintas = {
         }else{
             $("#next_button_page4").attr("href", "#five")
         }
+	},
+	showPageFourPercentages: function(){
+        if(!Gozintas.billModifier.wine){
+            $("#four #wine_tip").hide();
+        }
+        if(!Gozintas.billModifier.extras){
+            $("#four #carry_tip").hide();
+        }
+
 	},
 	showPageFiveButtons: function(){
         if(!Gozintas.billModifier.wine){
