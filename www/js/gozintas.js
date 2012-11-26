@@ -7,7 +7,7 @@ function Group () {
     this.FoodTotal = 0
     this.wineTotal = 0
     this.carryOutTotal = 0
-    this.reduduction = 0
+    this.reduction = 0
 }
 
 var groups = [new Group()]

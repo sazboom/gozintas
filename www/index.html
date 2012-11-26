@@ -110,6 +110,15 @@
                         groups[groupNum-1].carryOutTotal = carryOut;
                     })
 
+                    $("#three #fair_reduction").live('keyup',function(){
+                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                        parentClass = "."+group+" ";
+                        groupNum = parseFloat(group.split("-")[1])
+                        fairReduction = parseFloat($(parentClass+'#fair_reduction').val()).toFixed(2);
+                        groups[groupNum-1].reduction = fairReduction;
+                    })
+
+
             </script>
         </div>
 
