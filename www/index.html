@@ -82,8 +82,6 @@
                         parentClass = "."+group+" ";
                         groupNum = parseFloat(group.split("-")[1])
                         peopleInParty = parseFloat($(parentClass+'#people_in_group').val());
-                        console.log(peopleInParty)
-                        console.log(groupNum)
                         groups[groupNum-1].peopleInParty = peopleInParty;
                     })
 
@@ -91,9 +89,7 @@
                         group = $(this).parent().parent().parent().attr("class").split(" ")[0];
                         parentClass = "."+group+" ";
                         groupNum = parseFloat(group.split("-")[1])
-                        foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val());
-                        console.log(foodTotal)
-                        console.log(groupNum)
+                        foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val()).toFixed(2);
                         groups[groupNum-1].foodTotal = foodTotal;
                     })
 
@@ -101,9 +97,7 @@
                         group = $(this).parent().parent().parent().attr("class").split(" ")[0];
                         parentClass = "."+group+" ";
                         groupNum = parseFloat(group.split("-")[1])
-                        wineTotal = parseFloat($(parentClass+'#wine_amount').val());
-                        console.log(wineTotal)
-                        console.log(groupNum)
+                        wineTotal = parseFloat($(parentClass+'#wine_amount').val()).toFixed(2);
                         groups[groupNum-1].wineTotal = wineTotal;
                     })
 
@@ -112,9 +106,7 @@
                         group = $(this).parent().parent().parent().attr("class").split(" ")[0];
                         parentClass = "."+group+" ";
                         groupNum = parseFloat(group.split("-")[1])
-                        carryOut = parseFloat($(parentClass+'#carry_out_amount').val());
-                        console.log(carryOut)
-                        console.log(groupNum)
+                        carryOut = parseFloat($(parentClass+'#carry_out_amount').val()).toFixed(2);
                         groups[groupNum-1].carryOutTotal = carryOut;
                     })
 
