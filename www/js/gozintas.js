@@ -3,7 +3,7 @@ function Group () {
     this.reductions = false
     this.extras = false
     this.nickname = ''
-    this.peopleInParty = 0
+    this.peopleInParty = 1
     this.FoodTotal = 0
     this.wineTotal = 0
     this.carryOutTotal = 0
@@ -104,7 +104,7 @@ var Gozintas = {
         }
 
 	},
-	showPageFiveButtons: function(){
+	showPageFiveInputs: function(){
         if(!Gozintas.billModifier.wine){
             $(".page5.wine_tip").hide();
             $(".page5.wine").hide();
@@ -115,5 +115,15 @@ var Gozintas = {
         if(!Gozintas.billModifier.extras){
             $(".page5.extras").hide();
         }
+        if(Gozintas.billPath == "determine-tip")
+        {
+        	$(".page5.determine_tip").show();
+        	$(".ui-grid-a").hide();
+
+        }else{
+        	$(".page5.determine_tip").hide();
+        	$(".ui-grid-a").show();
+        }
+        
 	}
 }
