@@ -125,8 +125,10 @@
         <div data-role="page" id="three-b" data-add-back-btn="true" data-routing="page3b.html">
             <script>
                 $("#three-b").live('pageshow',function(){
+                    groups.length = 1
+                    groups[0] = new Group();
                     $("#three-b #people_in_party").focusout(function() {
-                        Gozintas.peopleInParty = $(this).val();
+                        groups[0].peopleInParty = parseFloat($(this).val());
                     });
                 });
             </script>
@@ -185,7 +187,7 @@
                     "pagebeforeshow",
                     function () {
 
-                        $("#fiveb input#individuals_in_party").val(Gozintas.peopleInParty);
+                        $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
                         $("#fiveb input#food_total").val("$"+Gozintas.foodAmount);
                         $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveButtons();

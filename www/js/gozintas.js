@@ -37,13 +37,21 @@ var Gozintas = {
 		return parseFloat(+this.tipAmount * (+this.foodAmount + +this.taxAmount)).toFixed(2)
 	},
 	calculateTipIndividual: function(){
-		return parseFloat(this.calculateTip()/(+this.peopleInParty)).toFixed(2)
+		if(groups.length == 1){
+			return parseFloat(this.calculateTip()/(+groups[0].peopleInParty)).toFixed(2)
+		}else{
+			return 0
+		}
 	},
 	calculateTotal: function(){
 		return parseFloat(+this.foodAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
-		return parseFloat(+this.calculateTotal()/(+this.peopleInParty)).toFixed(2)
+		if(groups.length ==1){
+			return parseFloat(+this.calculateTotal()/(+groups[0].peopleInParty)).toFixed(2)
+		}else{
+			return 0
+		}
 	},
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
