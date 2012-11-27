@@ -99,6 +99,11 @@
                         groupNum = parseFloat(group.split("-")[1])
                         wineTotal = parseFloat($(parentClass+'#wine_amount').val()).toFixed(2);
                         groups[groupNum-1].wineTotal = wineTotal;
+                        if(groups[groupNum-1].wineTotal > 0){
+                            groups[groupNum-1].wine = true
+                        }else{
+                            groups[groupNum-1].wine = false
+                        }
                     })
 
 
@@ -108,6 +113,11 @@
                         groupNum = parseFloat(group.split("-")[1])
                         carryOut = parseFloat($(parentClass+'#carry_out_amount').val()).toFixed(2);
                         groups[groupNum-1].carryOutTotal = carryOut;
+                        if(groups[groupNum-1].carryOutTotal > 0){
+                            groups[groupNum-1].extras = true
+                        }else{
+                            groups[groupNum-1].extras = false
+                        }
                     })
 
                     $("#three #fair_reduction").live('keyup',function(){
@@ -115,7 +125,12 @@
                         parentClass = "."+group+" ";
                         groupNum = parseFloat(group.split("-")[1])
                         fairReduction = parseFloat($(parentClass+'#fair_reduction').val()).toFixed(2);
-                        groups[groupNum-1].reduction = fairReduction;
+                        groups[groupNum-1].reductionTotal = fairReduction;
+                        if(groups[groupNum-1].reductionTotal > 0){
+                            groups[groupNum-1].reduction = true
+                        }else{
+                            groups[groupNum-1].reduction = false
+                        }
                     })
 
 
