@@ -127,10 +127,33 @@
                 $("#three-b").live('pageshow',function(){
                     groups.length = 1
                     groups[0] = new Group();
+                    $("#three-b #drinks_deserts_etc").val(Gozintas.totalAmount-Gozintas.taxAmount);
                     $("#three-b #people_in_party").focusout(function() {
                         groups[0].peopleInParty = parseFloat($(this).val());
                     });
                 });
+
+                $("#three-b").live('keyup',function(){
+                    parentClass = "#three-b";
+                    peopleInParty = parseFloat($(parentClass+' #people_in_party').val())
+                    wineTotal = parseFloat($(parentClass+' #wine_amount').val()).toFixed(2);
+                    carryOut = parseFloat($(parentClass+' #carry_out_amount').val()).toFixed(2);
+
+                    if(carryOut == "NaN"){
+                        carryOut = 0
+                    }
+                    if(wineTotal == "NaN"){
+                        wineTotal = 0
+                    }
+                    console.log(peopleInParty+" "+wineTotal+" "+carryOut);
+
+                    groups[0].peopleInParty = peopleInParty
+                    groups[0].wineTotal = wineTotal;
+                    groups[0].carryOutTotal = carryOut
+                    groups[0].foodTotal = +Gozintas.totalAmount - +Gozintas.taxAmount
+
+                    $("#three-b #drinks_deserts_etc").val(Gozintas.totalAmount-Gozintas.taxAmount-groups[0].wineTotal-groups[0].carryOutTotal);
+                })
             </script>
         </div>
 
@@ -186,9 +209,12 @@
                 $("#fiveb").live(
                     "pagebeforeshow",
                     function () {
+                        if(Gozintas.billPath == "determine-tip" || (Gozintas.billPath == "split-tip" && Gozintas.splitBy == "individual")){
+                            groups[0].foodTotal = +Gozintas.totalAmount - +Gozintas.taxAmount
+                        }
 
                         $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
-                        $("#fiveb input#food_total").val("$"+Gozintas.foodAmount);
+                        $("#fiveb input#food_total").val("$"+groups[0].foodTotal);
                         $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveInputs();
                         $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");

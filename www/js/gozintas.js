@@ -4,7 +4,7 @@ function Group () {
     this.extras = false
     this.nickname = ''
     this.peopleInParty = 1
-    this.FoodTotal = 0
+    this.foodTotal = 0
     this.wineTotal = 0
     this.carryOutTotal = 0
     this.reduction = 0
@@ -34,7 +34,7 @@ var Gozintas = {
 		return re.test(price);
 	},
 	calculateTip: function(){
-		return parseFloat(+this.tipAmount * (+this.foodAmount + +this.taxAmount)).toFixed(2)
+		return parseFloat(+this.tipAmount * (+this.totalAmount)).toFixed(2)
 	},
 	calculateTipIndividual: function(){
 		if(groups.length == 1){
@@ -44,6 +44,9 @@ var Gozintas = {
 		}
 	},
 	calculateTotal: function(){
+		if((this.billPath == "split-bill" && this.splitBy == "individual") || this.billPath == "determine-tip"){
+			return parseFloat(+this.totalAmount + +this.calculateTip()).toFixed(2)
+		}
 		return parseFloat(+this.foodAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
