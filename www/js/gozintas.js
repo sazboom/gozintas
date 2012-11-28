@@ -34,6 +34,7 @@ var Gozintas = {
 	carryOutAmount: 0,
 	peopleInParty : 0,
 	tipAmount : 0.15,
+	wineTipAmount: 0.15,
 	validatePrice: function(price){
 		var re = /^[0-9]+(\.[0-9]{2})?$/;
 		return re.test(price);
@@ -104,12 +105,30 @@ var Gozintas = {
         }
 	},
 	showPageFourPercentages: function(){
-        if(!Gozintas.billModifier.wine){
-            $("#four #wine_tip").hide();
-        }
-        if(!Gozintas.billModifier.extras){
-            $("#four #carry_tip").hide();
-        }
+		if(Gozintas.splitBy == "individual"){
+			if(groups[0].wine){
+				console.log("yup wine")
+	            $("#four #wine_tip").show();
+	        }else{
+	        	console.log("nope wine")
+	        	$("#four #wine_tip").hide();
+	        }
+	        if(groups[0].carryout){
+	        	console.log("yup carryout")
+	            $("#four #carry_tip").show();
+	        }else{
+	        	console.log("nope carryout")
+	        	$("#four #carry_tip").hide();
+	        }
+		}else{
+			if(!Gozintas.billModifier.wine){
+	            $("#four #wine_tip").hide();
+	        }
+	        if(!Gozintas.billModifier.extras){
+	            $("#four #carry_tip").hide();
+	        }
+		}
+
 
 	},
 	showPageFiveInputs: function(){

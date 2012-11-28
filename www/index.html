@@ -193,8 +193,26 @@
                     groups[0].wineTotal = wineTotal;
                     groups[0].carryOutTotal = carryOut
                     groups[0].foodTotal = +Gozintas.totalAmount - +Gozintas.taxAmount
+                    newFoodTotal = Gozintas.totalAmount-Gozintas.taxAmount-groups[0].wineTotal-groups[0].carryOutTotal -groups[0].reductionTotal;
+                    groups[0].foodTotal = newFoodTotal
 
-                    $("#three-b #drinks_deserts_etc").val(Gozintas.totalAmount-Gozintas.taxAmount-groups[0].wineTotal-groups[0].carryOutTotal);
+                    if(groups[0].foodTotal > 0){
+                        groups[0].extras =true;
+                    }else{
+                        groups[0].extras = false
+                    }
+                    if(groups[0].wineTotal > 0){
+                        groups[0].wine = true
+                    }else{
+                        groups[0].wine = false
+                    }
+                    if(groups[0].carryOutTotal > 0){
+                        groups[0].carryout = true
+                    }else{
+                        groups[0].carryout = false
+                    }
+
+                    $("#three-b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
                 })
             </script>
         </div>
@@ -313,6 +331,7 @@
 
                         $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
                         $("#fiveb input#food_total").val("$"+groups[0].foodTotal);
+                        $("#fiveb .food_total label").text("Food Total ("+Gozintas.tipAmount*100+"% tip rate)")
                         $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveInputs();
                         $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
