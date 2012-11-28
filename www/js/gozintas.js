@@ -21,7 +21,7 @@ var Gozintas = {
 		reductions : false,
 		extras : false
 	},
-	totalBill : 0,
+	totalWithoutReduction : 0,
 	totalTax : 0,
 	billPath : '',
 	splitBy : '',
