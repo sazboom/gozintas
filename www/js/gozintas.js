@@ -2,6 +2,7 @@ function Group () {
     this.wine = false;
     this.reductions = false
     this.extras = false
+    this.carryout = false
     this.nickname = ''
     this.peopleInParty = 1
     this.foodTotal = 0

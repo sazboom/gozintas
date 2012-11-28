@@ -91,10 +91,16 @@
                     groupNum = parseFloat(group.split("-")[1])
                     foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val()).toFixed(2);
                     groups[groupNum-1].foodTotal = foodTotal;
-                    if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
+                    if(groups[groupNum-1].foodTotal > 0){
+                        groups[groupNum-1].extras = true
                         groups[groupNum-1].reduction = true
                     }else{
-                        groups[groupNum-1].reduction = false
+                        if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
+                            groups[groupNum-1].reduction = true
+                        }else{
+                            groups[groupNum-1].reduction = false
+                            groups[groupNum-1].extras = false
+                        }
                     }
                 })
 
@@ -125,10 +131,10 @@
                     carryOut = parseFloat($(parentClass+'#carry_out_amount').val()).toFixed(2);
                     groups[groupNum-1].carryOutTotal = carryOut;
                     if(groups[groupNum-1].carryOutTotal > 0){
-                        groups[groupNum-1].extras = true
+                        groups[groupNum-1].carryout = true
                         groups[groupNum-1].reduction = true
                     }else{
-                        groups[groupNum-1].extras = false
+                        groups[groupNum-1].carryout = false
                         if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
                             groups[groupNum-1].reduction = true
                         }else{
@@ -238,16 +244,19 @@
                             $("#five #group-"+(i+1)+" #total").val(groups[i].total)
                             if(groups[i].wine){
                                 $("#five #group-"+(i+1)+" #wine_amount_container").show()
+                                $("#five #group-"+(i+1)+" #wine_amount").val(groups[i].wineTotal)
                             }else{
                                 $("#five #group-"+(i+1)+" #wine_amount_container").hide()
                             }
-                            if(groups[i].extras){
+                            if(groups[i].carryout){
                                 $("#five #group-"+(i+1)+" #carry_out_amount_container").show()
+                                $("#five #group-"+(i+1)+" #carry_out_amount").val(groups[i].carryOutTotal)
                             }else{
                                 $("#five #group-"+(i+1)+" #carry_out_amount_container").hide()
                             }
-                            if(groups[i].foodTotal > 0){
+                            if(groups[i].extras){
                                 $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").show()
+                                $("#five #group-"+(i+1)+" #drinks_deserts_amount").val(groups[i].foodTotal)
                             }else{
                                 $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").hide()
                             }
