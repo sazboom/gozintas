@@ -236,6 +236,21 @@
                         for(var i=0; i<groups.length; i++){
                             $("#five #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
                             $("#five #group-"+(i+1)+" #total").val(groups[i].total)
+                            if(groups[i].wine){
+                                $("#five #group-"+(i+1)+" #wine_amount_container").show()
+                            }else{
+                                $("#five #group-"+(i+1)+" #wine_amount_container").hide()
+                            }
+                            if(groups[i].extras){
+                                $("#five #group-"+(i+1)+" #carry_out_amount_container").show()
+                            }else{
+                                $("#five #group-"+(i+1)+" #carry_out_amount_container").hide()
+                            }
+                            if(groups[i].foodTotal > 0){
+                                $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").show()
+                            }else{
+                                $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").hide()
+                            }
                         }
 
                         $(".page5.total input").val($("#total_amount_input").val())
