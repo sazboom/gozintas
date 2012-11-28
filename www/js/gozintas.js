@@ -8,6 +8,8 @@ function Group () {
     this.wineTotal = 0
     this.carryOutTotal = 0
     this.reductionTotal = 0
+    this.tipTotal = 0
+    this.total = 0
 }
 
 var groups = [new Group()]
@@ -24,6 +26,8 @@ var Gozintas = {
 	splitBy : '',
 	foodAmount : 0,
 	taxAmount : 0,
+	totalIndividual : 0,
+	tipIndividual : 0,
 	totalAmount : 0,
 	wineAmount : 0,
 	carryOutAmount: 0,

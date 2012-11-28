@@ -223,6 +223,21 @@
                 $("#five").live(
                     "pagebeforeshow",
                     function () {
+                        for(var i=0; i<groups.length; i++){
+                            Gozintas.peopleInParty = +Gozintas.peopleInParty + groups[i].peopleInParty
+                        }
+
+                        Gozintas.totalIndividual = +Gozintas.totalAmount/Gozintas.peopleInParty
+
+                        for(var i=0; i<groups.length; i++){
+                            groups[i].total = (+Gozintas.totalIndividual * +groups[i].peopleInParty).toFixed(2)
+                        }
+
+                        for(var i=0; i<groups.length; i++){
+                            $("#five #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
+                            $("#five #group-"+(i+1)+" #total").val(groups[i].total)
+                        }
+
                         $(".page5.total input").val($("#total_amount_input").val())
                         $(".page5.tax input").val($("#total_tax_amount_input").val())
                         if(!Gozintas.billModifier.wine){
