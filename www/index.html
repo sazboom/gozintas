@@ -259,8 +259,9 @@
                 $("#five").live(
                     "pagebeforeshow",
                     function () {
+                        Gozintas.peopleInParty = 0;
                         for(var i=0; i<groups.length; i++){
-                            Gozintas.peopleInParty = +Gozintas.peopleInParty + groups[i].peopleInParty
+                            Gozintas.peopleInParty = +Gozintas.peopleInParty + groups[i].peopleInParty;
                         }
 
                         
@@ -294,7 +295,8 @@
 
                         for(var i=0; i<groups.length; i++){
                             $("#five #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
-                            $("#five #group-"+(i+1)+" #total").val(groups[i].total)
+                            $("#five #group-"+(i+1)+" #total").val(+groups[i].total)
+                            $("#five #group-"+(i+1)+" #total_individual").val(+groups[i].total/+groups[i].peopleInParty)
                             if(groups[i].wine){
                                 $("#five #group-"+(i+1)+" #wine_amount_container").show()
                                 $("#five #group-"+(i+1)+" #wine_amount").val(groups[i].wineTotal)
@@ -351,9 +353,9 @@
                         $("#fiveb .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
                         $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveInputs();
-                        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip());
                         $("#fiveb input#total").val("$"+Gozintas.calculateTotal());
-                        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual() +" ("+Gozintas.tipAmount*100+"%)");
+                        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
                         $("#fiveb input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
                     }
                 );

@@ -42,7 +42,11 @@ var Gozintas = {
 		return re.test(price);
 	},
 	calculateTip: function(){
-		return parseFloat(+this.tipAmount * (+this.totalAmount)).toFixed(2)
+		if(groups.length == 1){
+			return parseFloat(+groups[0].foodTotal*Gozintas.tipAmount + +groups[0].wineTotal*Gozintas.wineTipAmount + +groups[0].carryOutTotal*Gozintas.carryTipAmount + +Gozintas.taxAmount*Gozintas.taxTipAmount)
+		}else{
+			return parseFloat(+this.tipAmount * (+this.totalAmount)).toFixed(2)
+		}
 	},
 	calculateTipIndividual: function(){
 		if(groups.length == 1){
@@ -55,7 +59,7 @@ var Gozintas = {
 		if((this.billPath == "split-bill" && this.splitBy == "individual") || this.billPath == "determine-tip"){
 			return parseFloat(+this.totalAmount + +this.calculateTip()).toFixed(2)
 		}
-		return parseFloat(+this.foodAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
+		return parseFloat(+this.totalAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
 		if(groups.length ==1){
@@ -134,6 +138,29 @@ var Gozintas = {
 
 	},
 	showPageFiveInputs: function(){
+		if(Gozintas.splitBy == "individual"){
+			if(Gozintas.billPath == "determine-tip")
+	        {
+	        	$(".page5.determine_tip").show();
+	        	$("#fiveb .wine_total").hide();
+	        	$("#fiveb .carryout_total").hide();
+	        	$(".ui-grid-a").hide();
+
+	        }else{
+	        	if(groups[0].wine){
+	        		$("#fiveb .wine_total").show();
+	        	}else{
+	        		$("#fiveb .wine_total").hide();
+	        	}
+				if(groups[0].carryout){
+					$("#fiveb .carryout_total").show();
+				}else{
+					$("#fiveb .carryout_total").hide();
+				}
+	        	$(".page5.determine_tip").hide();
+	        	$(".ui-grid-a").show();
+	        }
+		}
         if(!Gozintas.billModifier.wine){
             $(".page5.wine_tip").hide();
             $(".page5.wine").hide();
@@ -144,15 +171,7 @@ var Gozintas = {
         if(!Gozintas.billModifier.extras){
             $(".page5.extras").hide();
         }
-        if(Gozintas.billPath == "determine-tip")
-        {
-        	$(".page5.determine_tip").show();
-        	$(".ui-grid-a").hide();
 
-        }else{
-        	$(".page5.determine_tip").hide();
-        	$(".ui-grid-a").show();
-        }
         
 	}
 }
