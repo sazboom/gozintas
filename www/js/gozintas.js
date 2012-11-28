@@ -34,7 +34,9 @@ var Gozintas = {
 	carryOutAmount: 0,
 	peopleInParty : 0,
 	tipAmount : 0.15,
-	wineTipAmount: 0.15,
+	wineTipAmount : 0.15,
+	carryTipAmount : 0.15,
+	taxTipAmount : 0.15,
 	validatePrice: function(price){
 		var re = /^[0-9]+(\.[0-9]{2})?$/;
 		return re.test(price);
