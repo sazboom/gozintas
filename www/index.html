@@ -278,7 +278,8 @@
                             }
                         }
 
-                        Gozintas.totalIndividual = +Gozintas.totalWithoutReduction/Gozintas.peopleInParty
+                        Gozintas.totalIndividual = (+Gozintas.totalWithoutReduction/Gozintas.peopleInParty).toFixed(2)
+                        Gozintas.totalTaxIndividual = (+Gozintas.taxAmount/Gozintas.peopleInParty).toFixed(2)
                         for(var i=0; i<groups.length; i++){
                             var totalAddition = 0
                             if(groups[i].extras){
@@ -291,12 +292,29 @@
                                 totalAddition = totalAddition + +groups[i].wineTotal
                             }
                             groups[i].total = (+Gozintas.totalIndividual * +groups[i].peopleInParty + +totalAddition).toFixed(2)
+                            groups[i].taxTotal = (+Gozintas.totalTaxIndividual * +groups[i].peopleInParty).toFixed(2)
                         }
 
                         for(var i=0; i<groups.length; i++){
+                            var foodTotal = (+groups[i].total- +groups[i].taxTotal - +groups[i].foodTotal - groups[i].carryOutTotal - groups[i].wineTotal).toFixed(2)
+                            var tipTotal = ((+foodTotal)*Gozintas.tipAmount + +groups[i].foodTotal*Gozintas.tipAmount + +groups[i].carryOutTotal*Gozintas.carryTipAmount + +groups[i].wineTotal*Gozintas.wineTipAmount + +groups[i].taxTotal*Gozintas.taxTipAmount).toFixed(2)
+                            var finalTotal = +groups[i].total + +tipTotal;
                             $("#five #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
-                            $("#five #group-"+(i+1)+" #total").val(+groups[i].total)
-                            $("#five #group-"+(i+1)+" #total_individual").val(+groups[i].total/+groups[i].peopleInParty)
+                            $("#five #group-"+(i+1)+" #total").val(finalTotal)
+                            $("#five #group-1 .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+                            $("#five #group-"+(i+1)+" #food_total").val(+foodTotal)
+                            
+                           $("#five #group-1 #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+
+                           $("#five #group-1 #wine_amount_container label").text("Wine ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
+
+                           $("#five #group-1 #carry_out_amount_container label").text("Carry-out for group ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
+                            $("#five #group-"+(i+1)+" #total_individual").val((+finalTotal/+groups[i].peopleInParty).toFixed(2))
+                            $("#five #group-1 .tax_total label").text("Tax for group ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
+                            $("#five #group-"+(i+1)+" #tax_total").val(+groups[i].taxTotal)
+                            
+                            $("#five #group-"+(i+1)+" #tip_total").val(tipTotal)
+                            $("#five #group-"+(i+1)+" #tip_individual").val((tipTotal/groups[i].peopleInParty).toFixed(2))
                             if(groups[i].wine){
                                 $("#five #group-"+(i+1)+" #wine_amount_container").show()
                                 $("#five #group-"+(i+1)+" #wine_amount").val(groups[i].wineTotal)

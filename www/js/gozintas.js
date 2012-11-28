@@ -11,6 +11,7 @@ function Group () {
     this.reductionTotal = 0
     this.tipTotal = 0
     this.total = 0
+    this.taxTotal = 0
 }
 
 var groups = [new Group()]
@@ -28,6 +29,7 @@ var Gozintas = {
 	foodAmount : 0,
 	taxAmount : 0,
 	totalIndividual : 0,
+	totalTaxIndividual : 0,
 	tipIndividual : 0,
 	totalAmount : 0,
 	wineAmount : 0,
@@ -127,12 +129,30 @@ var Gozintas = {
 	        	$("#four #carry_tip").hide();
 	        }
 		}else{
-			if(!Gozintas.billModifier.wine){
-	            $("#four #wine_tip").hide();
-	        }
-	        if(!Gozintas.billModifier.extras){
-	            $("#four #carry_tip").hide();
-	        }
+			if(Gozintas.splitBy == "group"){
+				for(var i = 0; i<groups.length; i++){
+					if(groups[i].wine){
+						Gozintas.billModifier.wine = true
+					}
+					if(groups[i].carryout){
+						Gozintas.billModifier.carryout = true
+					}
+					if(groups[i].extras){
+						Gozintas.billModifier.extras = true
+					}
+
+				}
+				if(Gozintas.billModifier.wine){
+		            $("#four #wine_tip").show();
+		        }else{
+		        	$("#four #wine_tip").hide();
+		        }
+		        if(Gozintas.billModifier.carryout){
+		            $("#four #carry_tip").show();
+		        }else{
+		        	$("#four #carry_tip").hide();
+		        }
+		    }
 		}
 
 
