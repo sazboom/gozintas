@@ -77,61 +77,82 @@
                     final_elToRemove.append(finalChildren);
                 });
 
-                    $("#three #people_in_group").live('keyup',function(){
-                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
-                        parentClass = "."+group+" ";
-                        groupNum = parseFloat(group.split("-")[1])
-                        peopleInParty = parseFloat($(parentClass+'#people_in_group').val());
-                        groups[groupNum-1].peopleInParty = peopleInParty;
-                    })
+                $("#three #people_in_group").live('keyup',function(){
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                    parentClass = "."+group+" ";
+                    groupNum = parseFloat(group.split("-")[1])
+                    peopleInParty = parseFloat($(parentClass+'#people_in_group').val());
+                    groups[groupNum-1].peopleInParty = peopleInParty;
+                })
 
-                    $("#three #drinks_deserts_etc").live('keyup',function(){
-                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
-                        parentClass = "."+group+" ";
-                        groupNum = parseFloat(group.split("-")[1])
-                        foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val()).toFixed(2);
-                        groups[groupNum-1].foodTotal = foodTotal;
-                    })
+                $("#three #drinks_deserts_etc").live('keyup',function(){
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                    parentClass = "."+group+" ";
+                    groupNum = parseFloat(group.split("-")[1])
+                    foodTotal = parseFloat($(parentClass+'#drinks_deserts_etc').val()).toFixed(2);
+                    groups[groupNum-1].foodTotal = foodTotal;
+                    if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
+                        groups[groupNum-1].reduction = true
+                    }else{
+                        groups[groupNum-1].reduction = false
+                    }
+                })
 
-                    $("#three #wine_amount").live('keyup',function(){
-                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
-                        parentClass = "."+group+" ";
-                        groupNum = parseFloat(group.split("-")[1])
-                        wineTotal = parseFloat($(parentClass+'#wine_amount').val()).toFixed(2);
-                        groups[groupNum-1].wineTotal = wineTotal;
-                        if(groups[groupNum-1].wineTotal > 0){
-                            groups[groupNum-1].wine = true
-                        }else{
-                            groups[groupNum-1].wine = false
-                        }
-                    })
-
-
-                    $("#three #carry_out_amount").live('keyup',function(){
-                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
-                        parentClass = "."+group+" ";
-                        groupNum = parseFloat(group.split("-")[1])
-                        carryOut = parseFloat($(parentClass+'#carry_out_amount').val()).toFixed(2);
-                        groups[groupNum-1].carryOutTotal = carryOut;
-                        if(groups[groupNum-1].carryOutTotal > 0){
-                            groups[groupNum-1].extras = true
-                        }else{
-                            groups[groupNum-1].extras = false
-                        }
-                    })
-
-                    $("#three #fair_reduction").live('keyup',function(){
-                        group = $(this).parent().parent().parent().attr("class").split(" ")[0];
-                        parentClass = "."+group+" ";
-                        groupNum = parseFloat(group.split("-")[1])
-                        fairReduction = parseFloat($(parentClass+'#fair_reduction').val()).toFixed(2);
-                        groups[groupNum-1].reductionTotal = fairReduction;
-                        if(groups[groupNum-1].reductionTotal > 0){
+                $("#three #wine_amount").live('keyup',function(){
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                    parentClass = "."+group+" ";
+                    groupNum = parseFloat(group.split("-")[1])
+                    wineTotal = parseFloat($(parentClass+'#wine_amount').val()).toFixed(2);
+                    groups[groupNum-1].wineTotal = wineTotal;
+                    if(groups[groupNum-1].wineTotal > 0){
+                        groups[groupNum-1].wine = true
+                        groups[groupNum-1].reduction = true
+                    }else{
+                        groups[groupNum-1].wine = false
+                        if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
                             groups[groupNum-1].reduction = true
                         }else{
                             groups[groupNum-1].reduction = false
                         }
-                    })
+                    }
+                })
+
+
+                $("#three #carry_out_amount").live('keyup',function(){
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                    parentClass = "."+group+" ";
+                    groupNum = parseFloat(group.split("-")[1])
+                    carryOut = parseFloat($(parentClass+'#carry_out_amount').val()).toFixed(2);
+                    groups[groupNum-1].carryOutTotal = carryOut;
+                    if(groups[groupNum-1].carryOutTotal > 0){
+                        groups[groupNum-1].extras = true
+                        groups[groupNum-1].reduction = true
+                    }else{
+                        groups[groupNum-1].extras = false
+                        if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
+                            groups[groupNum-1].reduction = true
+                        }else{
+                            groups[groupNum-1].reduction = false
+                        }
+                    }
+                })
+
+                $("#three #fair_reduction").live('keyup',function(){
+                    group = $(this).parent().parent().parent().attr("class").split(" ")[0];
+                    parentClass = "."+group+" ";
+                    groupNum = parseFloat(group.split("-")[1])
+                    fairReduction = parseFloat($(parentClass+'#fair_reduction').val()).toFixed(2);
+                    groups[groupNum-1].reductionTotal = fairReduction;
+                    if(groups[groupNum-1].reductionTotal > 0){
+                        groups[groupNum-1].reduction = true
+                    }else{
+                        if(groups[groupNum-1].foodTotal >=0 || groups[groupNum-1].carryOutTotal >=0 || groups[groupNum-1].wineTotal >= 0 || groups[groupNum-1].reductionTotal >= 0){
+                            groups[groupNum-1].reduction = true
+                        }else{
+                            groups[groupNum-1].reduction = false
+                        }
+                    }
+                })
 
 
             </script>
