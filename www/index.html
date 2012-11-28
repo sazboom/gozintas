@@ -247,6 +247,9 @@
                     $("#four #carry_tip_rate").focusout(function() {
                         Gozintas.carryTipAmount = parseFloat($(this).val());
                     });
+                    $("#four #tax_tip_rate").focusout(function() {
+                        Gozintas.taxTipAmount = parseFloat($(this).val());
+                    });
                 });
             </script> 
         </div>
@@ -345,6 +348,7 @@
                         $("#fiveb .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
                         $("#fiveb .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
                         $("#fiveb .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
+                        $("#fiveb .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
                         $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveInputs();
                         $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip()+" ("+Gozintas.tipAmount*100+"%)");
