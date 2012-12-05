@@ -70,6 +70,42 @@ var Gozintas = {
 			return 0
 		}
 	},
+	calculatePeopleInParty: function(){
+		Gozintas.peopleInParty = 0;
+	    for(var i=0; i<groups.length; i++){
+	        Gozintas.peopleInParty = +Gozintas.peopleInParty + groups[i].peopleInParty;
+	    }
+	},
+	calculateTotalWithoutReduction: function(){
+		Gozintas.totalWithoutReduction = Gozintas.totalAmount
+        for(var i=0; i<groups.length; i++){
+            if(groups[i].extras){
+                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].foodTotal).toFixed(2)
+            }
+            if(groups[i].carryout){
+                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].carryOutTotal).toFixed(2)
+            }
+            if(groups[i].wine){
+                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].wineTotal).toFixed(2)
+            }
+        }
+	},
+	calculateTaxAndTotal: function(){
+	    for(var i=0; i<groups.length; i++){
+	        var totalAddition = 0
+	        if(groups[i].extras){
+	            totalAddition = totalAddition + +groups[i].foodTotal
+	        }
+	        if(groups[i].carryout){
+	            totalAddition = totalAddition + +groups[i].carryOutTotal
+	        }
+	        if(groups[i].wine){
+	            totalAddition = totalAddition + +groups[i].wineTotal
+	        }
+	        groups[i].total = (+Gozintas.totalIndividual * +groups[i].peopleInParty + +totalAddition).toFixed(2)
+	        groups[i].taxTotal = (+Gozintas.totalTaxIndividual * +groups[i].peopleInParty).toFixed(2)
+	    }
+	},
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
 	},
