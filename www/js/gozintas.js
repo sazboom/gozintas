@@ -39,11 +39,8 @@ var Gozintas = {
 	wineTipAmount : 0.15,
 	carryTipAmount : 0.15,
 	taxTipAmount : 0.15,
-	validatePrice: function(price){
-		var re = /^[0-9]+(\.[0-9]{2})?$/;
-		return re.test(price);
-	},
 	calculateTip: function(){
+		/* Calculates the tip for a group by taking all the different food totals (wine, food/drink, carryout) and multiplying by their percentage tip (.1, .3, etc). So the calculation is FoodTotal*FoodTipRate + WineTotal*WineTipRate + CarryTotal*CarryTipRate = total tip amount for group*/
 		if(groups.length == 1){
 			return parseFloat(+groups[0].foodTotal*Gozintas.tipAmount + +groups[0].wineTotal*Gozintas.wineTipAmount + +groups[0].carryOutTotal*Gozintas.carryTipAmount + +Gozintas.taxAmount*Gozintas.taxTipAmount)
 		}else{
@@ -51,6 +48,7 @@ var Gozintas = {
 		}
 	},
 	calculateTipIndividual: function(){
+		/*Takes calculateTip above and divides it by the number of people in the groups party*/
 		if(groups.length == 1){
 			return parseFloat(this.calculateTip()/(+groups[0].peopleInParty)).toFixed(2)
 		}else{
@@ -194,6 +192,20 @@ var Gozintas = {
 
 	},
 	showPageFiveInputs: function(){
+        $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
+        $("#fiveb input#food_total").val("$"+groups[0].foodTotal);
+        $("#fiveb input#wine_total").val("$"+groups[0].wineTotal);
+        $("#fiveb input#carryout_total").val("$"+groups[0].carryOutTotal);
+        $("#fiveb .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+        $("#fiveb .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
+        $("#fiveb .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
+        $("#fiveb .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
+        $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
+
+        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip());
+        $("#fiveb input#total").val("$"+Gozintas.calculateTotal());
+        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
+        $("#fiveb input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
 		if(Gozintas.splitBy == "individual"){
 			if(Gozintas.billPath == "determine-tip")
 	        {
@@ -229,6 +241,27 @@ var Gozintas = {
         }
 
         
+	},
+	showPageFiveGroupInputs: function(group_number){
+        if(groups[group_number].wine){
+            $("#five #group-"+(group_number+1)+" #wine_amount_container").show()
+            $("#five #group-"+(group_number+1)+" #wine_amount").val(groups[group_number].wineTotal)
+        }else{
+            $("#five #group-"+(group_number+1)+" #wine_amount_container").hide()
+        }
+        if(groups[group_number].carryout){
+            $("#five #group-"+(group_number+1)+" #carry_out_amount_container").show()
+            $("#five #group-"+(group_number+1)+" #carry_out_amount").val(groups[group_number].carryOutTotal)
+        }else{
+            $("#five #group-"+(group_number+1)+" #carry_out_amount_container").hide()
+        }
+        if(groups[group_number].extras){
+            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount_container").show()
+            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount").val(groups[group_number].foodTotal)
+        }else{
+            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount_container").hide()
+        }
+
 	},
 	handleKeyups: function(page){
 		if(page == 3){

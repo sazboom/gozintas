@@ -110,24 +110,7 @@
                             
                             $("#five #group-"+(i+1)+" #tip_total").val(five_tipTotal)
                             $("#five #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
-                            if(groups[i].wine){
-                                $("#five #group-"+(i+1)+" #wine_amount_container").show()
-                                $("#five #group-"+(i+1)+" #wine_amount").val(groups[i].wineTotal)
-                            }else{
-                                $("#five #group-"+(i+1)+" #wine_amount_container").hide()
-                            }
-                            if(groups[i].carryout){
-                                $("#five #group-"+(i+1)+" #carry_out_amount_container").show()
-                                $("#five #group-"+(i+1)+" #carry_out_amount").val(groups[i].carryOutTotal)
-                            }else{
-                                $("#five #group-"+(i+1)+" #carry_out_amount_container").hide()
-                            }
-                            if(groups[i].extras){
-                                $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").show()
-                                $("#five #group-"+(i+1)+" #drinks_deserts_amount").val(groups[i].foodTotal)
-                            }else{
-                                $("#five #group-"+(i+1)+" #drinks_deserts_amount_container").hide()
-                            }
+                            Gozintas.showPageFiveGroupInputs(i);
                         }
 
                         $(".page5.total input").val($("#total_amount_input").val())
@@ -156,20 +139,7 @@
                             groups[0].foodTotal = +Gozintas.totalAmount - +Gozintas.taxAmount
                         }
 
-                        $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
-                        $("#fiveb input#food_total").val("$"+groups[0].foodTotal);
-                        $("#fiveb input#wine_total").val("$"+groups[0].wineTotal);
-                        $("#fiveb input#carryout_total").val("$"+groups[0].carryOutTotal);
-                        $("#fiveb .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
-                        $("#fiveb .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
-                        $("#fiveb .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
-                        $("#fiveb .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
-                        $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
                         Gozintas.showPageFiveInputs();
-                        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip());
-                        $("#fiveb input#total").val("$"+Gozintas.calculateTotal());
-                        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
-                        $("#fiveb input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
                     }
                 );
             </script>

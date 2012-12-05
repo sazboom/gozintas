@@ -1,0 +1,12 @@
+NOTES:
+
+Gozintas.calculateTipIndividual only works for page 5b, not for page 5. Page 5 does the calculation in the page, which we might want to refactor
+
+Gozintas.calculateTotal only works for page 5b
+	Also might be doing the wrong thing -- returning twice means only the second one is probably correct -- do some error checking on that
+
+Need someway to cull down the for loops in 5
+
+Make sure booleans for billModifier are being set -- page.js line 47+
+
+Handlekeyups doesn't change booleans, so the divs wont show on page 5 for split-by group
