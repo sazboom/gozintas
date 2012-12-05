@@ -58,34 +58,24 @@
                     "pagebeforeshow",
                     function(){
                         Gozintas.showPageFourPercentages();
-                    }
-                );
-                $("#four").live(
-                    "pageshow",
-                    function () {
                         Gozintas.showPageFourButton();
+                        $("#four #tip_rate").focusout(function() {
+                            Gozintas.tipAmount = parseFloat($(this).val());
+                        });
+                        $("#four #tax_tip_rate").focusout(function() {
+                            Gozintas.taxTipAmount = parseFloat($(this).val());
+                        });
+                        $("#four #wine_tip_rate").focusout(function() {
+                            Gozintas.wineTipAmount = parseFloat($(this).val());
+                        });
+                        $("#four #carry_tip_rate").focusout(function() {
+                            Gozintas.carryTipAmount = parseFloat($(this).val());
+                        });
+                        $("#four #tax_tip_rate").focusout(function() {
+                            Gozintas.taxTipAmount = parseFloat($(this).val());
+                        });
                     }
                 );
-
-                $("#four").live(
-                    "pageshow",
-                    function() {
-                    $("#four #tip_rate").focusout(function() {
-                        Gozintas.tipAmount = parseFloat($(this).val());
-                    });
-                    $("#four #tax_tip_rate").focusout(function() {
-                        Gozintas.taxTipAmount = parseFloat($(this).val());
-                    });
-                    $("#four #wine_tip_rate").focusout(function() {
-                        Gozintas.wineTipAmount = parseFloat($(this).val());
-                    });
-                    $("#four #carry_tip_rate").focusout(function() {
-                        Gozintas.carryTipAmount = parseFloat($(this).val());
-                    });
-                    $("#four #tax_tip_rate").focusout(function() {
-                        Gozintas.taxTipAmount = parseFloat($(this).val());
-                    });
-                });
             </script> 
         </div>
 
