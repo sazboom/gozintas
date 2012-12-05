@@ -10,3 +10,12 @@ Need someway to cull down the for loops in 5
 Make sure booleans for billModifier are being set -- page.js line 47+
 
 Handlekeyups doesn't change booleans, so the divs wont show on page 5 for split-by group
+
+Showpage5inputs really only works for page 5b -- kind of a dumb oversight, but make sure to rename this properly or combine with 5 showpage
+
+
+Aaron questions/conundrums
+	Setup and get working on iphone
+	.live events cant be put in page.js -- strategy for this?
+	Lots of for loops that "seem" neccesary -- strategy for this?
+	First page loading -- still an issue

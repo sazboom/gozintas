@@ -271,15 +271,27 @@ var Gozintas = {
 	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
 	            	parentClass = "#"+group+" ";
 		            groupNum = parseFloat(group.split("-")[1])
+		            console.log(value["input"])
+		            console.log(parentClass+value["id"])
 		            if(value["input"] == "text"){
 		            	input = $(parentClass+value["id"]).val();
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = '"+input+"'"
 		            }
 		            else if(value["input"] == "integer"){
-		            	input = parseFloat($(parentClass+value["id"]).val()).toFixed();
+		            	input = $(parentClass+value["id"]).val()
+		            	if(input.length == 0){ 
+		            		input = 0
+		            	}else{
+		            		input = parseFloat($(parentClass+value["id"]).val()).toFixed();
+		            	}
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
 		            }else if(value["input"] == "money"){
-		            	input = parseFloat($(parentClass+value["id"]).val()).toFixed(2);
+		            	input = $(parentClass+value["id"]).val()
+		            	if(input.length == 0){ 
+		            		input = 0
+		            	}else{
+		            		input = parseFloat($(parentClass+value["id"]).val()).toFixed(2);
+		            	}
 						store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
 		            }
 
