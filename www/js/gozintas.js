@@ -141,26 +141,26 @@ var Gozintas = {
 	},
 	showPageFourButton: function(){
         if(this.isSplitingByIndividual()){
-            $("#next_button_page4").attr("href", "#fiveb");
+            $("#next_button_page4").attr("href", "#page5b");
         }else{
-            $("#next_button_page4").attr("href", "#five")
+            $("#next_button_page4").attr("href", "#page5")
         }
 	},
 	showPageFourPercentages: function(){
 		if(Gozintas.splitBy == "individual"){
 			if(groups[0].wine){
 				console.log("yup wine")
-	            $("#four #wine_tip").show();
+	            $("#page4 #wine_tip").show();
 	        }else{
 	        	console.log("nope wine")
-	        	$("#four #wine_tip").hide();
+	        	$("#page4 #wine_tip").hide();
 	        }
 	        if(groups[0].carryout){
 	        	console.log("yup carryout")
-	            $("#four #carry_tip").show();
+	            $("#page4 #carry_tip").show();
 	        }else{
 	        	console.log("nope carryout")
-	        	$("#four #carry_tip").hide();
+	        	$("#page4 #carry_tip").hide();
 	        }
 		}else{
 			if(Gozintas.splitBy == "group"){
@@ -177,14 +177,14 @@ var Gozintas = {
 
 				}
 				if(Gozintas.billModifier.wine){
-		            $("#four #wine_tip").show();
+		            $("#page4 #wine_tip").show();
 		        }else{
-		        	$("#four #wine_tip").hide();
+		        	$("#page4 #wine_tip").hide();
 		        }
 		        if(Gozintas.billModifier.carryout){
-		            $("#four #carry_tip").show();
+		            $("#page4 #carry_tip").show();
 		        }else{
-		        	$("#four #carry_tip").hide();
+		        	$("#page4 #carry_tip").hide();
 		        }
 		    }
 		}
@@ -192,38 +192,38 @@ var Gozintas = {
 
 	},
 	showPageFiveInputs: function(){
-        $("#fiveb input#individuals_in_party").val(groups[0].peopleInParty);
-        $("#fiveb input#food_total").val("$"+groups[0].foodTotal);
-        $("#fiveb input#wine_total").val("$"+groups[0].wineTotal);
-        $("#fiveb input#carryout_total").val("$"+groups[0].carryOutTotal);
-        $("#fiveb .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
-        $("#fiveb .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
-        $("#fiveb .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
-        $("#fiveb .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
-        $("#fiveb input#tax_total").val("$"+Gozintas.taxAmount);
+        $("#page5b input#individuals_in_party").val(groups[0].peopleInParty);
+        $("#page5b input#food_total").val("$"+groups[0].foodTotal);
+        $("#page5b input#wine_total").val("$"+groups[0].wineTotal);
+        $("#page5b input#carryout_total").val("$"+groups[0].carryOutTotal);
+        $("#page5b .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+        $("#page5b .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
+        $("#page5b .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
+        $("#page5b .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
+        $("#page5b input#tax_total").val("$"+Gozintas.taxAmount);
 
-        $("#fiveb input#tip_total").val("$"+Gozintas.calculateTip());
-        $("#fiveb input#total").val("$"+Gozintas.calculateTotal());
-        $("#fiveb input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
-        $("#fiveb input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
+        $("#page5b input#tip_total").val("$"+Gozintas.calculateTip());
+        $("#page5b input#total").val("$"+Gozintas.calculateTotal());
+        $("#page5b input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
+        $("#page5b input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
 		if(Gozintas.splitBy == "individual"){
 			if(Gozintas.billPath == "determine-tip")
 	        {
 	        	$(".page5.determine_tip").show();
-	        	$("#fiveb .wine_total").hide();
-	        	$("#fiveb .carryout_total").hide();
+	        	$("#page5b .wine_total").hide();
+	        	$("#page5b .carryout_total").hide();
 	        	$(".ui-grid-a").hide();
 
 	        }else{
 	        	if(groups[0].wine){
-	        		$("#fiveb .wine_total").show();
+	        		$("#page5b .wine_total").show();
 	        	}else{
-	        		$("#fiveb .wine_total").hide();
+	        		$("#page5b .wine_total").hide();
 	        	}
 				if(groups[0].carryout){
-					$("#fiveb .carryout_total").show();
+					$("#page5b .carryout_total").show();
 				}else{
-					$("#fiveb .carryout_total").hide();
+					$("#page5b .carryout_total").hide();
 				}
 	        	$(".page5.determine_tip").hide();
 	        	$(".ui-grid-a").show();
@@ -244,22 +244,22 @@ var Gozintas = {
 	},
 	showPageFiveGroupInputs: function(group_number){
         if(groups[group_number].wine){
-            $("#five #group-"+(group_number+1)+" #wine_amount_container").show()
-            $("#five #group-"+(group_number+1)+" #wine_amount").val(groups[group_number].wineTotal)
+            $("#page5 #group-"+(group_number+1)+" #wine_amount_container").show()
+            $("#page5 #group-"+(group_number+1)+" #wine_amount").val(groups[group_number].wineTotal)
         }else{
-            $("#five #group-"+(group_number+1)+" #wine_amount_container").hide()
+            $("#page5 #group-"+(group_number+1)+" #wine_amount_container").hide()
         }
         if(groups[group_number].carryout){
-            $("#five #group-"+(group_number+1)+" #carry_out_amount_container").show()
-            $("#five #group-"+(group_number+1)+" #carry_out_amount").val(groups[group_number].carryOutTotal)
+            $("#page5 #group-"+(group_number+1)+" #carry_out_amount_container").show()
+            $("#page5 #group-"+(group_number+1)+" #carry_out_amount").val(groups[group_number].carryOutTotal)
         }else{
-            $("#five #group-"+(group_number+1)+" #carry_out_amount_container").hide()
+            $("#page5 #group-"+(group_number+1)+" #carry_out_amount_container").hide()
         }
         if(groups[group_number].extras){
-            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount_container").show()
-            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount").val(groups[group_number].foodTotal)
+            $("#page5 #group-"+(group_number+1)+" #drinks_deserts_amount_container").show()
+            $("#page5 #group-"+(group_number+1)+" #drinks_deserts_amount").val(groups[group_number].foodTotal)
         }else{
-            $("#five #group-"+(group_number+1)+" #drinks_deserts_amount_container").hide()
+            $("#page5 #group-"+(group_number+1)+" #drinks_deserts_amount_container").hide()
         }
 
 	},
@@ -267,7 +267,7 @@ var Gozintas = {
 		if(page == 3){
 			var three_classes = [{id: "#group_nickname", input:"text", attribute:"nickname"},{id:"#people_in_group", input:"integer", attribute:"peopleInParty"},{id:"#drinks_deserts_etc",input:"money", attribute:"foodTotal"},{id:"#wine_amount",input:"money", attribute:"wineTotal"},{id:"#carry_out_amount",input:"money", attribute:"carryOutTotal"},{id:"#fair_reduction",input:"money", attribute:"reductionTotal"}]
 			$.each(three_classes, function(index, value) { 
-				$("#three "+value["id"]).live("keyup",function(){
+				$("#page3 "+value["id"]).live("keyup",function(){
 	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
 	            	parentClass = "#"+group+" ";
 		            groupNum = parseFloat(group.split("-")[1])
@@ -297,10 +297,10 @@ var Gozintas = {
 
 		            eval(store)
 		            if(value["id"] == "#group_nickname"){
-		            	elToRemove = $("#three "+parentClass+"h3 span.ui-btn-text");
-			            final_elToRemove = $("#five "+parentClass+"h3 span.ui-btn-text");
+		            	elToRemove = $("#page3 "+parentClass+"h3 span.ui-btn-text");
+			            final_elToRemove = $("#page5 "+parentClass+"h3 span.ui-btn-text");
 			            if(final_elToRemove.length == 0){
-			                final_elToRemove = $("#five "+parentClass+"h3");
+			                final_elToRemove = $("#page5 "+parentClass+"h3");
 			            }
 			            children = elToRemove.children().detach();
 			            finalChildren = final_elToRemove.children().detach();

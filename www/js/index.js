@@ -23,7 +23,7 @@ var app = {
 
 function addGroup()
 {
-    group_size = $("#three [class^='group-']").size();
+    group_size = $("#page3 [class^='group-']").size();
     groups.push(new Group())
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups');
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
@@ -32,7 +32,7 @@ function addGroup()
 
 function removeGroup()
 {
-    group_size = $("#three [class^='group-']").size();
+    group_size = $("#page3 [class^='group-']").size();
     if(group_size !=1)
     {
         $(".group-"+group_size).remove();

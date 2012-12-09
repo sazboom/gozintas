@@ -6,11 +6,11 @@ var Page = {
 		},
 
 		page2: function() {
-			$("#two #total_amount_input").on("change", function() {
+			$("#page2 #total_amount_input").on("change", function() {
 				Gozintas.totalAmount = parseFloat($(this).val()).toFixed(2)
 				console.log(Gozintas.totalAmount)
 			})
-			$("#two #total_tax_amount_input").on("change", function() {
+			$("#page2 #total_tax_amount_input").on("change", function() {
 				Gozintas.taxAmount = parseFloat($(this).val()).toFixed(2)
 				console.log(Gozintas.taxAmount)
 			})
@@ -23,8 +23,8 @@ var Page = {
 
 
 		page3b: function() {
-            $("#three-b").live("keyup",function(){
-                parentClass = "#three-b";
+            $("#page3b").live("keyup",function(){
+                parentClass = "#page3b";
                 peopleInParty = parseFloat($(parentClass+" #people_in_party").val())
                 wineTotal = parseFloat($(parentClass+" #wine_amount").val()).toFixed(2);
                 carryOut = parseFloat($(parentClass+" #carry_out_amount").val()).toFixed(2);
@@ -60,7 +60,7 @@ var Page = {
                     groups[0].carryout = false
                 }
 
-                $("#three-b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
+                $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
             })
 
 		},

@@ -21,12 +21,12 @@
         </script>
     </head>
     <body>
-        <div data-role="page" id="one" data-routing="page1.html">
+        <div data-role="page" id="page1" data-routing="page1.html">
         </div>
 
-        <div data-role="page" id="two" data-add-back-btn="true" data-routing="page2.html" data-pagejs="page2">
+        <div data-role="page" id="page2" data-add-back-btn="true" data-routing="page2.html" data-pagejs="page2">
             <script> 
-                $("#two").live(
+                $("#page2").live(
                     "pagebeforeshow",
                     function () {
                         Gozintas.showSplitTipButtons();
@@ -36,42 +36,42 @@
             </script>        
         </div>
 
-        <div data-role="page" id="three" data-add-back-btn="true" data-routing="page3.html" data-pagejs="page3">
+        <div data-role="page" id="page3" data-add-back-btn="true" data-routing="page3.html" data-pagejs="page3">
         </div>
 
-        <div data-role="page" id="three-b" data-add-back-btn="true" data-routing="page3b.html" data-pagejs="page3b">
+        <div data-role="page" id="page3b" data-add-back-btn="true" data-routing="page3b.html" data-pagejs="page3b">
             <script>
-                $("#three-b").live('pageshow',function(){
+                $("#page3b").live('pageshow',function(){
                     groups.length = 1
                     groups[0] = new Group();
-                    $("#three-b #drinks_deserts_etc").val(Gozintas.totalAmount-Gozintas.taxAmount);
-                    $("#three-b #people_in_party").focusout(function() {
+                    $("#page3b #drinks_deserts_etc").val(Gozintas.totalAmount-Gozintas.taxAmount);
+                    $("#page3b #people_in_party").focusout(function() {
                         groups[0].peopleInParty = parseFloat($(this).val());
                     });
                 });
             </script>
         </div>
 
-        <div data-role="page" id="four" data-add-back-btn="true" data-routing="page4.html" data-pagejs="page4">
+        <div data-role="page" id="page4" data-add-back-btn="true" data-routing="page4.html" data-pagejs="page4">
             <script> 
-                $("#four").live(
+                $("#page4").live(
                     "pagebeforeshow",
                     function(){
                         Gozintas.showPageFourPercentages();
                         Gozintas.showPageFourButton();
-                        $("#four #tip_rate").focusout(function() {
+                        $("#page4 #tip_rate").focusout(function() {
                             Gozintas.tipAmount = parseFloat($(this).val());
                         });
-                        $("#four #tax_tip_rate").focusout(function() {
+                        $("#page4 #tax_tip_rate").focusout(function() {
                             Gozintas.taxTipAmount = parseFloat($(this).val());
                         });
-                        $("#four #wine_tip_rate").focusout(function() {
+                        $("#page4 #wine_tip_rate").focusout(function() {
                             Gozintas.wineTipAmount = parseFloat($(this).val());
                         });
-                        $("#four #carry_tip_rate").focusout(function() {
+                        $("#page4 #carry_tip_rate").focusout(function() {
                             Gozintas.carryTipAmount = parseFloat($(this).val());
                         });
-                        $("#four #tax_tip_rate").focusout(function() {
+                        $("#page4 #tax_tip_rate").focusout(function() {
                             Gozintas.taxTipAmount = parseFloat($(this).val());
                         });
                     }
@@ -79,9 +79,9 @@
             </script> 
         </div>
 
-        <div data-role="page" id="five" data-add-back-btn="true" data-routing="page5.html" data-pagejs="page5">
+        <div data-role="page" id="page5" data-add-back-btn="true" data-routing="page5.html" data-pagejs="page5">
             <script>
-                $("#five").live(
+                $("#page5").live(
                     "pagebeforeshow",
                     function () {
                         Gozintas.calculatePeopleInParty()
@@ -94,22 +94,22 @@
                             five_foodTotal = (+groups[i].total- +groups[i].taxTotal - +groups[i].foodTotal - groups[i].carryOutTotal - groups[i].wineTotal).toFixed(2)
                             five_tipTotal = ((+five_foodTotal)*Gozintas.tipAmount + +groups[i].foodTotal*Gozintas.tipAmount + +groups[i].carryOutTotal*Gozintas.carryTipAmount + +groups[i].wineTotal*Gozintas.wineTipAmount + +groups[i].taxTotal*Gozintas.taxTipAmount).toFixed(2)
                             five_finalTotal = +groups[i].total + +five_tipTotal;
-                            $("#five #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
-                            $("#five #group-"+(i+1)+" #total").val(five_finalTotal)
-                            $("#five #group-"+(i+1)+" .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
-                            $("#five #group-"+(i+1)+" #food_total").val(+five_foodTotal)
+                            $("#page5 #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
+                            $("#page5 #group-"+(i+1)+" #total").val(five_finalTotal)
+                            $("#page5 #group-"+(i+1)+" .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+                            $("#page5 #group-"+(i+1)+" #food_total").val(+five_foodTotal)
                             
-                           $("#five #group-"+(i+1)+" #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
+                           $("#page5 #group-"+(i+1)+" #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
 
-                           $("#five #group-"+(i+1)+" #wine_amount_container label").text("Wine ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
+                           $("#page5 #group-"+(i+1)+" #wine_amount_container label").text("Wine ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
 
-                           $("#five #group-"+(i+1)+" #carry_out_amount_container label").text("Carry-out for group ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
-                            $("#five #group-"+(i+1)+" #total_individual").val((+five_finalTotal/+groups[i].peopleInParty).toFixed(2))
-                            $("#five #group-"+(i+1)+" .tax_total label").text("Tax for group ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
-                            $("#five #group-"+(i+1)+" #tax_total").val(+groups[i].taxTotal)
+                           $("#page5 #group-"+(i+1)+" #carry_out_amount_container label").text("Carry-out for group ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
+                            $("#page5 #group-"+(i+1)+" #total_individual").val((+five_finalTotal/+groups[i].peopleInParty).toFixed(2))
+                            $("#page5 #group-"+(i+1)+" .tax_total label").text("Tax for group ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
+                            $("#page5 #group-"+(i+1)+" #tax_total").val(+groups[i].taxTotal)
                             
-                            $("#five #group-"+(i+1)+" #tip_total").val(five_tipTotal)
-                            $("#five #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
+                            $("#page5 #group-"+(i+1)+" #tip_total").val(five_tipTotal)
+                            $("#page5 #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
                             Gozintas.showPageFiveGroupInputs(i);
                         }
 
@@ -130,9 +130,9 @@
             </script>
         </div>
 
-        <div data-role="page" id="fiveb" data-add-back-btn="true" data-routing="page5b.html" data-pagejs="page5b">
+        <div data-role="page" id="page5b" data-add-back-btn="true" data-routing="page5b.html" data-pagejs="page5b">
             <script>
-                $("#fiveb").live(
+                $("#page5b").live(
                     "pagebeforeshow",
                     function () {
                         if(Gozintas.billPath == "determine-tip" || (Gozintas.billPath == "split-tip" && Gozintas.splitBy == "individual")){
