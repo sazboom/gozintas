@@ -163,10 +163,11 @@ var Gozintas = {
 	        }
 		}else{
 			if(Gozintas.splitBy == "group"){
+				wineCount = 0
+				carryoutCount = 0
+				extraCount = 0
 				for(var i = 0; i<groups.length; i++){
-					wineCount = 0
-					carryoutCount = 0
-					extraCount = 0
+
 					if(groups[i].wine){
 						wineCount = wineCount + 1
 					}
