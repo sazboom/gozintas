@@ -128,21 +128,6 @@ var Gozintas = {
 	isSplitingByGroup : function(){
 		return this.splitPath == 'group'
 	},
-	setBillModifierBooleans : function(){
-		for(var i = 0; i<groups.length; i++){
-			if(groups[i].foodTotal > 0){
-				groups[i].extras = true
-			}
-			if(groups[i].wineTotal > 0){
-				groups[i].wine = true
-			}
-			if(groups[i].carryOutTotal > 0){
-				groups[i].carryOut = true
-			}
-
-		}
-
-	},
 	showSplitTipButtons : function(){
 	    if(this.isOnSplitBillPath()){
 	        showButton = ".links-split";
@@ -164,39 +149,41 @@ var Gozintas = {
 	showPageFourPercentages: function(){
 		if(Gozintas.splitBy == "individual"){
 			if(groups[0].wine){
-				console.log("yup wine")
 	            $("#page4 #wine_tip").show();
 	        }else{
-	        	console.log("nope wine")
 	        	$("#page4 #wine_tip").hide();
 	        }
 	        if(groups[0].carryout){
-	        	console.log("yup carryout")
 	            $("#page4 #carry_tip").show();
 	        }else{
-	        	console.log("nope carryout")
 	        	$("#page4 #carry_tip").hide();
 	        }
 		}else{
 			if(Gozintas.splitBy == "group"){
 				for(var i = 0; i<groups.length; i++){
+					wineCount = 0
+					carryoutCount = 0
+					extraCount = 0
 					if(groups[i].wine){
-						Gozintas.billModifier.wine = true
+						wineCount = wineCount + 1
 					}
 					if(groups[i].carryout){
-						Gozintas.billModifier.carryout = true
+						carryoutCount = carryoutCount + 1
 					}
 					if(groups[i].extras){
+						extraCount = extraCount + 1
 						Gozintas.billModifier.extras = true
 					}
 
 				}
-				if(Gozintas.billModifier.wine){
+
+				if(wineCount > 0 ){
+					Gozintas.billModifier.wine = true
 		            $("#page4 #wine_tip").show();
 		        }else{
 		        	$("#page4 #wine_tip").hide();
 		        }
-		        if(Gozintas.billModifier.carryout){
+		        if(carryoutCount > 0){
 		            $("#page4 #carry_tip").show();
 		        }else{
 		        	$("#page4 #carry_tip").hide();
@@ -286,8 +273,6 @@ var Gozintas = {
 	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
 	            	parentClass = "#"+group+" ";
 		            groupNum = parseFloat(group.split("-")[1])
-		            console.log(value["input"])
-		            console.log(parentClass+value["id"])
 		            if(value["input"] == "text"){
 		            	input = $(parentClass+value["id"]).val();
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = '"+input+"'"
@@ -305,15 +290,12 @@ var Gozintas = {
 		            	if(input.length == 0){ 
 		            		input = 0
 		            		bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = false"
-		            		console.log("No input "+bool)
 		            	}else{
 		            		input = parseFloat($(parentClass+value["id"]).val()).toFixed(2);
 		            		if(input <=0){
 		            			bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = false"
-		            			console.log("Input <=0 "+bool)
 		            		}else{
 		            			bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = true"
-								console.log("Input >0! "+bool)
 		            		}
 		            	}
 						store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
