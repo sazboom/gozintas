@@ -1,8 +1,8 @@
 function Group () {
-    this.wine = false;
-    this.reductions = false
-    this.extras = false
-    this.carryout = false
+	    this.wine = false
+	    this.reductions = false
+	    this.extras = false
+	    this.carryout = false
     this.nickname = ''
     this.peopleInParty = 1
     this.foodTotal = 0
@@ -17,34 +17,36 @@ function Group () {
 var groups = [new Group()]
 
 var Gozintas = {
+	billPath : '',
+	splitBy : '',
+	peopleInParty : 0,
 	billModifier : {
 		wine : false,
 		reductions : false,
 		extras : false
 	},
-	totalWithoutReduction : 0,
-	totalTax : 0,
-	billPath : '',
-	splitBy : '',
-	foodAmount : 0,
-	taxAmount : 0,
-	totalIndividual : 0,
-	totalTaxIndividual : 0,
-	tipIndividual : 0,
-	totalAmount : 0,
-	wineAmount : 0,
-	carryOutAmount: 0,
-	peopleInParty : 0,
-	tipAmount : 0.15,
-	wineTipAmount : 0.15,
-	carryTipAmount : 0.15,
-	taxTipAmount : 0.15,
+	total : {
+		withoutReduction : 0,
+		taxAmount : 0,
+		amount : 0
+	},
+	individual : {
+		total : 0.00, /*total amount per individual*/
+		tax : 0.00,   /*tax amount per individual*/
+		tip : 0.00    /*tip amount per individual*/
+	},
+	tip : {
+		general : 0.15,  /*percent, used for food tip and drink/desert/etc tip*/
+		wine : 0.15,     /*percent, used for wine tip*/
+		carryout : 0.15, /*percent, used for carryout tip*/
+		tax : 0.15       /*percent, used for tax tip*/
+	},
 	calculateTip: function(){
 		/* Calculates the tip for a group by taking all the different food totals (wine, food/drink, carryout) and multiplying by their percentage tip (.1, .3, etc). So the calculation is FoodTotal*FoodTipRate + WineTotal*WineTipRate + CarryTotal*CarryTipRate = total tip amount for group*/
 		if(groups.length == 1){
-			return parseFloat(+groups[0].foodTotal*Gozintas.tipAmount + +groups[0].wineTotal*Gozintas.wineTipAmount + +groups[0].carryOutTotal*Gozintas.carryTipAmount + +Gozintas.taxAmount*Gozintas.taxTipAmount)
+			return parseFloat(+groups[0].foodTotal*Gozintas.tip.general + +groups[0].wineTotal*Gozintas.tip.wine + +groups[0].carryOutTotal*Gozintas.tip.carryout + +Gozintas.total.taxAmount*Gozintas.tip.tax)
 		}else{
-			return parseFloat(+this.tipAmount * (+this.totalAmount)).toFixed(2)
+			return parseFloat(+this.tipAmount * (+this.total.amount)).toFixed(2)
 		}
 	},
 	calculateTipIndividual: function(){
@@ -57,9 +59,9 @@ var Gozintas = {
 	},
 	calculateTotal: function(){
 		if((this.billPath == "split-bill" && this.splitBy == "individual") || this.billPath == "determine-tip"){
-			return parseFloat(+this.totalAmount + +this.calculateTip()).toFixed(2)
+			return parseFloat(+this.total.amount + +this.calculateTip()).toFixed(2)
 		}
-		return parseFloat(+this.totalAmount + +this.taxAmount + +this.calculateTip()).toFixed(2)
+		return parseFloat(+this.total.amount + +this.total.taxAmount + +this.calculateTip()).toFixed(2)
 	},
 	calculateTotalIndividual: function(){
 		if(groups.length ==1){
@@ -75,16 +77,16 @@ var Gozintas = {
 	    }
 	},
 	calculateTotalWithoutReduction: function(){
-		Gozintas.totalWithoutReduction = Gozintas.totalAmount
+		Gozintas.total.withoutReduction = Gozintas.total.amount
         for(var i=0; i<groups.length; i++){
             if(groups[i].extras){
-                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].foodTotal).toFixed(2)
+                Gozintas.total.withoutReduction = (+Gozintas.total.withoutReduction - +groups[i].foodTotal).toFixed(2)
             }
             if(groups[i].carryout){
-                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].carryOutTotal).toFixed(2)
+                Gozintas.total.withoutReduction = (+Gozintas.total.withoutReduction - +groups[i].carryOutTotal).toFixed(2)
             }
             if(groups[i].wine){
-                Gozintas.totalWithoutReduction = (+Gozintas.totalWithoutReduction - +groups[i].wineTotal).toFixed(2)
+                Gozintas.total.withoutReduction = (+Gozintas.total.withoutReduction - +groups[i].wineTotal).toFixed(2)
             }
         }
 	},
@@ -100,8 +102,8 @@ var Gozintas = {
 	        if(groups[i].wine){
 	            totalAddition = totalAddition + +groups[i].wineTotal
 	        }
-	        groups[i].total = (+Gozintas.totalIndividual * +groups[i].peopleInParty + +totalAddition).toFixed(2)
-	        groups[i].taxTotal = (+Gozintas.totalTaxIndividual * +groups[i].peopleInParty).toFixed(2)
+	        groups[i].total = (+Gozintas.individual.total * +groups[i].peopleInParty + +totalAddition).toFixed(2)
+	        groups[i].taxTotal = (+Gozintas.individual.tax * +groups[i].peopleInParty).toFixed(2)
 	    }
 	},
 	splitBillPath : function() {
@@ -198,11 +200,11 @@ var Gozintas = {
         $("#page5b input#food_total").val("$"+groups[0].foodTotal);
         $("#page5b input#wine_total").val("$"+groups[0].wineTotal);
         $("#page5b input#carryout_total").val("$"+groups[0].carryOutTotal);
-        $("#page5b .food_total label").text("Food Total ("+(Gozintas.tipAmount*100).toFixed()+"% tip rate)")
-        $("#page5b .wine_total label").text("Wine Total ("+(Gozintas.wineTipAmount*100).toFixed()+"% tip rate)")
-        $("#page5b .carryout_total label").text("Carry-out Total ("+(Gozintas.carryTipAmount*100).toFixed()+"% tip rate)")
-        $("#page5b .tax_total label").text("Tax ("+(Gozintas.taxTipAmount*100).toFixed()+"% tip rate)")
-        $("#page5b input#tax_total").val("$"+Gozintas.taxAmount);
+        $("#page5b .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+        $("#page5b .wine_total label").text("Wine Total ("+(Gozintas.tip.wine*100).toFixed()+"% tip rate)")
+        $("#page5b .carryout_total label").text("Carry-out Total ("+(Gozintas.tip.carryout*100).toFixed()+"% tip rate)")
+        $("#page5b .tax_total label").text("Tax ("+(Gozintas.tip.tax*100).toFixed()+"% tip rate)")
+        $("#page5b input#tax_total").val("$"+Gozintas.total.taxAmount);
 
         $("#page5b input#tip_total").val("$"+Gozintas.calculateTip());
         $("#page5b input#total").val("$"+Gozintas.calculateTotal());
