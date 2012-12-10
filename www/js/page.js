@@ -140,19 +140,6 @@ var Page = {
                         $("#page5 #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
                         Gozintas.showPageFiveGroupInputs(i);
                     }
-
-                    $(".page5.total input").val($("#total_amount_input").val())
-                    $(".page5.tax input").val($("#total_tax_amount_input").val())
-                    if(!Gozintas.billModifier.wine){
-                        $(".page5.wine_tip").hide();
-                        $(".page5.wine").hide();
-                    }
-                    if(!Gozintas.billModifier.reductions){
-                        $(".page5.reductions").hide();
-                    }
-                    if(!Gozintas.billModifier.extras){
-                        $(".page5.extras").hide();
-                    }
                 }
             );
 
