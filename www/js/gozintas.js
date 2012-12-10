@@ -288,6 +288,9 @@ var Gozintas = {
 		            groupNum = parseFloat(group.split("-")[1])
 		            if(value["input"] == "text"){
 		            	input = $(parentClass+value["id"]).val();
+		            	if(input.length == 0){
+		            		input = "Group "+groupNum
+		            	}
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = '"+input+"'"
 		            }
 		            else if(value["input"] == "integer"){
