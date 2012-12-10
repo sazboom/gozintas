@@ -1,8 +1,8 @@
 function Group () {
-	    this.wine = false
-	    this.reductions = false
-	    this.extras = false
-	    this.carryout = false
+    this.wine = false
+    this.reductions = false
+    this.extras = false
+    this.carryout = false
     this.nickname = ''
     this.peopleInParty = 1
     this.foodTotal = 0
@@ -20,22 +20,22 @@ var Gozintas = {
 	billPath : '',
 	splitBy : '',
 	peopleInParty : 0,
-	billModifier : {
+	billModifier : { /* If any of the groups have wine, reductions, or extras, these will be set to true. If none of them have wine, reductions, or extras, these will be set to false. Also defined on a per group basis above in the groups variable*/
 		wine : false,
 		reductions : false,
 		extras : false
 	},
-	total : {
+	total : {       /* Used to store the tax and amount from page two, and calculate the "reduced" price to divide by the group, taking into account reductions */
 		withoutReduction : 0,
 		taxAmount : 0,
 		amount : 0
 	},
-	individual : {
+	individual : {  /* Defines the amount per individual that should be paid in a party*/
 		total : 0.00, /*total amount per individual*/
 		tax : 0.00,   /*tax amount per individual*/
 		tip : 0.00    /*tip amount per individual*/
 	},
-	tip : {
+	tip : {         /* Defines the separate tip rates */
 		general : 0.15,  /*percent, used for food tip and drink/desert/etc tip*/
 		wine : 0.15,     /*percent, used for wine tip*/
 		carryout : 0.15, /*percent, used for carryout tip*/
