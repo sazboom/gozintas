@@ -59,9 +59,10 @@ var Gozintas = {
 	},
 	calculateTotal: function(){
 		if((this.billPath == "split-bill" && this.splitBy == "individual") || this.billPath == "determine-tip"){
-			return parseFloat(+this.total.amount + +this.calculateTip()).toFixed(2)
-		}
-		return parseFloat(+this.total.amount + +this.total.taxAmount + +this.calculateTip()).toFixed(2)
+			return parseFloat(+this.total.amount + +this.total.taxAmount + +this.calculateTip()).toFixed(2)
+		}else{
+
+		}	
 	},
 	calculateTotalIndividual: function(){
 		if(groups.length ==1){
@@ -195,7 +196,7 @@ var Gozintas = {
 
 
 	},
-	showPageFiveInputs: function(){
+	showPageFiveBInputs: function(){
         $("#page5b input#individuals_in_party").val(groups[0].peopleInParty);
         $("#page5b input#food_total").val("$"+groups[0].foodTotal);
         $("#page5b input#wine_total").val("$"+groups[0].wineTotal);
@@ -213,7 +214,7 @@ var Gozintas = {
 		if(Gozintas.splitBy == "individual"){
 			if(Gozintas.billPath == "determine-tip")
 	        {
-	        	$(".page5.determine_tip").show();
+	        	$("#page5b .determine_tip").show();
 	        	$("#page5b .wine_total").hide();
 	        	$("#page5b .carryout_total").hide();
 	        	$(".ui-grid-a").hide();
@@ -266,6 +267,15 @@ var Gozintas = {
             $("#page5 #group-"+(group_number+1)+" #drinks_deserts_amount_container").hide()
         }
 
+	},
+	setBillModifierBooleans : function(){
+		if(groups[0].extras == true){
+			Gozintas.billModifier.extras = true
+		}
+
+		if(groups[0].wine == true){
+			Gozintas.billModifier.wine = true
+		}
 	},
 	handleKeyups: function(page){
 		if(page == 3){

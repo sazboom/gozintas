@@ -38,7 +38,7 @@ var Page = {
                     groups[0].peopleInParty = parseFloat($(this).val());
                 });
             });
-            $("#page3b").live("keyup",function(){
+            $("#page3b").live("click",function(){
                 parentClass = "#page3b";
                 peopleInParty = parseFloat($(parentClass+" #people_in_party").val())
                 wineTotal = parseFloat($(parentClass+" #wine_amount").val()).toFixed(2);
@@ -166,7 +166,7 @@ var Page = {
                         groups[0].foodTotal = +Gozintas.total.amount - +Gozintas.total.taxAmount
                     }
 
-                    Gozintas.showPageFiveInputs();
+                    Gozintas.showPageFiveBInputs();
                 }
             );
 		}
