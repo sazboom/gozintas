@@ -128,6 +128,21 @@ var Gozintas = {
 	isSplitingByGroup : function(){
 		return this.splitPath == 'group'
 	},
+	setBillModifierBooleans : function(){
+		for(var i = 0; i<groups.length; i++){
+			if(groups[i].foodTotal > 0){
+				groups[i].extras = true
+			}
+			if(groups[i].wineTotal > 0){
+				groups[i].wine = true
+			}
+			if(groups[i].carryOutTotal > 0){
+				groups[i].carryOut = true
+			}
+
+		}
+
+	},
 	showSplitTipButtons : function(){
 	    if(this.isOnSplitBillPath()){
 	        showButton = ".links-split";
@@ -265,7 +280,7 @@ var Gozintas = {
 	},
 	handleKeyups: function(page){
 		if(page == 3){
-			var three_classes = [{id: "#group_nickname", input:"text", attribute:"nickname"},{id:"#people_in_group", input:"integer", attribute:"peopleInParty"},{id:"#drinks_deserts_etc",input:"money", attribute:"foodTotal"},{id:"#wine_amount",input:"money", attribute:"wineTotal"},{id:"#carry_out_amount",input:"money", attribute:"carryOutTotal"},{id:"#fair_reduction",input:"money", attribute:"reductionTotal"}]
+			var three_classes = [{id: "#group_nickname", input:"text", attribute:"nickname"},{id:"#people_in_group", input:"integer", attribute:"peopleInParty"},{id:"#drinks_deserts_etc",input:"money", attribute:"foodTotal", bool:"extras"},{id:"#wine_amount",input:"money", attribute:"wineTotal", bool:"wine"},{id:"#carry_out_amount",input:"money", attribute:"carryOutTotal", bool:"carryout"},{id:"#fair_reduction",input:"money", attribute:"reductionTotal", reduction:"reductions"}]
 			$.each(three_classes, function(index, value) { 
 				$("#page3 "+value["id"]).live("keyup",function(){
 	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
@@ -289,13 +304,24 @@ var Gozintas = {
 		            	input = $(parentClass+value["id"]).val()
 		            	if(input.length == 0){ 
 		            		input = 0
+		            		bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = false"
+		            		console.log("No input "+bool)
 		            	}else{
 		            		input = parseFloat($(parentClass+value["id"]).val()).toFixed(2);
+		            		if(input <=0){
+		            			bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = false"
+		            			console.log("Input <=0 "+bool)
+		            		}else{
+		            			bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = true"
+								console.log("Input >0! "+bool)
+		            		}
 		            	}
 						store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
+						eval(bool)
 		            }
 
 		            eval(store)
+
 		            if(value["id"] == "#group_nickname"){
 		            	elToRemove = $("#page3 "+parentClass+"h3 span.ui-btn-text");
 			            final_elToRemove = $("#page5 "+parentClass+"h3 span.ui-btn-text");
