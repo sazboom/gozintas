@@ -13,3 +13,5 @@ Showpage5inputs really only works for page 5b -- kind of a dumb oversight, but m
 Aaron questions/conundrums
 	Setup and get working on iphone
 	Lots of for loops that "seem" neccesary -- strategy for this?
+
+page 3b now doesnt live update on keyup -- kill myself
