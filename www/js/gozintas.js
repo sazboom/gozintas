@@ -59,7 +59,7 @@ var Gozintas = {
 	},
 	calculateTotal: function(){
 		if((this.billPath == "split-bill" && this.splitBy == "individual") || this.billPath == "determine-tip"){
-			return parseFloat(+this.total.amount + +this.total.taxAmount + +this.calculateTip()).toFixed(2)
+			return parseFloat(+this.total.amount + +this.calculateTip()).toFixed(2)
 		}else{
 
 		}	

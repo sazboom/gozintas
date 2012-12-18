@@ -31,6 +31,8 @@ var Page = {
 				Gozintas.total.taxAmount = parseFloat($(this).val()).toFixed(2)
 			})
 
+            
+
 		},
 
 		page3: function() {
