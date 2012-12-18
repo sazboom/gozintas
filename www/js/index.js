@@ -24,7 +24,9 @@ var app = {
 function addGroup()
 {
     group_size = $("#page3 [class^='group-']").size();
-    groups.push(new Group())
+    new_group = new Group()
+    new_group.peopleInParty = 0;
+    groups.push(new_group)
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups');
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
     loadPartials(".group-"+(group_size+1)+"[data-routing]");

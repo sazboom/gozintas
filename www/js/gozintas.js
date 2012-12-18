@@ -4,7 +4,7 @@ function Group () {
     this.extras = false
     this.carryout = false
     this.nickname = ''
-    this.peopleInParty = 1
+    this.peopleInParty = 0
     this.foodTotal = 0
     this.wineTotal = 0
     this.carryOutTotal = 0
@@ -121,6 +121,10 @@ var Gozintas = {
 	},
 	splitByIndividual : function() {
 		this.splitBy = 'individual'
+        groups.length = 1
+        var new_group = new Group();
+        new_group.peopleInParty = 1;
+        groups[0] = new_group;
 	},
 	splitByGroup : function() {
 		this.splitBy = 'group'
@@ -282,7 +286,7 @@ var Gozintas = {
 		if(page == 3){
 			var three_classes = [{id: "#group_nickname", input:"text", attribute:"nickname"},{id:"#people_in_group", input:"integer", attribute:"peopleInParty"},{id:"#drinks_deserts_etc",input:"money", attribute:"foodTotal", bool:"extras"},{id:"#wine_amount",input:"money", attribute:"wineTotal", bool:"wine"},{id:"#carry_out_amount",input:"money", attribute:"carryOutTotal", bool:"carryout"},{id:"#fair_reduction",input:"money", attribute:"reductionTotal", reduction:"reductions"}]
 			$.each(three_classes, function(index, value) { 
-				$("#page3 "+value["id"]).live("keyup",function(){
+				$("#page3 "+value["id"]).live("pageshow keyup",function(){
 	            	group = $(this).parent().parent().parent().attr("class").split(" ")[0]
 	            	parentClass = "#"+group+" ";
 		            groupNum = parseFloat(group.split("-")[1])
@@ -300,6 +304,11 @@ var Gozintas = {
 		            	}else{
 		            		input = parseFloat($(parentClass+value["id"]).val()).toFixed();
 		            	}
+		            	if( isNaN(input) || input == 0){
+	                        $(".buttons").children().addClass('ui-disabled');
+	                    }else{
+	                        $(".buttons").children().removeClass('ui-disabled');
+	                    }
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
 		            }else if(value["input"] == "money"){
 		            	input = $(parentClass+value["id"]).val()

@@ -7,23 +7,47 @@ var Page = {
 
 		page2: function() {
             $("#page2").live(
-                "pagebeforeshow",
+                "pagebeforeshow keyup",
                 function () {
                     Gozintas.showSplitTipButtons();
+                    if( isNaN(Gozintas.total.amount) ){
+                        Gozintas.total.amount = 0;
+                    }
+                    if( isNaN(Gozintas.total.taxAmount) ){
+                        Gozintas.total.taxAmount = 0;
+                    }
+                    if( (parseFloat(Gozintas.total.taxAmount) > parseFloat(Gozintas.total.amount)) || (Gozintas.total.amount ==0 )){
+                        $(".buttons").children().addClass('ui-disabled');
+                    }else{
+                        $(".buttons").children().removeClass('ui-disabled');
+                    }
                 }
             );
-			$("#page2 #total_amount_input").on("change", function() {
+			$("#page2 #total_amount_input").on("change keyup", function() {
 				Gozintas.total.amount = parseFloat($(this).val()).toFixed(2)
-				console.log(Gozintas.total.amount)
+
 			})
-			$("#page2 #total_tax_amount_input").on("change", function() {
+			$("#page2 #total_tax_amount_input").on("change keyup", function() {
 				Gozintas.total.taxAmount = parseFloat($(this).val()).toFixed(2)
-				console.log(Gozintas.total.taxAmount)
 			})
 
 		},
 
 		page3: function() {
+
+            $("#page3").live("pageshow keyup", function(){
+                missingPeople = false;
+                $.each(groups, function(index,value){
+                    if( value.peopleInParty == 0 || isNaN(value.peopleInParty)){
+                        missingPeople = true
+                    }
+                })
+                if(missingPeople == true){
+                    $(".buttons").children().addClass('ui-disabled');
+                }else{
+                    $(".buttons").children().removeClass('ui-disabled');
+                }
+            });
 			Gozintas.handleKeyups(3);
 		},
 
@@ -31,8 +55,6 @@ var Page = {
 		page3b: function() {
 
             $("#page3b").live('pageshow',function(){
-                groups.length = 1
-                groups[0] = new Group();
                 $("#page3b #drinks_deserts_etc").val(Gozintas.total.amount-Gozintas.total.taxAmount);
                 $("#page3b #people_in_party").focusout(function() {
                     groups[0].peopleInParty = parseFloat($(this).val());
@@ -44,13 +66,16 @@ var Page = {
                     peopleInParty = parseFloat($(parentClass+" #people_in_party").val())
                     wineTotal = parseFloat($(parentClass+" #wine_amount").val()).toFixed(2);
                     carryOut = parseFloat($(parentClass+" #carry_out_amount").val()).toFixed(2);
-                    if(carryOut == "NaN"){
+                    if(isNaN(peopleInParty)){
+                        peopleInParty = 0
+                    }
+                    if(isNaN(carryOut)){
                         carryOut = 0
                     }
-                    if(wineTotal == "NaN"){
+                    if(isNaN(wineTotal)){
                         wineTotal = 0
                     }
-                    if(peopleInParty == "NaN"){
+                    if(isNaN(peopleInParty)){
                         peopleInParty = 0
                     }
                     groups[0].peopleInParty = peopleInParty
@@ -76,7 +101,12 @@ var Page = {
                         groups[0].carryout = false
                     }
                     console.log(newFoodTotal)
-                    $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));  
+                    $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
+                    if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) ){
+                            $(".buttons").children().addClass('ui-disabled');
+                    }else{
+                            $(".buttons").children().removeClass('ui-disabled');
+                    }
 
 
 
