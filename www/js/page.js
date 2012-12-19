@@ -39,11 +39,19 @@ var Page = {
 
             $("#page3").live("pageshow keyup", function(){
                 disable = false;
+                total = 0;
                 $.each(groups, function(index,value){
+                    value.carryOutTotal
+                    value.wineTotal
+                    value.foodTotal
+                    total = total + value.carryOutTotal + value.wineTotal + value.foodTotal
                     if( value.peopleInParty == 0 || isNaN(value.peopleInParty) || value.foodTotal < 0 || value.wineTotal < 0 || value.carryOutTotal < 0 ){
                         disable = true
                     }
                 })
+                if( +total > +Gozintas.total.amount){
+                    disable = true;
+                }
                 if(disable == true){
                     $(".buttons").children().addClass('ui-disabled');
                 }else{
