@@ -109,6 +109,7 @@ var Gozintas = {
 	},
 	splitBillPath : function() {
 		this.billPath = 'split-bill'
+		console.log("You hit me!")
 	},
 	determineTipPath :  function() {
 		this.billPath = 'determine-tip'
