@@ -38,13 +38,13 @@ var Page = {
 		page3: function() {
 
             $("#page3").live("pageshow keyup", function(){
-                missingPeople = false;
+                disable = false;
                 $.each(groups, function(index,value){
-                    if( value.peopleInParty == 0 || isNaN(value.peopleInParty)){
-                        missingPeople = true
+                    if( value.peopleInParty == 0 || isNaN(value.peopleInParty) || value.foodTotal < 0 || value.wineTotal < 0 || value.carryOutTotal < 0 ){
+                        disable = true
                     }
                 })
-                if(missingPeople == true){
+                if(disable == true){
                     $(".buttons").children().addClass('ui-disabled');
                 }else{
                     $(".buttons").children().removeClass('ui-disabled');
