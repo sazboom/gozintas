@@ -16,7 +16,7 @@ var Page = {
                     if( isNaN(Gozintas.total.taxAmount) ){
                         Gozintas.total.taxAmount = 0;
                     }
-                    if( (parseFloat(Gozintas.total.taxAmount) > parseFloat(Gozintas.total.amount)) || (Gozintas.total.amount ==0 )){
+                    if( (parseFloat(Gozintas.total.taxAmount) > parseFloat(Gozintas.total.amount)) || (Gozintas.total.amount ==0 ) || Gozintas.total.amount < 0 || Gozintas.total.taxAmount < 0){
                         $(".buttons").children().addClass('ui-disabled');
                     }else{
                         $(".buttons").children().removeClass('ui-disabled');
@@ -104,7 +104,7 @@ var Page = {
                     }
                     console.log(newFoodTotal)
                     $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
-                    if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) ){
+                    if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) || carryOut < 0 || wineTotal < 0  ){
                             $(".buttons").children().addClass('ui-disabled');
                     }else{
                             $(".buttons").children().removeClass('ui-disabled');
