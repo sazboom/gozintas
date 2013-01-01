@@ -1,0 +1,25 @@
+<div data-bind="with: bill">
+    <h3>Gozintas</h3>
+    <p>Total Amount: <input data-bind="value: total" /></p>
+    <p>Tax Amount: <input data-bind="value: tax" /></p>    
+</div>
+
+<div data-bind="with: bill">
+    <h3>Weather</h3>
+    <table>
+        <thead><tr><th>Nickname</th><th>People In Party</th></tr></thead>
+        <tbody data-bind="foreach: groups">
+            <tr>
+                <td><input data-bind="value: nickname"></input></td>
+                <td><input data-bind="value: peopleInParty"></input></td>    
+                <td><a href="#" data-bind="click: $parent.removeGroup">Remove</a></td>            
+            </tr>
+        </tbody>
+    </table>
+    <button data-bind="click: addGroup">Add Group</button>
+</div>
+
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type='text/javascript' src='knockout-2.2.0.js'></script>
+<script type='text/javascript' src='knockout.validation.js'></script>
+<script type='text/javascript' src='application.js'></script>
