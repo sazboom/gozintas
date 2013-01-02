@@ -1,7 +1,23 @@
+ko.extenders.formatPrice = function(target, option) {
+    var formattedPrice = ko.computed({
+            read: function () {
+                return '$' + parseFloat(target()).toFixed(2);
+            },
+            write: function (value) {
+                console.log(value);
+                // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                target(isNaN(value) ? 0 : value); // Write to underlying storage
+            }
+        });
+    formattedPrice(target());
+    return formattedPrice;
+}
+
 function billModel() {
     var self = this;
-    self.total = ko.observable(0).extend({ min: 0, required: true});
-    self.tax = ko.observable(0).extend({ min: 0});  
+    self.total = ko.observable("0").extend({ min: 0, required: true, formatPrice: true});
+    self.tax = ko.observable("0").extend({ min: 0, formatPrice: true});  
     self.tip = {
         general: ko.observable(5).extend({ min: 0}),
         wine: ko.observable(10).extend({ min: 0}),
@@ -20,23 +36,6 @@ function billModel() {
 
     self.removeGroup = function(group) { self.groups.remove(group) }
 
-    self.addFormattedPrice = function(formattedName, variable)
-    {
-        self[formattedName] = ko.computed({
-            read: function () {
-                return '$' + self[variable]().toFixed(2);
-            },
-            write: function (value) {
-                // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
-                value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                self[variable](isNaN(value) ? 0 : value); // Write to underlying storage
-            },
-            owner: self
-        });
-    }
-
-    self.addFormattedPrice('formattedTotal', 'total');
-    self.addFormattedPrice('formattedTax', 'tax');
 
 }
 
@@ -45,9 +44,9 @@ function groupModel(nickname, peopleInParty) {
     self.peopleInParty = ko.observable(peopleInParty).extend({ min: 0, required: true});
     self.nickname = ko.observable(nickname).extend({ minLength: 3, maxLength: 10, required: true});
 
-    self.drinks_deserts = ko.observable("0").extend({ min: 0, required: false});
-    self.wine = ko.observable("0").extend({ min: 0, required: false});
-    self.carryout = ko.observable("0").extend({ min: 0, required: false});
+    self.drinks_deserts = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
+    self.wine = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
+    self.carryout = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
 }
 
 function appViewModel() {

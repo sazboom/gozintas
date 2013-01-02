@@ -1,7 +1,7 @@
 <div data-bind="with: bill">
     <h3>Gozintas</h3>
-    <p>Total Amount: <input data-bind="value: formattedTotal" /></p>
-    <p>Tax Amount: <input data-bind="value: formattedTax" /></p>
+    <p>Total Amount: <input data-bind="value: total" /></p>
+    <p>Tax Amount: <input data-bind="value: tax" /></p>
     <p>Total Amount: <div data-bind="text: total "></div></p>
     <p>General Tip: <input data-bind="value: tip.general, disable: total != 0, enable: total == 0" /></p>  
     <p>Wine Tip: <input data-bind="value: tip.wine, disable: total != 0, enable: total == 0" /></p>  
