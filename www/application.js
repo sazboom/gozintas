@@ -1,17 +1,35 @@
 ko.extenders.formatPrice = function(target, option) {
-    var formattedPrice = ko.computed({
+    if(option){
+        var formattedPrice = ko.computed({
             read: function () {
                 return '$' + parseFloat(target()).toFixed(2);
             },
             write: function (value) {
-                console.log(value);
                 // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
                 target(isNaN(value) ? 0 : value); // Write to underlying storage
             }
         });
-    formattedPrice(target());
-    return formattedPrice;
+        formattedPrice(target());
+        return formattedPrice;
+    }
+}
+
+ko.extenders.formatTip = function(target, option) {
+    if(option){
+        var formattedTip = ko.computed({
+            read: function () {
+                return parseFloat(target()).toFixed(0) + "%";
+            },
+            write: function (value) {
+                // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                target(isNaN(value) ? 0 : value); // Write to underlying storage
+            }
+        });
+        formattedTip(target());
+        return formattedTip;
+    }
 }
 
 function billModel() {
@@ -19,10 +37,10 @@ function billModel() {
     self.total = ko.observable("0").extend({ min: 0, required: true, formatPrice: true});
     self.tax = ko.observable("0").extend({ min: 0, formatPrice: true});  
     self.tip = {
-        general: ko.observable(5).extend({ min: 0}),
-        wine: ko.observable(10).extend({ min: 0}),
-        tax: ko.observable(15).extend({ min: 0}),
-        carryout: ko.observable(20).extend({ min: 0})
+        general: ko.observable("5").extend({ min: 0, formatTip: true}),
+        wine: ko.observable("10").extend({ min: 0, formatTip: true}),
+        tax: ko.observable("15").extend({ min: 0, formatTip: true}),
+        carryout: ko.observable("20").extend({ min: 0, formatTip: true})
     }
 
     self.groups = ko.observableArray([
