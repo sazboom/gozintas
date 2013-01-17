@@ -1,25 +1,19 @@
 ko.extenders.formatPrice = function(target, option) {
     if(option){
-        var formattedPrice = ko.computed({
+        target.formattedPrice = ko.computed({
             read: function () {
                 return '$' + parseFloat(target()).toFixed(2);
             },
             write: function (value) {
                 // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
-                console.log(value);
                 var current = target()
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                console.log("Now I'm "+value);
-                target(isNaN(value) ? 0 : value); // Write to underlying storage
+                target(isNaN(value) ? 0 : value.toFixed(2)); // Write to underlying storage
                 target.valueHasMutated()
-                console.log("Target is "+target());
             }
         });
-        formattedPrice(target());
-        console.log("First formatted price: "+formattedPrice);
-        console.log("Second formatted price: "+formattedPrice());
-        console.log("SSS"+target());
-        return formattedPrice;
+        target.formattedPrice(target());
+        return target;
     }
 }
 
@@ -51,14 +45,69 @@ function billModel() {
         carryout: ko.observable("20").extend({ min: 0, formatTip: true})
     }
 
+    self.timesTwo = ko.computed(function(){
+        return self.total()*2;
+    })
+
     self.groups = ko.observableArray([
         new groupModel("Group-1", 0)
     ]);
 
+    self.hasWine = ko.computed(function() {
+        var bool = false;
+        ko.utils.arrayForEach(self.groups(), function(group) {
+            if(group.wine() > 0){
+                bool = true;
+           }
+        });
+        return bool
+    });
+
+    self.hasTax = ko.computed(function() {
+        var bool = false;
+        ko.utils.arrayForEach(self.groups(), function(group) {
+            if(group.general() > 0){
+                bool = true;
+           }
+        });
+        return bool
+    });
+
+    self.hasGeneral = ko.computed(function() {
+        var bool = false;
+        ko.utils.arrayForEach(self.groups(), function(group) {
+            if(group.general() > 0){
+                bool = true;
+           }
+        });
+        return bool;
+    });
+
+    self.hasCarryout = ko.computed(function() {
+        var bool = false;
+        ko.utils.arrayForEach(self.groups(), function(group) {
+            if(group.carryout() > 0){
+                bool = true;
+           }
+        });
+        return bool;
+    });
+
+
+    self.hasValue = function(value){
+        ko.utils.arrayForEach(self.groups(), function(group) {
+            if(group.value > 0){
+                return true;
+           }else{
+                return false;
+           }
+        });
+    };
+
     self.addGroup = function() {
         nextGroup = self.groups().length+1
         self.groups.push(new groupModel("Group-"+nextGroup, 0))
-    }
+    };
 
     self.removeGroup = function(group) { self.groups.remove(group) }
 
@@ -70,7 +119,7 @@ function groupModel(nickname, peopleInParty) {
     self.peopleInParty = ko.observable(peopleInParty).extend({ min: 0, required: true});
     self.nickname = ko.observable(nickname).extend({ minLength: 3, maxLength: 10, required: true});
 
-    self.drinks_deserts = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
+    self.general = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
     self.wine = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
     self.carryout = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
 }

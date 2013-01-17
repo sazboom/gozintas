@@ -1,12 +1,15 @@
 <div data-bind="with: bill">
     <h3>Gozintas</h3>
-    <p>Total Amount: <input data-bind="value: total" /></p>
-    <p>Tax Amount: <input data-bind="value: tax" /></p>
+    <p>Total Amount: <input data-bind="value: total.formattedPrice" /></p>
+    <p>Tax Amount: <input data-bind="value: tax.formattedPrice" /></p>
     <p>Total Amount: <div data-bind="text: total "></div></p>
-    <p>General Tip: <input data-bind="value: tip.general, disable: total != 0, enable: total == 0" /></p>  
-    <p>Wine Tip: <input data-bind="value: tip.wine, disable: total != 0, enable: total == 0" /></p>  
-    <p>Tax Tip: <input data-bind="value: tip.tax, disable: total != 0, enable: total == 0" /></p>  
-    <p>Carryout Tip: <input data-bind="value: tip.carryout, disable: total != 0, enable: total == 0" /></p>  
+    <p>General Tip: <input data-bind="value: tip.general, visible: hasGeneral" /></p>  
+    <p>Wine Tip: <input data-bind="value: tip.wine, visible: hasWine " /></p>  
+    <p>Tax Tip: <input data-bind="value: tip.tax, visible: hasWine" /></p>  
+    <p>Carryout Tip: <input data-bind="value: tip.carryout, visible: hasCarryout" /></p>
+    DURR
+    <span data-bind="text: timesTwo"></span>
+    <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>
 </div>
 
 <div data-bind="with: bill">
@@ -25,9 +28,9 @@
             <tr>
                 <td><input data-bind="value: nickname"></input></td>
                 <td><input data-bind="value: peopleInParty"></input></td>
-                <td><input data-bind="value: drinks_deserts"></input></td>
-                <td><input data-bind="value: wine"></input></td>   
-                <td><input data-bind="value: carryout"></input></td>    
+                <td><input data-bind="value: general.formattedPrice"></input></td>
+                <td><input data-bind="value: wine.formattedPrice"></input></td>   
+                <td><input data-bind="value: carryout.formattedPrice"></input></td>    
                 <td><a href="#" data-bind="click: $parent.removeGroup">Remove</a></td>            
             </tr>
         </tbody>
@@ -36,6 +39,6 @@
 </div>
 
 <link rel="stylesheet" type="text/css" href="css/index.css">
-<script type='text/javascript' src='knockout-2.2.0.js'></script>
+<script type='text/javascript' src='knockout-2.2.0.debug.js'></script>
 <script type='text/javascript' src='knockout.validation.js'></script>
 <script type='text/javascript' src='application.js'></script>
