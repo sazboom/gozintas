@@ -36,6 +36,7 @@ ko.extenders.formatTip = function(target, option) {
 
 function billModel() {
     var self = this;
+    self.gozMode = ko.observable(false);
     self.total = ko.observable("0").extend({ min: 0, required: true, formatPrice: true});
     self.tax = ko.observable("0").extend({ min: 0, formatPrice: true});  
     self.tip = {

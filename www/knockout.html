@@ -7,12 +7,13 @@
     <p>Wine Tip: <input data-bind="value: tip.wine, visible: hasWine " /></p>  
     <p>Tax Tip: <input data-bind="value: tip.tax, visible: hasTax" /></p>  
     <p>Carryout Tip: <input data-bind="value: tip.carryout, visible: hasCarryout" /></p>
-    DURR
+    Group mode<input type="radio" name="gozMode" value="group" data-bind="checked: gozMode" />
+    Determine tip mode <input type="radio" name="gozMode" value="determine-tip" data-bind="checked: gozMode" />
     <span data-bind="text: timesTwo"></span>
     <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>
 </div>
 
-<div data-bind="with: bill">
+<div data-bind="with: bill, visible: bill.gozMode() =='group'">
     <h3>Weather</h3>
     <table>
         <thead>
