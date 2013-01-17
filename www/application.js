@@ -6,11 +6,19 @@ ko.extenders.formatPrice = function(target, option) {
             },
             write: function (value) {
                 // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                console.log(value);
+                var current = target()
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                console.log("Now I'm "+value);
                 target(isNaN(value) ? 0 : value); // Write to underlying storage
+                target.valueHasMutated()
+                console.log("Target is "+target());
             }
         });
         formattedPrice(target());
+        console.log("First formatted price: "+formattedPrice);
+        console.log("Second formatted price: "+formattedPrice());
+        console.log("SSS"+target());
         return formattedPrice;
     }
 }
