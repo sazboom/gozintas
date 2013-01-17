@@ -65,11 +65,9 @@ function billModel() {
 
     self.hasTax = ko.computed(function() {
         var bool = false;
-        ko.utils.arrayForEach(self.groups(), function(group) {
-            if(group.general() > 0){
-                bool = true;
-           }
-        });
+        if(self.tax() > 0){
+            bool = true;
+        }
         return bool
     });
 
