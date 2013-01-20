@@ -2,19 +2,21 @@
     <h3>Gozintas</h3>
     <p>Total Amount: <input data-bind="value: total.formattedPrice" /></p>
     <p>Tax Amount: <input data-bind="value: tax.formattedPrice" /></p>
-    <p>Total Amount: <div data-bind="text: total "></div></p>
-    <p>General Tip: <input data-bind="value: tip.general, visible: hasGeneral" /></p>  
-    <p>Wine Tip: <input data-bind="value: tip.wine, visible: hasWine " /></p>  
-    <p>Tax Tip: <input data-bind="value: tip.tax, visible: hasTax" /></p>  
+    <p>General Tip: <input data-bind="value: tip.general.formattedTip, visible: hasGeneral" /></p>  
+    <p>Wine Tip: <input data-bind="value: tip.wine.formattedTip, visible: hasWine " /></p>  
+    <p>Tax Tip: <input data-bind="value: tip.tax.formattedTip, visible: hasTax" /></p>  
     <p>Carryout Tip: <input data-bind="value: tip.carryout, visible: hasCarryout" /></p>
     Group mode<input type="radio" name="gozMode" value="group" data-bind="checked: gozMode" />
     Determine tip mode <input type="radio" name="gozMode" value="determine-tip" data-bind="checked: gozMode" />
-    <span data-bind="text: timesTwo"></span>
-    <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>
+</div>
+
+<div data-bind="with: bill">
+    <p>Total Times two: <input data-bind="value: timesTwo()" /></p>
+    <p>General Tip (<span data-bind="text: tip.general.formattedTip()"></span>) times two: <input data-bind="value: tipTwo()" /></p>
 </div>
 
 <div data-bind="with: bill, visible: bill.gozMode() =='group'">
-    <h3>Weather</h3>
+    <h3>Group Mode</h3>
     <table>
         <thead>
             <tr>
@@ -38,6 +40,13 @@
     </table>
     <button data-bind="click: addGroup">Add Group</button>
 </div>
+
+<div data-bind="with: bill, visible: bill.gozMode() =='determine-tip'">
+    <h3>Determine tip!!</h3>
+    <p>Total Amount: <div data-bind="text: total "></div></p>
+</div>
+
+<pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>
 
 <link rel="stylesheet" type="text/css" href="css/index.css">
 <script type='text/javascript' src='knockout-2.2.0.debug.js'></script>

@@ -19,18 +19,18 @@ ko.extenders.formatPrice = function(target, option) {
 
 ko.extenders.formatTip = function(target, option) {
     if(option){
-        var formattedTip = ko.computed({
+        target.formattedTip = ko.computed({
             read: function () {
-                return parseFloat(target()).toFixed(0) + "%";
+                return parseFloat(target())*100 + "%";
             },
             write: function (value) {
                 // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                target(isNaN(value) ? 0 : value); // Write to underlying storage
+                target(isNaN(value) ? 0 : value/100); // Write to underlying storage
             }
         });
-        formattedTip(target());
-        return formattedTip;
+        target.formattedTip(target());
+        return target;
     }
 }
 
@@ -48,7 +48,11 @@ function billModel() {
 
     self.timesTwo = ko.computed(function(){
         return self.total()*2;
-    })
+    });
+
+    self.tipTwo = ko.computed(function(){
+        return self.tip.general()*2;
+    });
 
     self.groups = ko.observableArray([
         new groupModel("Group-1", 0)
