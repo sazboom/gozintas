@@ -164,7 +164,17 @@ function billModel() {
         return self.calculatedTip()
     });
 
+    self.splitIndividualTotalGroup = ko.computed(function(){
+        return self.foodTotal()/self.groups().length + self.tax()/self.groups().length + self.groups()[0].general() + self.groups()[0].wine() + self.groups()[0].carryout() + self.splitIndividualTipTotal();
+    });
 
+    self.splitIndividualTotalIndividual = ko.computed(function(){
+        if(self.totalPeopleInAllGroups() > 0){
+            return self.splitIndividualTotalGroup() / self.groups()[0].peopleInParty();
+        }else{
+            return 0;
+        }
+    });
 
 
     // Group adding and removing for split-group mode

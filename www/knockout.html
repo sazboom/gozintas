@@ -94,8 +94,8 @@
         <p>Tax Total (<span data-bind="text: tip.tax.formattedTip"></span> Tip = <span data-bind="text: tip.tax() * tax()"></span>): <span data-bind="text: '$' + (tax()/groups().length).toFixed(2)"></span></p>
         <p>Tip Individual: <span data-bind="text: '$' + splitIndividualTipIndividual().toFixed(2)"></span></p>
         <p>Tip Total: <span data-bind="text: '$' + splitIndividualTipTotal().toFixed(2)"></span></p>
-        <p>Total Individual: <span data-bind="text: "></span></p>
-        <p>Total For Party: <span data-bind="text: tax.formattedPrice"></span></p>
+        <p>Total Individual: <span data-bind="text: '$' + splitIndividualTotalIndividual().toFixed(2)"></span></p>
+        <p>Total For Party: <span data-bind="text: '$' + splitIndividualTotalGroup().toFixed(2)"></span></p>
 
     </div>
 </div>
