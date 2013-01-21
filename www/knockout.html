@@ -12,15 +12,6 @@
 <p>----------------------------</p>
 
 <div data-bind="with: bill, visible: bill.gozMode() =='group'">
-
-    <div data-bind="visible: total() > 0">
-        <strong>Tip Rates</strong>
-        <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
-        <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
-        <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
-        <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout" /></p>
-    </div>
-
     <h3>Group Mode</h3>
     <table>
         <thead>
@@ -44,16 +35,69 @@
         </tbody>
     </table>
     <button data-bind="click: addGroup">Add Group</button>
+    <div data-bind="visible: total() > 0">
+        <strong>Tip Rates</strong>
+        <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
+        <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
+        <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout.formattedTip" /></p>
+        <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
+    </div>
 </div>
 
 <div data-bind="with: bill, visible: bill.gozMode() =='determine-tip'">
-    <h3>Determine tip!!</h3>
+    <h3>Determine tip</h3>
     <p>Total Amount: <div data-bind="text: total "></div></p>
     <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
     <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>
     <p>Food Total (<span data-bind="text: tip.general.formattedTip"></span>) <span data-bind="text: total.formattedPrice"></span></p>
     <p>Tax Total (<span data-bind="text: tip.tax.formattedTip"></span>) <span data-bind="text: tax.formattedPrice"></span></p>
     <p>Calculated total: <span data-bind="text: calculatedTotal()"></span></p>
+</div>
+
+<div data-bind="with: bill, visible: bill.gozMode() =='split-individual'">
+    <h3>Split Individual</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>People In Party</th>
+                <th>Food Total</th>
+                <th>Drinks/Deserts/Etc</th>
+                <th>Wine</th>
+                <th>Carryout</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input data-bind="value: groups()[0].peopleInParty"></input></td>
+                <td><input data-bind="value: '$' + foodTotal()" disabled="disabled"></input></td>
+                <td><input data-bind="value: groups()[0].general.formattedPrice"></input></td>
+                <td><input data-bind="value: groups()[0].wine.formattedPrice"></input></td>   
+                <td><input data-bind="value: groups()[0].carryout.formattedPrice"></input></td>    
+            </tr>
+        </tbody>
+    </table>
+
+    <div data-bind="visible: total() > 0">
+        <strong>Tip Rates</strong>
+        <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
+        <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
+        <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout.formattedTip" /></p>
+        <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
+    </div>
+
+    <div>
+        <h3> Totals </h3>
+        <p>Food Total (<span data-bind="text: tip.general.formattedTip"></span> Tip): <span data-bind="text: '$'+foodTotal() / groups().length"></span></p>
+        <p data-bind="visible: hasWine" >Wine Total (<span data-bind="text: tip.wine.formattedTip"></span> Tip): <span data-bind="text: groups()[0].wine()"></span></p>
+        <p data-bind="visible: hasCarryout">Carryout Total (<span data-bind="text: tip.carryout.formattedTip"></span> Tip): <span data-bind="text: groups()[0].carryout.formattedPrice"></span></p>
+        <p>Tax Total (<span data-bind="text: tip.tax.formattedTip"></span> Tip): <span data-bind="text: tax.formattedPrice"></span></p>
+        <p>Tip Individual: <span data-bind="text: groups()[0].tipTotalIndividual()"></span></p>
+        <p>Tip Total: <span data-bind="text: groups()[0].tipTotal()"></span></p>
+        <p>Total Individual: <span data-bind="text: tax.formattedPrice"></span></p>
+        <p>Total For Party: <span data-bind="text: tax.formattedPrice"></span></p>
+        <p>Calculated total: <span data-bind="text: calculatedTotal()"></span></p>
+
+    </div>
 </div>
 
 <p>----------------------------</p>
