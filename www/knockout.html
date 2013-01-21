@@ -2,17 +2,15 @@
     <h3>Gozintas</h3>
     <p>Total Amount: <input data-bind="value: total.formattedPrice" /></p>
     <p>Tax Amount: <input data-bind="value: tax.formattedPrice" /></p>
-    <p>General Tip: <input data-bind="value: tip.general.formattedTip, visible: hasGeneral" /></p>  
-    <p>Wine Tip: <input data-bind="value: tip.wine.formattedTip, visible: hasWine " /></p>  
-    <p>Tax Tip: <input data-bind="value: tip.tax.formattedTip, visible: hasTax" /></p>  
-    <p>Carryout Tip: <input data-bind="value: tip.carryout, visible: hasCarryout" /></p>
-    Group mode<input type="radio" name="gozMode" value="group" data-bind="checked: gozMode" />
-    Determine tip mode <input type="radio" name="gozMode" value="determine-tip" data-bind="checked: gozMode" />
+    Group mode<input type="radio" name="gozMode" value="group" data-bind="checked: gozMode, disable: total() == 0" />
+    Determine tip mode <input type="radio" name="gozMode" value="determine-tip" data-bind="checked: gozMode, disable: total()== 0" />
 </div>
 
-<div data-bind="with: bill">
-    <p>Total Times two: <input data-bind="value: timesTwo()" /></p>
-    <p>General Tip (<span data-bind="text: tip.general.formattedTip()"></span>) times two: <input data-bind="value: tipTwo()" /></p>
+<div data-bind="with: bill, visible: bill.total() > 0">
+    <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
+    <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
+    <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
+    <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout" /></p>
 </div>
 
 <div data-bind="with: bill, visible: bill.gozMode() =='group'">
@@ -44,6 +42,11 @@
 <div data-bind="with: bill, visible: bill.gozMode() =='determine-tip'">
     <h3>Determine tip!!</h3>
     <p>Total Amount: <div data-bind="text: total "></div></p>
+    <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
+    <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>
+    <p>Food Total (<span data-bind="text: tip.general.formattedTip"></span>) <span data-bind="text: total.formattedPrice"></span></p>
+    <p>Tax Total (<span data-bind="text: tip.tax.formattedTip"></span>) <span data-bind="text: tax.formattedPrice"></span></p>
+    <p>Calculated total: <span data-bind="text: calculatedTotal()"></span></p>
 </div>
 
 <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>

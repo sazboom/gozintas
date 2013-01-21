@@ -6,9 +6,8 @@ ko.extenders.formatPrice = function(target, option) {
             },
             write: function (value) {
                 // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
-                var current = target()
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
-                target(isNaN(value) ? 0 : value.toFixed(2)); // Write to underlying storage
+                target(isNaN(value) ? 0 : Math.round(value*100)/100); // Write to underlying storage
                 target.valueHasMutated()
             }
         });
@@ -24,7 +23,7 @@ ko.extenders.formatTip = function(target, option) {
                 return parseFloat(target())*100 + "%";
             },
             write: function (value) {
-                // Strip out unwanted characters, parse as float, then write the raw data back to the underlying "price" observable
+                // Strip out unwanted characters, parse as float, then write the raw data back to the underlying tip observable
                 value = parseFloat(value.replace(/[^\.\d]/g, ""));
                 target(isNaN(value) ? 0 : value/100); // Write to underlying storage
             }
@@ -46,13 +45,10 @@ function billModel() {
         carryout: ko.observable("20").extend({ min: 0, formatTip: true})
     }
 
-    self.timesTwo = ko.computed(function(){
-        return self.total()*2;
-    });
+    self.calculatedTotal = ko.computed(function(){
+        return "$" + (self.total() + self.total() * self.tip.general() + self.tax()*self.tip.tax()).toFixed(2);
 
-    self.tipTwo = ko.computed(function(){
-        return self.tip.general()*2;
-    });
+    })
 
     self.groups = ko.observableArray([
         new groupModel("Group-1", 0)
@@ -78,11 +74,15 @@ function billModel() {
 
     self.hasGeneral = ko.computed(function() {
         var bool = false;
-        ko.utils.arrayForEach(self.groups(), function(group) {
-            if(group.general() > 0){
-                bool = true;
-           }
-        });
+        if(self.gozMode() == 'determine-tip'){
+            bool = true;
+        }else{
+            ko.utils.arrayForEach(self.groups(), function(group) {
+                if(group.general() > 0){
+                    bool = true;
+                }
+            });
+        }
         return bool;
     });
 
