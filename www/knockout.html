@@ -3,17 +3,24 @@
     <p>Total Amount: <input data-bind="value: total.formattedPrice" /></p>
     <p>Tax Amount: <input data-bind="value: tax.formattedPrice" /></p>
     Group mode<input type="radio" name="gozMode" value="group" data-bind="checked: gozMode, disable: total() == 0" />
+    Split individual mode <input type="radio" name="gozMode" value="split-individual" data-bind="checked: gozMode, disable: total()== 0" />
     Determine tip mode <input type="radio" name="gozMode" value="determine-tip" data-bind="checked: gozMode, disable: total()== 0" />
 </div>
 
-<div data-bind="with: bill, visible: bill.total() > 0">
-    <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
-    <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
-    <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
-    <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout" /></p>
-</div>
+<p>----------------------------</p>
+<p>----------------------------</p>
+<p>----------------------------</p>
 
 <div data-bind="with: bill, visible: bill.gozMode() =='group'">
+
+    <div data-bind="visible: total() > 0">
+        <strong>Tip Rates</strong>
+        <p data-bind="visible: hasGeneral">General Tip: <input data-bind="value: tip.general.formattedTip" /></p>  
+        <p data-bind="visible: hasWine">Wine Tip: <input data-bind="value: tip.wine.formattedTip" /></p>  
+        <p data-bind="visible: hasTax">Tax Tip: <input data-bind="value: tip.tax.formattedTip" /></p>  
+        <p data-bind="visible: hasCarryout">Carryout Tip: <input data-bind="value: tip.carryout" /></p>
+    </div>
+
     <h3>Group Mode</h3>
     <table>
         <thead>
@@ -49,6 +56,10 @@
     <p>Calculated total: <span data-bind="text: calculatedTotal()"></span></p>
 </div>
 
+<p>----------------------------</p>
+<p>----------------------------</p>
+<p>----------------------------</p>
+<strong> DATA OUTPUT BELOW</strong>
 <pre data-bind="text: JSON.stringify(ko.toJS($data), null, 3)"></pre>
 
 <link rel="stylesheet" type="text/css" href="css/index.css">

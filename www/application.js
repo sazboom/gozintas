@@ -46,7 +46,7 @@ function billModel() {
     }
 
     self.calculatedTotal = ko.computed(function(){
-        return "$" + (self.total() + self.total() * self.tip.general() + self.tax()*self.tip.tax()).toFixed(2);
+        return "$" + (self.total() + self.tax() + self.total() * self.tip.general() + self.tax()*self.tip.tax()).toFixed(2);
 
     })
 
