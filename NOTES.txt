@@ -13,3 +13,10 @@ Showpage5inputs really only works for page 5b -- kind of a dumb oversight, but m
 Aaron questions/conundrums
 	Setup and get working on iphone
 	Lots of for loops that "seem" neccesary -- strategy for this?
+
+
+
+
+NOTES 1/21/12:
+
+Create methods that check mode - if split individual do x, if group to y, etc. That way methods make sense rather than being long checkIfIndividualTipModeGarbage123 etc.

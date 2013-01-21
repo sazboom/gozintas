@@ -181,7 +181,7 @@ function billModel() {
 
     self.addGroup = function() {
         nextGroup = self.groups().length+1
-        self.groups.push(new groupModel("Group-"+nextGroup, 0))
+        self.groups.push(new groupModel("Group-"+nextGroup, 1))
     };
 
     self.removeGroup = function(group) { self.groups.remove(group) }
