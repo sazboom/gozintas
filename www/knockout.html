@@ -89,14 +89,13 @@
         <h3> Totals </h3>
         <p>Food Total (<span data-bind="text: tip.general.formattedTip"></span> Tip = <span data-bind="text: tip.general() * foodTotal()"></span>): <span data-bind="text: '$'+foodTotal() / groups().length"></span></p>
         <p>General Total (<span data-bind="text: tip.general.formattedTip"></span> Tip = <span data-bind="text: tip.general() * groups()[0].general()"></span>): <span data-bind="text: groups()[0].general.formattedPrice"></span></p>
-        <p data-bind="visible: hasWine" >Wine Total (<span data-bind="text: tip.wine.formattedTip"></span> Tip): <span data-bind="text: groups()[0].wine.formattedPrice"></span></p>
-        <p data-bind="visible: hasCarryout">Carryout Total (<span data-bind="text: tip.carryout.formattedTip"></span> Tip): <span data-bind="text: groups()[0].carryout.formattedPrice"></span></p>
+        <p data-bind="visible: hasWine" >Wine Total (<span data-bind="text: tip.wine.formattedTip"></span> Tip = <span data-bind="text: tip.wine() * groups()[0].wine()"></span>): <span data-bind="text: groups()[0].wine.formattedPrice"></span></p>
+        <p data-bind="visible: hasCarryout">Carryout Total (<span data-bind="text: tip.carryout.formattedTip"></span> Tip = <span data-bind="text: tip.carryout() * groups()[0].carryout()"></span>): <span data-bind="text: groups()[0].carryout.formattedPrice"></span></p>
         <p>Tax Total (<span data-bind="text: tip.tax.formattedTip"></span> Tip = <span data-bind="text: tip.tax() * tax()"></span>): <span data-bind="text: '$' + (tax()/groups().length).toFixed(2)"></span></p>
         <p>Tip Individual: <span data-bind="text: '$' + splitIndividualTipIndividual().toFixed(2)"></span></p>
         <p>Tip Total: <span data-bind="text: '$' + splitIndividualTipTotal().toFixed(2)"></span></p>
-        <p>Total Individual: <span data-bind="text: tax.formattedPrice"></span></p>
+        <p>Total Individual: <span data-bind="text: "></span></p>
         <p>Total For Party: <span data-bind="text: tax.formattedPrice"></span></p>
-        <p>Calculated total: <span data-bind="text: calculatedTotal()"></span></p>
 
     </div>
 </div>

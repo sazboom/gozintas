@@ -47,7 +47,7 @@ function billModel() {
 
     // Initializing a group to be used for split individual and split group modes
     self.groups = ko.observableArray([
-        new groupModel("Group-1", 0)
+        new groupModel("Group-1", 1)
     ]);
 
     // Group additions, needed for computations
@@ -155,6 +155,7 @@ function billModel() {
         return (Math.round((self.total() + self.tax() + self.total() * self.tip.general() + self.tax()*self.tip.tax())*100)/100);
     });
 
+
     self.calculatedTip = ko.computed(function(){
         return (Math.round((self.foodTotal()*self.tip.general() + self.groupWineTotal()*self.tip.wine() + self.groupCarryoutTotal()*self.tip.carryout() + self.tax()*self.tip.tax())*100)/100);
     });
@@ -162,6 +163,8 @@ function billModel() {
     self.calculatedTipIndividual = ko.computed(function(){
         return self.calculatedTip()
     });
+
+
 
 
     // Group adding and removing for split-group mode
@@ -178,7 +181,7 @@ function billModel() {
 
 function groupModel(nickname, peopleInParty) {
     var self = this;
-    self.peopleInParty = ko.observable(peopleInParty).extend({ min: 0, required: true});
+    self.peopleInParty = ko.observable(peopleInParty).extend({ min: 1, required: true});
     self.nickname = ko.observable(nickname).extend({ minLength: 3, maxLength: 10, required: true});
 
     self.general = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
