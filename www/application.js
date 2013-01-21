@@ -139,16 +139,16 @@ function billModel() {
         return self.total() - self.groupGeneralTotal() - self.groupWineTotal() - self.groupCarryoutTotal();
     });
 
-    self.setGroupDetails = ko.computed(function(){
-        ko.utils.arrayForEach(self.groups(), function(group) {
-            group.foodTotal = self.foodTotal() / self.groups().length
-            group.taxTotal = self.tax() / self.groups().length
+    self.splitIndividualTipTotal = ko.computed(function(){
+        return (self.foodTotal() / self.groups().length) * self.tip.general() + self.groups()[0].general()*self.tip.general() + self.groups()[0].carryout()*self.tip.carryout() + self.groups()[0].wine() * self.tip.wine() + self.tax()*self.tip.tax()
+    });
 
-            group.carryoutTipTotal = group.carryout() * self.tip.carryout();
-            group.wineTipTotal = group.wine() * self.tip.wine();
-            group.generalTipTotal = group.foodTotal * self.tip.general();
-        });
-
+    self.splitIndividualTipIndividual = ko.computed(function(){
+        if(self.totalPeopleInAllGroups() > 0){
+            return self.splitIndividualTipTotal()/self.groups()[0].peopleInParty();
+        }else{
+            return 0
+        }
     });
 
     self.calculatedTotal = ko.computed(function(){
@@ -180,27 +180,6 @@ function groupModel(nickname, peopleInParty) {
     var self = this;
     self.peopleInParty = ko.observable(peopleInParty).extend({ min: 0, required: true});
     self.nickname = ko.observable(nickname).extend({ minLength: 3, maxLength: 10, required: true});
-
-    self.foodTotal = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
-    self.taxTotal = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
-
-    self.carryoutTipTotal =  ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
-    self.wineTipTotal =  ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
-    self.generalTipTotal = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
-
-    self.tipTotal = ko.computed(function(){
-       return self.carryoutTipTotal() + self.wineTipTotal() + self.generalTipTotal();
-    });
-
-    self.tipTotalIndividual = ko.computed(function(){
-        var tipIndividual =  self.tipTotal() / self.peopleInParty()
-        if(isNaN(tipIndividual)){
-            return 0;
-        }else{
-            return tipIndividual;
-        }
-
-    })
 
     self.general = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
     self.wine = ko.observable("0").extend({ min: 0, required: false, formatPrice: true});
