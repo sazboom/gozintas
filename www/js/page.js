@@ -74,53 +74,30 @@ var Page = {
             $("#page3b").live('pageshow click keyup',function(){
                     parentClass = "#page3b";
                     peopleInParty = parseFloat($(parentClass+" #people_in_party").val())
-                    wineTotal = parseFloat($(parentClass+" #wine_amount").val()).toFixed(2);
-                    carryOut = parseFloat($(parentClass+" #carry_out_amount").val()).toFixed(2);
                     if(isNaN(peopleInParty)){
                         peopleInParty = 0
-                    }
-                    if(isNaN(carryOut)){
-                        carryOut = 0
-                    }
-                    if(isNaN(wineTotal)){
-                        wineTotal = 0
                     }
                     if(isNaN(peopleInParty)){
                         peopleInParty = 0
                     }
                     groups[0].peopleInParty = peopleInParty
-                    groups[0].wineTotal = wineTotal;
-                    groups[0].carryOutTotal = carryOut
                     groups[0].foodTotal = +Gozintas.total.amount - +Gozintas.total.taxAmount
                     newFoodTotal = Gozintas.total.amount-Gozintas.total.taxAmount-groups[0].wineTotal-groups[0].carryOutTotal -groups[0].reductionTotal;
                     groups[0].foodTotal = newFoodTotal
                     
-                    if(groups[0].foodTotal > 0){
+                    /*if(groups[0].foodTotal > 0){
                         groups[0].extras =true;
                     }else{
                         groups[0].extras = false
-                    }
-                    if(groups[0].wineTotal > 0){
-                        groups[0].wine = true
-                    }else{
-                        groups[0].wine = false
-                    }
-                    if(groups[0].carryOutTotal > 0){
-                        groups[0].carryout = true
-                    }else{
-                        groups[0].carryout = false
-                    }
+                    }*/
+
                     console.log(newFoodTotal)
                     $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
-                    if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) || carryOut < 0 || wineTotal < 0  ){
+                    if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) ){
                             $(".buttons").children().addClass('ui-disabled');
                     }else{
                             $(".buttons").children().removeClass('ui-disabled');
                     }
-
-
-
-
                 
             })
 
@@ -202,7 +179,41 @@ var Page = {
                     Gozintas.showPageFiveBInputs();
                 }
             );
-		}
+		},
+
+        extras: function() {
+
+            $("#extras").live(
+                "pagebeforeshow", function(){
+                    $("#extras").live('pageshow click keyup', function(){
+                        parentClass = "#extras";
+                        wineTotal = parseFloat($(parentClass+" #wine_amount").val()).toFixed(2);
+                        carryOut = parseFloat($(parentClass+" #carry_out_amount").val()).toFixed(2);
+                        if(isNaN(carryOut)){
+                            carryOut = 0;
+                        }
+                        if(isNaN(wineTotal)){
+                            wineTotal = 0;
+                        }
+                        groups[0].wineTotal = wineTotal;
+                        groups[0].carryOutTotal = carryOut;
+                        if(groups[0].wineTotal > 0){
+                            groups[0].wine = true;
+                        }else{
+                            groups[0].wine = false;
+                        }
+                        if(groups[0].carryOutTotal > 0){
+                            groups[0].carryout = true;
+                        }else{
+                            groups[0].carryout = false;
+                        }
+
+                    });
+
+                }
+            );
+
+        }
 
 
 	}
