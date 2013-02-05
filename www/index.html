@@ -22,6 +22,14 @@
     </head>
     <body>
         <div data-role="page" id="page1" data-routing="page1.html">
+            <div data-role="header">
+                <h1>Gozintas</h1>
+            </div>
+            <h3><center>Welcome to Gozintas. What would you like to do?</center></h3>
+            <div class="menu">
+                <a href="#page2" data-role="button" onclick="Gozintas.splitBillPath()" data-transition="fade">Split Bill</a>
+                <a href="#page2" data-role="button" onclick="Gozintas.determineTipPath()" data-transition="fade">Determine Tip</a>
+            </div>
         </div>
 
         <div data-role="page" id="page2" data-add-back-btn="true" data-routing="page2.html" data-pagejs="page2">       
