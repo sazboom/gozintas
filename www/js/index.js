@@ -41,3 +41,13 @@ function removeGroup()
         groups.pop(new Group())
     }
 }
+
+function addExtra()
+{
+
+}
+
+function returnHome(){
+    Gozintas.reset();
+    $(':input').val('');
+}
