@@ -3,13 +3,13 @@
 </div>
 <div class = "tabs-top">
     <div class="split-bill">
-        <a href="#split-bill">
+        <a href="#page2" onclick="Gozintas.splitBillPath()">
             <div class="paper-icon"></div>
             <div class="text-tab">Split Bill</div>
         </a>
     </div>
     <div class="determine-tip">
-        <a href="#determine-tip">
+        <a href="#page2" onclick="Gozintas.determineTipPath()">
             <div class="percent-icon"></div>
             <div class="text-tab">Determine Tip</div>
         </a>
@@ -30,7 +30,14 @@
             <div class="buttons">
                 <div class="links-split" style="display:none;">
                     <a href ="#page3b" data-role="button" onclick="Gozintas.splitByIndividual()">Split Individually</a>
-                    <a href = "#page3" data-role="button" onclick="Gozintas.splitByGroup()">Split as Group</a>
+                    <a href = "#page3" data-role="button" onclick="Gozintas.splitByGroup($('#group_num').val())" style="width:50%;float:left;">Split as ...</a>
+
+                    <div id = "number_of_groups" style="width:49%;float:right;">
+                        <div class="div_select_group_num" style="width:100%;">
+                            <select class="select_group_num" id="group_num" name="group_num" data-inline="true" data-routing="group-num.html"></select> 
+                        </div>
+                    </div>
+
                 </div>
                 <div class="links-tip" style="display:none;">
                     <a href = "#page4" data-role="button" onclick="Gozintas.splitByIndividual()">Next</a>   

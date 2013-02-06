@@ -108,11 +108,12 @@ var Gozintas = {
 	    }
 	},
 	splitBillPath : function() {
-		this.billPath = 'split-bill'
-		console.log("You hit me!")
+		this.billPath = 'split-bill';
+		$("body").addClass('split-class').removeClass('tip-class');
 	},
 	determineTipPath :  function() {
-		this.billPath = 'determine-tip'
+		this.billPath = 'determine-tip';
+		$("body").addClass('tip-class').removeClass('split-class');
 	},
 	isOnSplitBillPath : function() {
 		return this.billPath == 'split-bill'
@@ -127,8 +128,9 @@ var Gozintas = {
         new_group.peopleInParty = 1;
         groups[0] = new_group;
 	},
-	splitByGroup : function() {
+	splitByGroup : function(group_num) {
 		this.splitBy = 'group'
+		this.group_num = group_num
 	},
 	isSplitingByIndividual : function(){
 		return this.splitBy == 'individual'
