@@ -255,6 +255,27 @@ var Gozintas = {
 
         
 	},
+
+	reset: function(){
+		Gozintas.billPath = "";
+		Gozintas.splitBy = '';
+		Gozintas.peopleInParty = 0;
+		Gozintas.billModifier.wine = false;
+		Gozintas.billModifier.reductions = false;
+		Gozintas.billModifier.extras = false;
+		Gozintas.total.withoutReduction = 0;
+		Gozintas.total.taxAmount = 0;
+		Gozintas.total.amount = 0;
+		Gozintas.individual.total = 0.00;
+		Gozintas.individual.tax = 0.00;
+		Gozintas.individual.tip = 0.00;
+		Gozintas.tip.general = 0.15;
+		Gozintas.tip.wine = 0.15;
+		Gozintas.tip.carryout = 0.15;
+		Gozintas.tip.tax = 0.15;
+		groups = [new Group()];
+	},
+
 	showPageFiveGroupInputs: function(group_number){
         if(groups[group_number].wine){
             $("#page5 #group-"+(group_number+1)+" #wine_amount_container").show()

@@ -19,6 +19,7 @@
 
 .background-page{
     padding-top: 3%;
+	height: 383px;
 	background: rgb(173,203,169); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(173,203,169,1) 0%, rgba(128,176,120,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(173,203,169,1)), color-stop(100%,rgba(128,176,120,1))); /* Chrome,Safari4+ */
@@ -27,6 +28,13 @@
 	background: -ms-linear-gradient(top, rgba(173,203,169,1) 0%,rgba(128,176,120,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom, rgba(173,203,169,1) 0%,rgba(128,176,120,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#adcba9', endColorstr='#80b078',GradientType=0 ); /* IE6-9 */
+	padding-bottom: 3%;
+}
+
+.done{
+	width: 97%;
+	margin: 0 auto;
+	display: block;
 }
 
 .tip-class .background-page{
