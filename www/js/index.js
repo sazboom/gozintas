@@ -29,7 +29,8 @@ function addGroup()
     groups.push(new_group)
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups');
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
-    loadPartials(".group-"+(group_size+1)+"[data-routing]");
+    result = loadPartials(".group-"+(group_size+1)+"[data-routing]", false);
+    return result;
 }
 
 function removeGroup()
@@ -46,6 +47,28 @@ function addExtra()
 {
 
 }
+
+
+// function testAjaxGroup(){
+//     group_size = $("#page3 [class^='group-']").size();
+//     new_group = new Group()
+//     new_group.peopleInParty = 0;
+//     groups.push(new_group)
+//     $this1 = $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>")
+//     $this1.appendTo('.groups');
+//     $this2 = $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>")
+//     $this2.appendTo('.groups-final');
+//     $.ajax({
+//         url: "partials/_group.html",
+//         dataType:'html',
+//         async: false,
+//         success: function(data){
+//             console.log('hurr');
+//             $this1.append(data);
+//             $this1.trigger('create');
+//         }
+//     });
+// }
 
 function returnHome(){
     Gozintas.reset();

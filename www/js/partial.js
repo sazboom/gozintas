@@ -20,6 +20,7 @@ function moreStuff(router, onReady){
 		$.ajax({
 			url: "partials/_"+link, 
 			dataType:'html',
+			async: false,
 			success: function(data){
 				$(that).append(data);
 				var newRouter = "#"+$(that).attr('id')+" *[data-routing]"
