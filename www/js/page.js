@@ -6,14 +6,14 @@ var Page = {
 		},
 
 		page2: function() {
-            $("#page2").live('pageshow',function(){
-                if(Gozintas.group_num > 0)
-                {
+            // $("#page2").live('pageshow',function(){
+            //     if(Gozintas.group_num > 0)
+            //     {
 
-                }
-                Gozintas.group_num = 0;
-                $(".groups").html("");
-            });
+            //     }
+            //     Gozintas.group_num = 0;
+            //     $(".groups").html("");
+            // });
             
             $("#page2").live(
                 "pagebeforeshow keyup",
@@ -42,14 +42,13 @@ var Page = {
             $(".tabs-top").on('click', function(){
                 Gozintas.showSplitTipButtons(); 
             });
+
 		},
 
 		page3: function() {
 
-            $("#page3").live('pagebeforeshow',function(){
-                for (var i = 0, len = parseInt(Gozintas.group_num); i < len; i++) {
-                    addGroup();
-                };
+            $("#page3").live('pageload',function(){
+
             });
 
             $("#page3").live("pageshow keyup", function(){
