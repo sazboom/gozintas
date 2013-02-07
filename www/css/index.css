@@ -87,6 +87,32 @@
     padding: 2%;
 }
 
+.receipt-wrapper .inner-page {
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top, #ffffff 0%, #f2f1e9 50%, #ffffff 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f2f1e9), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #ffffff 0%,#f2f1e9 50%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #ffffff 0%,#f2f1e9 50%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #ffffff 0%,#f2f1e9 50%,#ffffff 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #ffffff 0%,#f2f1e9 50%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    border: none !important;
+    border-radius: 0px;
+    margin:0;
+}
+
+.receipt-wrapper {
+	background: url("../img/receipt-down.png") repeat-x scroll left bottom transparent;
+    padding-bottom: 17px;
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+.receipt {
+	background: url("../img/receipt-up.png") repeat-x scroll left top transparent;
+    padding-top: 10px;
+}
+
 .split-class .inner-page {
     border: 5px solid #C7DCC4;
 }
@@ -127,7 +153,7 @@
 	height: 100%;
 	float: left;
 	background-color: #9acec9;
-	box-shadow: 10px 4px 9px -6px #999999 inset;
+	/*box-shadow: 10px 4px 9px -6px #999999 inset;*/
 	background: rgb(160,213,208); /* Old browsers */
 	background: -moz-linear-gradient(top, rgba(160,213,208,1) 0%, rgba(102,156,145,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(160,213,208,1)), color-stop(100%,rgba(102,156,145,1))); /* Chrome,Safari4+ */
@@ -137,3 +163,23 @@
 	background: linear-gradient(to bottom, rgba(160,213,208,1) 0%,rgba(102,156,145,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d5d0', endColorstr='#669c91',GradientType=0 ); /* IE6-9 */
 }
+
+.tip-class .split-bill {
+	box-shadow: -6px 0px 8px -8px #333333 inset;
+}
+
+.split-class .determine-tip {
+	box-shadow: 6px 0 8px -8px #333333 inset;
+}
+
+.split-class .determine-tip .ui-link .text-tab {
+	color: #415c58;
+	text-shadow: 0 1px 0 #bdd8d3;
+}
+
+.tip-class .split-bill .ui-link .text-tab {
+	color: #5d6a5b;
+	text-shadow: 0 1px 0 #dbe8d9;
+
+}
+
