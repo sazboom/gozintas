@@ -253,6 +253,10 @@ var Page = {
                 }
             );
 
+        },
+
+        settings: function() {
+            
         }
 
 
