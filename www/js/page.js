@@ -10,6 +10,20 @@ var Page = {
             $("#page2").live(
                 "pagebeforeshow keyup",
                 function () {
+                    Gozintas.numGroups = parseInt($("#page2 #group_num").val());
+                    numWantedGroups = Gozintas.numGroups;
+                    numGroups = groups.length
+                    if(numGroups < numWantedGroups){
+                        for(var i = numGroups; i < numWantedGroups; i++){
+                            addGroup();
+                        }
+                        Gozintas.numGroups = groups.length;
+                    }else if(numGroups > numWantedGroups){
+                        for(var i = numGroups; i > numWantedGroups; i--){
+                            removeGroup();
+                        }
+                        Gozintas.numGroups = groups.length;
+                    }
                     Gozintas.showSplitTipButtons(); 
                     if( isNaN(Gozintas.total.amount) ){
                         Gozintas.total.amount = 0;
@@ -42,10 +56,12 @@ var Page = {
                     for(var i = numGroups; i < numWantedGroups; i++){
                         addGroup();
                     }
+                    Gozintas.numGroups = groups.length;
                 }else if(numGroups > numWantedGroups){
                     for(var i = numGroups; i > numWantedGroups; i--){
                         removeGroup();
                     }
+                    Gozintas.numGroups = groups.length;
                 }
             })
 
@@ -55,20 +71,6 @@ var Page = {
 
 		page3: function() {
 
-
-            $("#page3").live('pagebeforeshow',function(){
-                numWantedGroups = parseInt($("#page2 #group_num").val());
-                numGroups = groups.length
-                if(numGroups < numWantedGroups){
-                    for(var i = numGroups; i < numWantedGroups; i++){
-                        addGroup();
-                    }
-                }else if(numGroups > numWantedGroups){
-                    for(var i = numGroups; i > numWantedGroups; i--){
-                        removeGroup();
-                    }
-                }
-            });
 
             $("#page3").live('pageload',function(){
 
