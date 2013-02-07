@@ -48,7 +48,10 @@ function addExtra()
 }
 
 
-function returnHome(){
+function returnHome(changepage){
     Gozintas.reset();
     $(':input').val('');
+    if(changepage){
+        $.mobile.changePage("#page1")
+    }
 }

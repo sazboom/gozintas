@@ -3,6 +3,10 @@
     width: 50px;
 }
 
+.header-home h1.ui-title a{
+	color: #FFF;
+}
+
 .div_select_gaz{
     display: inline-block !important;
 }
