@@ -1,16 +1,16 @@
 var Page = {
 
 	js : {
-		page1: function() {
+		page0: function() {
 
 		},
 
-		page2: function() {
+		page1: function() {
             
-            $("#page2").live(
+            $("#page1").live(
                 "pageshow keyup",
                 function () {
-                    Gozintas.numGroups = parseInt($("#page2 #group_num").val());
+                    Gozintas.numGroups = parseInt($("#page1 #group_num").val());
                     numWantedGroups = Gozintas.numGroups;
                     numGroups = groups.length
                     if(numGroups < numWantedGroups){
@@ -38,19 +38,19 @@ var Page = {
                     }
                 }
             );
-			$("#page2 #total_amount_input").on("change keyup", function() {
+			$("#page1 #total_amount_input").on("change keyup", function() {
 				Gozintas.total.amount = parseFloat($(this).val()).toFixed(2)
 
 			})
-			$("#page2 #total_tax_amount_input").on("change keyup", function() {
+			$("#page1 #total_tax_amount_input").on("change keyup", function() {
 				Gozintas.total.taxAmount = parseFloat($(this).val()).toFixed(2)
 			})
             $(".tabs-top").on('click', function(){
                 Gozintas.showSplitTipButtons(); 
             });
 
-            $("#page2 #group_num").on('click change keyup', function(){
-                numWantedGroups = parseInt($("#page2 #group_num").val());
+            $("#page1 #group_num").on('click change keyup', function(){
+                numWantedGroups = parseInt($("#page1 #group_num").val());
                 numGroups = groups.length
                 if(numGroups < numWantedGroups){
                     for(var i = numGroups; i < numWantedGroups; i++){
@@ -69,14 +69,14 @@ var Page = {
 
 		},
 
-		page3: function() {
+		page2: function() {
 
 
-            $("#page3").live('pageload',function(){
+            $("#page2").live('pageload',function(){
 
             });
 
-            $("#page3").live("pageshow keyup", function(){
+            $("#page2").live("pageshow keyup", function(){
                 disable = false;
                 total = 0;
 
@@ -102,17 +102,17 @@ var Page = {
 		},
 
 
-		page3b: function() {
+		page2b: function() {
 
-            $("#page3b").live('pageshow',function(){
-                $("#page3b #drinks_deserts_etc").val(Gozintas.total.amount-Gozintas.total.taxAmount);
-                $("#page3b #people_in_party").focusout(function() {
+            $("#page2b").live('pageshow',function(){
+                $("#page2b #drinks_deserts_etc").val(Gozintas.total.amount-Gozintas.total.taxAmount);
+                $("#page2b #people_in_party").focusout(function() {
                     groups[0].peopleInParty = parseFloat($(this).val());
                 });
             });
 
-            $("#page3b").live('pageshow click keyup',function(){
-                    parentClass = "#page3b";
+            $("#page2b").live('pageshow click keyup',function(){
+                    parentClass = "#page2b";
                     peopleInParty = parseFloat($(parentClass+" #people_in_party").val())
                     if(isNaN(peopleInParty)){
                         peopleInParty = 0
@@ -132,7 +132,7 @@ var Page = {
                     }*/
 
                     console.log(newFoodTotal)
-                    $("#page3b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
+                    $("#page2b #drinks_deserts_etc").val(+newFoodTotal.toFixed(2));
                     if( +newFoodTotal.toFixed(2) < 0 || isNaN(peopleInParty) || (peopleInParty <= 0) ){
                             $(".buttons").children().addClass('ui-disabled');
                     }else{
@@ -143,26 +143,26 @@ var Page = {
 
 		},
 
-		page4: function() {
+		page3: function() {
 
-            $("#page4").live(
+            $("#page3").live(
                 "pagebeforeshow",
                 function(){
                     Gozintas.showPageFourPercentages();
                     Gozintas.showPageFourButton();
-                    $("#page4 #tip_rate").focusout(function() {
+                    $("#page3 #tip_rate").focusout(function() {
                         Gozintas.tip.general = parseFloat($(this).val());
                     });
-                    $("#page4 #tax_tip_rate").focusout(function() {
+                    $("#page3 #tax_tip_rate").focusout(function() {
                         Gozintas.tip.tax = parseFloat($(this).val());
                     });
-                    $("#page4 #wine_tip_rate").focusout(function() {
+                    $("#page3 #wine_tip_rate").focusout(function() {
                         Gozintas.tip.wine = parseFloat($(this).val());
                     });
-                    $("#page4 #carry_tip_rate").focusout(function() {
+                    $("#page3 #carry_tip_rate").focusout(function() {
                         Gozintas.tip.carryout = parseFloat($(this).val());
                     });
-                    $("#page4 #tax_tip_rate").focusout(function() {
+                    $("#page3 #tax_tip_rate").focusout(function() {
                         Gozintas.tip.tax = parseFloat($(this).val());
                     });
                 }
@@ -171,8 +171,8 @@ var Page = {
 
 		},
 
-		page5: function() {
-            $("#page5").live(
+		page4: function() {
+            $("#page4").live(
                 "pagebeforeshow",
                 function () {
                     Gozintas.calculatePeopleInParty()
@@ -185,22 +185,22 @@ var Page = {
                         five_foodTotal = (+groups[i].total- +groups[i].taxTotal - +groups[i].foodTotal - groups[i].carryOutTotal - groups[i].wineTotal).toFixed(2)
                         five_tipTotal = ((+five_foodTotal)*Gozintas.tip.general + +groups[i].foodTotal*Gozintas.tip.general + +groups[i].carryOutTotal*Gozintas.tip.carryout + +groups[i].wineTotal*Gozintas.tip.wine + +groups[i].taxTotal*Gozintas.tip.tax).toFixed(2)
                         five_finalTotal = +groups[i].total + +five_tipTotal;
-                        $("#page5 #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
-                        $("#page5 #group-"+(i+1)+" #total").val(five_finalTotal)
-                        $("#page5 #group-"+(i+1)+" .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
-                        $("#page5 #group-"+(i+1)+" #food_total").val(+five_foodTotal)
+                        $("#page4 #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
+                        $("#page4 #group-"+(i+1)+" #total").val(five_finalTotal)
+                        $("#page4 #group-"+(i+1)+" .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+                        $("#page4 #group-"+(i+1)+" #food_total").val(+five_foodTotal)
                         
-                       $("#page5 #group-"+(i+1)+" #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+                       $("#page4 #group-"+(i+1)+" #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
 
-                       $("#page5 #group-"+(i+1)+" #wine_amount_container label").text("Wine ("+(Gozintas.tip.wine*100).toFixed()+"% tip rate)")
+                       $("#page4 #group-"+(i+1)+" #wine_amount_container label").text("Wine ("+(Gozintas.tip.wine*100).toFixed()+"% tip rate)")
 
-                       $("#page5 #group-"+(i+1)+" #carry_out_amount_container label").text("Carry-out for group ("+(Gozintas.tip.carryout*100).toFixed()+"% tip rate)")
-                        $("#page5 #group-"+(i+1)+" #total_individual").val((+five_finalTotal/+groups[i].peopleInParty).toFixed(2))
-                        $("#page5 #group-"+(i+1)+" .tax_total label").text("Tax for group ("+(Gozintas.tip.tax*100).toFixed()+"% tip rate)")
-                        $("#page5 #group-"+(i+1)+" #tax_total").val(+groups[i].taxTotal)
+                       $("#page4 #group-"+(i+1)+" #carry_out_amount_container label").text("Carry-out for group ("+(Gozintas.tip.carryout*100).toFixed()+"% tip rate)")
+                        $("#page4 #group-"+(i+1)+" #total_individual").val((+five_finalTotal/+groups[i].peopleInParty).toFixed(2))
+                        $("#page4 #group-"+(i+1)+" .tax_total label").text("Tax for group ("+(Gozintas.tip.tax*100).toFixed()+"% tip rate)")
+                        $("#page4 #group-"+(i+1)+" #tax_total").val(+groups[i].taxTotal)
                         
-                        $("#page5 #group-"+(i+1)+" #tip_total").val(five_tipTotal)
-                        $("#page5 #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
+                        $("#page4 #group-"+(i+1)+" #tip_total").val(five_tipTotal)
+                        $("#page4 #group-"+(i+1)+" #tip_individual").val((five_tipTotal/groups[i].peopleInParty).toFixed(2))
                         Gozintas.showPageFiveGroupInputs(i);
                     }
                 }
@@ -208,8 +208,8 @@ var Page = {
 
 		},
 
-		page5b: function() {
-            $("#page5b").live(
+		page4b: function() {
+            $("#page4b").live(
                 "pagebeforeshow",
                 function () {
                     if(Gozintas.billPath == "determine-tip" || (Gozintas.billPath == "split-tip" && Gozintas.splitBy == "individual")){
@@ -256,7 +256,7 @@ var Page = {
         },
 
         settings: function() {
-            
+
         }
 
 
