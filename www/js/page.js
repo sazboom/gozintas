@@ -6,14 +6,6 @@ var Page = {
 		},
 
 		page2: function() {
-            // $("#page2").live('pageshow',function(){
-            //     if(Gozintas.group_num > 0)
-            //     {
-
-            //     }
-            //     Gozintas.group_num = 0;
-            //     $(".groups").html("");
-            // });
             
             $("#page2").live(
                 "pagebeforeshow keyup",
@@ -43,9 +35,40 @@ var Page = {
                 Gozintas.showSplitTipButtons(); 
             });
 
+            $("#page2 #group_num").on('click change keyup', function(){
+                numWantedGroups = parseInt($("#page2 #group_num").val());
+                numGroups = groups.length
+                if(numGroups < numWantedGroups){
+                    for(var i = numGroups; i < numWantedGroups; i++){
+                        addGroup();
+                    }
+                }else if(numGroups > numWantedGroups){
+                    for(var i = numGroups; i > numWantedGroups; i--){
+                        removeGroup();
+                    }
+                }
+            })
+
+
+
 		},
 
 		page3: function() {
+
+
+            $("#page3").live('pagebeforeshow',function(){
+                numWantedGroups = parseInt($("#page2 #group_num").val());
+                numGroups = groups.length
+                if(numGroups < numWantedGroups){
+                    for(var i = numGroups; i < numWantedGroups; i++){
+                        addGroup();
+                    }
+                }else if(numGroups > numWantedGroups){
+                    for(var i = numGroups; i > numWantedGroups; i--){
+                        removeGroup();
+                    }
+                }
+            });
 
             $("#page3").live('pageload',function(){
 
