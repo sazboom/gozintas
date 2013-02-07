@@ -17,6 +17,7 @@ function Group () {
 var groups = [new Group()]
 
 var Gozintas = {
+	numGroups : 0,
 	billPath : '',
 	splitBy : '',
 	peopleInParty : 0,
