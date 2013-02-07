@@ -205,7 +205,7 @@ var Gozintas = {
 
 	},
 	showPageFiveBInputs: function(){
-        $("#page5b input#individuals_in_party").val(groups[0].peopleInParty);
+        /*$("#page5b input#individuals_in_party").val(groups[0].peopleInParty);
         $("#page5b input#food_total").val("$"+groups[0].foodTotal);
         $("#page5b input#wine_total").val("$"+groups[0].wineTotal);
         $("#page5b input#carryout_total").val("$"+groups[0].carryOutTotal);
@@ -218,7 +218,27 @@ var Gozintas = {
         $("#page5b input#tip_total").val("$"+Gozintas.calculateTip());
         $("#page5b input#total").val("$"+Gozintas.calculateTotal());
         $("#page5b input#tip_individual").val("$"+Gozintas.calculateTipIndividual());
-        $("#page5b input#total_individual").val("$"+Gozintas.calculateTotalIndividual());
+        $("#page5b input#total_individual").val("$"+Gozintas.calculateTotalIndividual());*/
+
+
+        $("#page5b span#individuals_in_party").text(groups[0].peopleInParty);
+        $("#page5b span#food_total").text("$"+groups[0].foodTotal);
+        $("#page5b span#wine_total").text("$"+groups[0].wineTotal);
+        $("#page5b span#carryout_total").text("$"+groups[0].carryOutTotal);
+        $("#page5b .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+        $("#page5b .wine_total label").text("Wine Total ("+(Gozintas.tip.wine*100).toFixed()+"% tip rate)")
+        $("#page5b .carryout_total label").text("Carry-out Total ("+(Gozintas.tip.carryout*100).toFixed()+"% tip rate)")
+        $("#page5b .tax_total label").text("Tax ("+(Gozintas.tip.tax*100).toFixed()+"% tip rate)")
+        $("#page5b span#tax_total").text("$"+Gozintas.total.taxAmount);
+
+        $("#page5b span#tip_total").text("$"+Gozintas.calculateTip());
+        $("#page5b span#total").text("$"+Gozintas.calculateTotal());
+        $("#page5b span#tip_individual").text("$"+Gozintas.calculateTipIndividual());
+        $("#page5b span#total_individual").text("$"+Gozintas.calculateTotalIndividual());
+
+
+
+
 		if(Gozintas.splitBy == "individual"){
 			if(Gozintas.billPath == "determine-tip")
 	        {
