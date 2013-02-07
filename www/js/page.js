@@ -8,7 +8,7 @@ var Page = {
 		page2: function() {
             
             $("#page2").live(
-                "pagebeforeshow keyup",
+                "pageshow keyup",
                 function () {
                     Gozintas.numGroups = parseInt($("#page2 #group_num").val());
                     numWantedGroups = Gozintas.numGroups;

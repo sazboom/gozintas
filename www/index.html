@@ -23,7 +23,23 @@
     <body>
         <div data-role="page" id="page1" data-routing="page1.html">
             <div data-role="header">
-                <h1>Gozintas</h1>
+                
+
+                <h1><a onclick ="returnHome();">
+                        Gozintas
+                    </a>
+                </h1>
+
+
+
+
+
+                <a class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-a" data-icon="gear" href="#settings" data-theme="a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">
+                <span class="ui-btn-inner ui-btn-corner-all">
+                <span class="ui-btn-text">Settings</span>
+                <span class="ui-icon ui-icon-gear ui-icon-shadow"> </span>
+                </span>
+                </a>
             </div>
             <h3><center>Welcome to Gozintas. What would you like to do?</center></h3>
             <div class="menu">
@@ -52,6 +68,9 @@
         </div>
 
         <div data-role="page" id="extras" data-add-back-btn="true" data-routing="extras.html" data-pagejs="extras" class="page-bg">
+        </div>
+
+        <div data-role="page" id="settings" data-add-back-btn="true" data-routing="settings.html" data-pagejs="settings" class="page-bg">
         </div>
 
     </body>
