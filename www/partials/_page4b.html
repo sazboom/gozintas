@@ -29,75 +29,91 @@
         <div class="receipt">
             <div class = "inner-page">
 
-                <div class = "page5 determine_tip top">
+                <div class = "page5 determine_tip bill-top">
                     <div class = "page5 total_tip">
                         <label class = "input_text_label" for="total_tip">Tip</label>
                         <span id="tip_total"></span>
                     </div>
+                    <br/>
                 </div>
 
-                <div class = "page5 individuals_in_party">
-                    <strong>The Breakdown (Party of <span id="individuals_in_party"></span>)</strong>
+                <div class = "page5 total_tip bill-top ui-grid-a-bill">
+                    <label class = "input_text_label" for="total_tip">Tip individual</label>
+                    <span id="tip_individual"></span>
+                    <br/>
                 </div>
 
-                <div class = "page5 food_total">
-                    <label class = "input_text_label" for="food_total">Food total</label>
-                    <span id="food_total"></span>
+                <div class = "page5 total_tip bill-top ui-grid-a-bill">
+                    <label class = "input_text_label" for="total_tip">Total Individual</label>
+                    <span id="total_individual"></span>
+                    <br/>
                 </div>
 
-                <div class = "page5 wine_total">
-                    <label class = "input_text_label" for="wine_total">Wine total</label>
-                    <span id="wine_total"></span>
-                </div>
+                <br/>
 
-                <div class = "page5 carryout_total">
-                    <label class = "input_text_label" for="pre_tax_amount">Carryout total (0% tip rate)</label>
-                    <span id="carryout_total"></span>
-                </div>
-
-                <div class = "page5 tax_total">
-                    <label class = "input_text_label" for="total_tip">Tax</label>
-                    <span id="tax_total"></span>
-                </div>
-
-                <div class = "page5 determine_tip">
-                    <div class = "page5 total_tip">
-                        <label class = "input_text_label" for="total_tip">Tip</label>
-                        <span id="tip_total"></span>
+                <div class="bill-breakdown">
+                    <div class = "page5 individuals_in_party">
+                        <strong>The Breakdown (Party of <span id="individuals_in_party"></span>)</strong>
                     </div>
 
-                    <hr/>
-
-                    <div class = "page5 total">
-                        <label class = "input_text_label" for="total">Total</label>
-                        <span id="total_individual"></span>
-                    </div>
-                </div>
-
-                <div class = "ui-grid-a">
-                    <div class = "page5 total_tip ui-block-a">
-                        <label class = "input_text_label" for="total_tip">Tip individual</label>
-                        <span id="tip_individual"></span>
+                    <div class = "page5 food_total">
+                        <label class = "input_text_label" for="food_total">Food total</label>
+                        <span id="food_total"></span>
                     </div>
 
-                    <div class = "page5 total_tip ui-block-b">
-                        <label class = "input_text_label" for="total_tip">Tip total</label>
-                        <span id="tip_total"></span>
-                    </div>
-                </div>
-
-                <div class = "ui-grid-a">
-                    <div class = "page5 total_tip ui-block-a">
-                        <label class = "input_text_label" for="total_tip">Total Individual</label>
-                        <span id="total_individual"></span>
+                    <div class = "page5 wine_total">
+                        <label class = "input_text_label" for="wine_total">Wine total</label>
+                        <span id="wine_total"></span>
                     </div>
 
-                    <div class = "page5 total_tip ui-block-b">
-                        <label class = "input_text_label" for="total_tip">Total for party</label>
-                        <span id="total"></span>
+                    <div class = "page5 carryout_total">
+                        <label class = "input_text_label" for="pre_tax_amount">Carryout total (0% tip rate)</label>
+                        <span id="carryout_total"></span>
                     </div>
 
-                </div>
+                    <div class = "page5 tax_total">
+                        <label class = "input_text_label" for="total_tip">Tax</label>
+                        <span id="tax_total"></span>
+                    </div>
+
+                    <div class = "page5 determine_tip">
+                        <div class = "page5 total_tip">
+                            <label class = "input_text_label" for="total_tip">Tip</label>
+                            <span id="tip_total"></span>
+                        </div>
+
+                        <hr/>
+
+                        <div class = "page5 total">
+                            <label class = "input_text_label" for="total">Total</label>
+                            <span id="total_individual"></span>
+                        </div>
+                    </div>
+
+                    <div class="ui-grid-a-bill">
+                        <div class = "page5 total_tip">
+                            <label class = "input_text_label" for="total_tip">Tip individual</label>
+                            <span id="tip_individual"></span>
+                        </div>
+
+                        <div class = "page5 total_tip">
+                            <label class = "input_text_label" for="total_tip">Tip total</label>
+                            <span id="tip_total"></span>
+                        </div>
+
+                        <div class = "page5 total_tip">
+                            <label class = "input_text_label" for="total_tip">Total Individual</label>
+                            <span id="total_individual"></span>
+                        </div>
+
+                        <hr/>
+
+                        <div class = "page5 total_tip">
+                            <label class = "input_text_label" for="total_tip">Total for party</label>
+                            <span id="total"></span>
+                        </div>
+                    </div>
+                </div> <!-- /bill-breakdown -->
             </div>
         </div>
     </div>

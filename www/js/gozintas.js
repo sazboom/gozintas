@@ -246,7 +246,7 @@ var Gozintas = {
 	        	$("#page4b .determine_tip").show();
 	        	$("#page4b .wine_total").hide();
 	        	$("#page4b .carryout_total").hide();
-	        	$(".ui-grid-a").hide();
+	        	$(".ui-grid-a-bill").hide();
 
 	        }else{
 	        	if(groups[0].wine){
@@ -260,7 +260,7 @@ var Gozintas = {
 					$("#page4b .carryout_total").hide();
 				}
 	        	$(".page5.determine_tip").hide();
-	        	$(".ui-grid-a").show();
+	        	$(".ui-grid-a-bill").show();
 	        }
 		}
         if(!Gozintas.billModifier.wine){
