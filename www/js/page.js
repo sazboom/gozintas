@@ -92,9 +92,9 @@ var Page = {
                 total = 0;
 
                 $.each(groups, function(index,value){
-                    value.carryOutTotal
-                    value.wineTotal
-                    value.foodTotal
+                    console.log("#1"+value.carryOutTotal)
+                    console.log("#2"+value.wineTotal)
+                    console.log("#3"+value.foodTotal)
                     total = total + value.carryOutTotal + value.wineTotal + value.foodTotal
                     if( value.peopleInParty == 0 || isNaN(value.peopleInParty) || value.foodTotal < 0 || value.wineTotal < 0 || value.carryOutTotal < 0 ){
                         disable = true
@@ -110,10 +110,21 @@ var Page = {
                 }
             });
 
-            $(".extra-popup input").live('pageshow pageaftershow pageafterload keyup change', function(){
+            $(".extra-popup input#drinks_deserts_etc").live('pageshow pageaftershow pageafterload keyup change', function(){
               extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
-              console.log("My group is "+extragroup);
+              groups[extragroup-1].foodTotal = parseFloat($(this).val()).toFixed(2)
             })
+
+            $(".extra-popup input#wine_amount").live('pageshow pageaftershow pageafterload keyup change', function(){
+              extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
+              groups[extragroup-1].wineTotal = parseFloat($(this).val()).toFixed(2)
+            })
+
+            $(".extra-popup input#carry_out_amount").live('pageshow pageaftershow pageafterload keyup change', function(){
+              extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
+              groups[extragroup-1].carryOutTotal = parseFloat($(this).val()).toFixed(2)
+            })
+
 			Gozintas.handleKeyups(3);
 		},
 
