@@ -1,5 +1,8 @@
-<div data-role="header">
-    <h1>Gozintas</h1>
+<div data-role="header" class="header-home">
+    <h1><a onclick ="returnHome(true);">
+            Gozintas
+        </a>
+    </h1>
     <a class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-a" data-icon="gear" href="#settings" data-theme="a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">
     <span class="ui-btn-inner ui-btn-corner-all">
     <span class="ui-btn-text">Settings</span>
@@ -22,41 +25,23 @@
     </div>
 </div>-->
 <div class = "background-page">
-    <div class = "inner-page">
-        <div class = "question_input">
-            <div class="div_select_gaz">
-                <select class="select_gaz tip_rate" id="tip_rate" name="tip_rate" data-inline="true" data-routing="tip-rate.html">
-                </select> 
-            </div>
-            <label for="tip_rate" class="label_gaz tip_rate">Base Rate Tip</label>
+    <div class="receipt-wrapper">
+        <div class="receipt">
+            <div class = "inner-page">
+        		<div class="groups-final">
+        		    <div data-role="collapsible" data-content-theme="c" id="group-1" data-theme="a" class="group-1 visible" data-routing="total.html">
+        		        <h3>Group 1</h3>
+        		    </div>
+        		</div>
+        	</div>
         </div>
-        <br>
-        <div id="custom_tip_rates">
-            <div><b>Customize your tip rate below:</b></div>
-            <div id = "wine_tip">
-                <div class="div_select_gaz">
-                    <select class="select_gaz tip_rate" id="wine_tip_rate" name="wine_tip_rate" data-inline="true" data-routing="tip-rate.html">
-                    </select> 
-                </div>
-                <label for="wine_tip_rate" class="label_gaz tip_rate">Wine Tip Rate</label>
-            </div>
-            <div id="carry_tip">
-                <div class="div_select_gaz">
-                    <select class="select_gaz tip_rate" id="carry_tip_rate" name="carry_tip_rate" data-inline="true" data-routing="tip-rate.html">
-                    </select> 
-                </div>
-                <label for="carry_tip_rate" class="label_gaz tip_rate">Carry Out Tip Rate</label>
-            </div>
-            <div id="tax_tip">
-                <div class="div_select_gaz">
-                    <select class="select_gaz tip_rate" id="tax_tip_rate" name="tax_tip_rate" data-inline="true" data-routing="tip-rate.html">
-                    </select> 
-                </div>
-                <label for="tax_tip_rate" class="label_gaz tip_rate">Tax Tip Rate</label>
-            </div>
-        </div>
-
-        <a href="#page5" id ="next_button_page4" data-role="button">Next</a>
     </div>
 </div>
-
+<a href="#popup" data-transition="pop" data-role="button" data-inline="true" class="done" data-rel="popup">I'm Done</a>
+<div data-role="popup" id="popup" data-overlay-theme="d" data-theme="c" style="max-width:500px;" class="ui-corner-all">
+    <div data-role="content" data-theme="d" style="padding:15px;" class="ui-corner-bottom">
+        <h1>You're done!</h1>
+        <p>Thank you for using Gozintas. Please click the button below to go back to the beginning.</p>
+        <a href="#page1" data-ajax="false" rel="external" data-role="button" onclick ="returnHome();">Take me home</a>        
+    </div>
+</div>

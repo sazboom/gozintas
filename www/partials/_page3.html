@@ -1,5 +1,8 @@
-<div data-role="header">
-    <h1>Gozintas</h1>
+<div data-role="header" class="header-home">
+    <h1><a onclick ="returnHome(true);">
+            Gozintas
+        </a>
+    </h1>
     <a class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-a" data-icon="gear" href="#settings" data-theme="a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">
     <span class="ui-btn-inner ui-btn-corner-all">
     <span class="ui-btn-text">Settings</span>
@@ -23,19 +26,40 @@
 </div>-->
 <div class = "background-page">
     <div class = "inner-page">
-        <div class ="menu">
-            <div class = "question_input">
-                <a href="#" data-role="button" onclick="addGroup()" data-inline="true" data-icon="plus">Add Group</a>
-                <a href="#" data-role="button" onclick="removeGroup()" data-inline="true" data-icon="minus">Remove Group</a>
+        <div class = "question_input">
+            <div class="div_select_gaz">
+                <select class="select_gaz tip_rate" id="tip_rate" name="tip_rate" data-inline="true" data-routing="tip-rate.html">
+                </select> 
             </div>
-            <div class="groups">
-                <div data-role="collapsible" data-content-theme="c" id="group-1" data-theme="a" class="group-1 visible" data-routing="group.html">
-                    <h3>Group 1</h3>
+            <label for="tip_rate" class="label_gaz tip_rate">Base Rate Tip</label>
+        </div>
+        <br>
+        <div id="custom_tip_rates">
+            <div><b>Customize your tip rate below:</b></div>
+            <div id = "wine_tip">
+                <div class="div_select_gaz">
+                    <select class="select_gaz tip_rate" id="wine_tip_rate" name="wine_tip_rate" data-inline="true" data-routing="tip-rate.html">
+                    </select> 
                 </div>
+                <label for="wine_tip_rate" class="label_gaz tip_rate">Wine Tip Rate</label>
             </div>
-            <div class="buttons">
-                <a href="#page4" data-role="button">Next</a>
+            <div id="carry_tip">
+                <div class="div_select_gaz">
+                    <select class="select_gaz tip_rate" id="carry_tip_rate" name="carry_tip_rate" data-inline="true" data-routing="tip-rate.html">
+                    </select> 
+                </div>
+                <label for="carry_tip_rate" class="label_gaz tip_rate">Carry Out Tip Rate</label>
+            </div>
+            <div id="tax_tip">
+                <div class="div_select_gaz">
+                    <select class="select_gaz tip_rate" id="tax_tip_rate" name="tax_tip_rate" data-inline="true" data-routing="tip-rate.html">
+                    </select> 
+                </div>
+                <label for="tax_tip_rate" class="label_gaz tip_rate">Tax Tip Rate</label>
             </div>
         </div>
+
+        <a href="#page4" id ="next_button_page4" data-role="button">Next</a>
     </div>
 </div>
+

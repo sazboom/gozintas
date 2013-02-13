@@ -23,7 +23,7 @@ var app = {
 
 function addGroup()
 {
-    group_size = $("#page3 [class^='group-']").size();
+    group_size = $("#page2 [class^='group-']").size();
     new_group = new Group()
     new_group.peopleInParty = 0;
     groups.push(new_group)
@@ -34,11 +34,16 @@ function addGroup()
 
 function removeGroup()
 {
-    group_size = $("#page3 [class^='group-']").size();
+    group_size = $("#page2 [class^='group-']").size();
     if(group_size !=1)
     {
         $(".group-"+group_size).remove();
         groups.pop(new Group())
+        
+    }
+    for(var i = groups.length; i > group_size; i--){
+        console.log("popping");
+        groups.pop(new Group());
     }
 }
 
@@ -48,7 +53,10 @@ function addExtra()
 }
 
 
-function returnHome(){
+function returnHome(changepage){
     Gozintas.reset();
     $(':input').val('');
+    if(changepage){
+        $.mobile.changePage("#page1")
+    }
 }
