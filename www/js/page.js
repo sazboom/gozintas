@@ -109,6 +109,11 @@ var Page = {
                     $(".buttons").children().removeClass('ui-disabled');
                 }
             });
+
+            $(".extra-popup input").live('pageshow pageaftershow pageafterload keyup change', function(){
+              extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
+              console.log("My group is "+extragroup);
+            })
 			Gozintas.handleKeyups(3);
 		},
 
