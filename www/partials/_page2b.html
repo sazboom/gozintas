@@ -33,14 +33,17 @@
                 <input class="input_text" id="people_in_party" type="text"  pattern="[0-9]*" name="people_in_party" >
             </div>
 
-            <div class = "question_input">
-            	<a href="#extras" data-role="button">I ordered extras on my bill.</a>
-        	</div>
-
         	<div class = "question_input">
         	    <input class = "input_text" id="drinks_deserts_etc" type="number" step = "0.01" name="drinks_deserts_etc" placeholder="0.00" min="0.00" style="width:10%; display:inline;" disabled="">
-        	    <label for="drink_deserts_etc" class="label_gaz drink_desert_tip_rate">Food Total (food tip rate)</label>
+        	    <label for="drink_deserts_etc" class="label_gaz drink_desert_tip_rate">Bill Total (food tip rate)</label>
         	</div>
+
+            <div class="extras-bubble-wrapper">
+                <div class = "question_input extras-bubble">
+                    <p>Your bill will be split evenly among the people in your party with the base tip and tax tip rates applied.</p>
+                    <a href="#extras" data-role="button">I ordered extras on my bill.</a>
+                </div>
+            </div>
 
             <div class="buttons">
             	<a href="#page3" data-role="button">Next</a>

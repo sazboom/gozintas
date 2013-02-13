@@ -230,7 +230,7 @@ var Page = {
                         five_finalTotal = +groups[i].total + +five_tipTotal;
                         $("#page4 #group-"+(i+1)+" #individuals_in_party").val(groups[i].peopleInParty)
                         $("#page4 #group-"+(i+1)+" #total").val(five_finalTotal)
-                        $("#page4 #group-"+(i+1)+" .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+                        $("#page4 #group-"+(i+1)+" .food_total label").text("Bill Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
                         $("#page4 #group-"+(i+1)+" #food_total").val(+five_foodTotal)
                         
                        $("#page4 #group-"+(i+1)+" #drinks_deserts_amount_container label").text("Drinks/Deserts/Etc ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")

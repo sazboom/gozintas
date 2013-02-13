@@ -226,7 +226,7 @@ var Gozintas = {
         $("#page4b span#food_total").text("$"+groups[0].foodTotal);
         $("#page4b span#wine_total").text("$"+groups[0].wineTotal);
         $("#page4b span#carryout_total").text("$"+groups[0].carryOutTotal);
-        $("#page4b .food_total label").text("Food Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
+        $("#page4b .food_total label").text("Bill Total ("+(Gozintas.tip.general*100).toFixed()+"% tip rate)")
         $("#page4b .wine_total label").text("Wine Total ("+(Gozintas.tip.wine*100).toFixed()+"% tip rate)")
         $("#page4b .carryout_total label").text("Carry-out Total ("+(Gozintas.tip.carryout*100).toFixed()+"% tip rate)")
         $("#page4b .tax_total label").text("Tax ("+(Gozintas.tip.tax*100).toFixed()+"% tip rate)")
