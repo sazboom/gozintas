@@ -32,11 +32,13 @@
                 <a href="#" data-role="button" onclick="removeGroup()" data-inline="true" data-icon="minus">Remove Group</a>
             </div>
             <div class="groups">
-                <div class="group-container">
+                <div id="topgroup-1-container" class="group-container">
                     <div data-role="collapsible" data-content-theme="c" id="group-1" data-theme="a" class="group-1 visible" data-routing="group.html" style = "width: 70%; float: left">
                         <h3>Group 1</h3>
                     </div>
-                    <div data-role="button" data-inline="true" style="float: left; width: 29%;" data-icon="gear" data-theme="b">Extras</div>
+                    <a href="#" data-transition="pop" data-role="button" data-inline="true" style="float: left; width: 29%;" data-icon="gear" data-theme="b" data-rel="popup" onclick="$('#extra-popup-1').popup('open')">Extras</a>
+                    <div data-role="popup" id="extra-popup-1" class="extra-popup" data-routing="extras.html">
+                    </div>
                 </div>
             </div>
             <br clear="both">
