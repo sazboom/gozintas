@@ -39,6 +39,11 @@ function removeGroup()
     {
         $(".group-"+group_size).remove();
         groups.pop(new Group())
+        
+    }
+    for(var i = groups.length; i > group_size; i--){
+        console.log("popping");
+        groups.pop(new Group());
     }
 }
 

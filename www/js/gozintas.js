@@ -18,8 +18,8 @@ var groups = [new Group()]
 
 var Gozintas = {
 	numGroups : 0,
-	billPath : '',
-	splitBy : '',
+	billPath : 'split-bill',
+	splitBy : 'individual',
 	peopleInParty : 0,
 	billModifier : { /* If any of the groups have wine, reductions, or extras, these will be set to true. If none of them have wine, reductions, or extras, these will be set to false. Also defined on a per group basis above in the groups variable*/
 		wine : false,

@@ -71,6 +71,15 @@ var Page = {
 
 		page2: function() {
 
+            $("#page2").live('pagebeforeshow', function(){
+                group_size = $("#page2 [class^='group-']").size();
+                for(var i = group_size; i < groups.length; i++){
+                    $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups');
+                    $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
+                    loadPartials(".group-"+(group_size+1)+"[data-routing]", false);
+                }
+            });
+
 
             $("#page2").live('pageload',function(){
 
