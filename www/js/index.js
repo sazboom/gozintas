@@ -23,11 +23,11 @@ var app = {
 
 function addGroup()
 {
-    group_size = $("#page2 [class^='group-']").size();
+    group_size = $("#page2 [id^='group-']").size();
     new_group = new Group()
     new_group.peopleInParty = 0;
     groups.push(new_group)
-    $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups');
+    $("<div class='group-container'><div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html' style = 'width: 70%; float: left'><h3>Group "+(group_size+1)+"</h3></div><div data-role='button' data-inline='true' style='float: left; width: 29%;' data-icon='gear' data-theme='b'>Extras</div></div>").appendTo('.groups');
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
     loadPartials(".group-"+(group_size+1)+"[data-routing]", false);
 }
@@ -55,6 +55,7 @@ function addExtra()
 
 function returnHome(changepage){
     Gozintas.reset();
+    Gozintas.showSplitTipButtons();
     $(':input').val('');
     if(changepage){
         $.mobile.changePage("#page1")

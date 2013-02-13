@@ -198,3 +198,29 @@
 
 }
 
+#page2 .groups .ui-corner-bottom{
+	border-bottom-right-radius: 0px;
+
+}
+
+#page2 .groups .ui-corner-top{
+	border-top-right-radius: 0px;
+
+}
+
+#page2 .group-container .ui-btn-corner-all{
+	border-radius: 0em 1em 1em 0em;
+}
+
+#page2 .group-container .ui-btn{
+	margin-left: 0px;
+}
+
+#page2 .group-container .ui-shadow {
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+}
+
+#page2 .group-container .ui-collapsible-content {
+	width: 138%;
+}
+

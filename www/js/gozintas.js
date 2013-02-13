@@ -278,8 +278,8 @@ var Gozintas = {
 	},
 
 	reset: function(){
-		Gozintas.billPath = "";
-		Gozintas.splitBy = '';
+		Gozintas.billPath = "split-bill";
+		Gozintas.splitBy = 'individual';
 		Gozintas.peopleInParty = 0;
 		Gozintas.billModifier.wine = false;
 		Gozintas.billModifier.reductions = false;
