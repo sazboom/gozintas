@@ -38,6 +38,8 @@ var Page = {
                     }
                 }
             );
+
+
 			$("#page1 #total_amount_input").on("change keyup", function() {
 				Gozintas.total.amount = parseFloat($(this).val()).toFixed(2)
 
