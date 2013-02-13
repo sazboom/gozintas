@@ -113,16 +113,32 @@ var Page = {
             $(".extra-popup input#drinks_deserts_etc").live('pageshow pageaftershow pageafterload keyup change', function(){
               extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
               groups[extragroup-1].foodTotal = parseFloat($(this).val()).toFixed(2)
+              if(groups[extragroup-1].foodTotal > 0){
+                groups[extragroup-1].extras = true;
+              }else{
+                groups[extragroup-1].extras = false;
+              }
             })
 
             $(".extra-popup input#wine_amount").live('pageshow pageaftershow pageafterload keyup change', function(){
               extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
+              parseFloat($(this).val()).toFixed(2)
               groups[extragroup-1].wineTotal = parseFloat($(this).val()).toFixed(2)
+              if(groups[extragroup-1].wineTotal > 0){
+                groups[extragroup-1].wine = true;
+              }else{
+                groups[extragroup-1].wine = false;
+              }
             })
 
             $(".extra-popup input#carry_out_amount").live('pageshow pageaftershow pageafterload keyup change', function(){
               extragroup = parseInt($(this).parent().parent().parent().attr('id').slice(-1));
               groups[extragroup-1].carryOutTotal = parseFloat($(this).val()).toFixed(2)
+              if(groups[extragroup-1].carryOutTotal > 0){
+                groups[extragroup-1].carryout = true;
+              }else{
+                groups[extragroup-1].carryout = false;
+              }
             })
 
 			Gozintas.handleKeyups(3);
