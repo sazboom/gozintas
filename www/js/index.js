@@ -29,15 +29,16 @@ function addGroup()
     groups.push(new_group)
     $("<div class='group-container'><div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='group.html' style = 'width: 70%; float: left'><h3>Group "+(group_size+1)+"</h3></div><div data-role='button' data-inline='true' style='float: left; width: 29%;' data-icon='gear' data-theme='b'>Extras</div></div>").appendTo('.groups');
     $("<div data-role='collapsible' data-content-theme='c' data-theme='a' id ='group-"+(group_size+1)+"' class='group-"+(group_size+1)+" visible' data-routing='total.html'><h3>Group "+(group_size+1)+"</h3></div>").appendTo('.groups-final');
-    loadPartials(".group-"+(group_size+1)+"[data-routing]", false);
+    loadPartials("#group-"+(group_size+1)+"[data-routing]", false);
 }
 
 function removeGroup()
 {
-    group_size = $("#page2 [class^='group-']").size();
+    group_size = $("#page2 [id^='group-']").size();
     if(group_size !=1)
     {
-        $(".group-"+group_size).remove();
+        $("#group-"+group_size).parent().remove();
+        console.log("Popped!")
         groups.pop(new Group())
         
     }
