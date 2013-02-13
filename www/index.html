@@ -82,6 +82,17 @@
                     </div>
                 </div>
             </div>
+
+            <script>
+                Gozintas.total.amount = parseFloat($("#page1 #total_amount_input").val()).toFixed(2)
+                Gozintas.total.taxAmount = parseFloat($("#page1 #total_tax_amount_input").val()).toFixed(2)
+                Gozintas.showSplitTipButtons(); 
+                if( (parseFloat(Gozintas.total.taxAmount) > parseFloat(Gozintas.total.amount)) || (Gozintas.total.amount ==0 ) || Gozintas.total.amount < 0 || Gozintas.total.taxAmount < 0){
+                    $(".buttons").children().addClass('ui-disabled');
+                }else{
+                    $(".buttons").children().removeClass('ui-disabled');
+                }
+            </script>
         </div>
 
         <div data-role="page" id="page2" data-add-back-btn="true" data-routing="page2.html" data-pagejs="page2" class="page-bg">
