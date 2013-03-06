@@ -306,3 +306,7 @@
 .page-bg{
 	background: #80B078;
 }
+
+.save_button{
+	float:right;
+}

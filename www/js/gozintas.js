@@ -357,6 +357,7 @@ var Gozintas = {
 		            	store = "groups["+(groupNum-1)+"]."+value["attribute"]+" = "+input
 		            }else if(value["input"] == "money"){
 		            	input = $(parentClass+value["id"]).val()
+
 		            	if(input.length == 0){ 
 		            		input = 0
 		            		bool = "groups["+(groupNum-1)+"]."+value["bool"]+" = false"
@@ -391,5 +392,11 @@ var Gozintas = {
 	        	});
 			});
 		}
+	},
+
+	clearEntry:  function(){
+		console.log($(this).attr("class"));
 	}
+
+
 }
